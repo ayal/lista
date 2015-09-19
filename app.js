@@ -133,7 +133,7 @@ import createBrowserHistory from 'history/lib/createBrowserHistory';
 React.render((
   <Router history={createBrowserHistory()}>
     <Route path="/" component={App}>
-    <Route path="/lista" component={App}>
+    <Route path="/lista/" component={App}>
     </Route>
   </Router>
 ), document.body);
