@@ -45,9 +45,9 @@ render: function() {
     var that = this;
     var lilista = _.map(lista.list,
                        function(x){
-                           if (x.name && x.name.toLowerCase().match(that.props.term.toLowerCase()) ||
-                               x.tags && x.tags.toLowerCase().match(that.props.term.toLowerCase()) ||
-                               x.text && x.text.toLowerCase().match(that.props.term.toLowerCase())) {
+                           if (x.name && x.name.toLowerCase().match(that.props.term && that.props.term.toLowerCase()) ||
+                               x.tags && x.tags.toLowerCase().match(that.props.term && that.props.term.toLowerCase()) ||
+                               x.text && x.text.toLowerCase().match(that.props.term && that.props.term.toLowerCase())) {
                                return (
                                        <li className="listing">
                                        <div className="name">
@@ -136,6 +136,8 @@ React.render((
     <Route path="/" component={App}>
     </Route>
     <Route path="/lista/" component={App} >
+    </Route>
+    <Route path="/lista" component={App} >
     </Route>
   </Router>
 ), document.body);

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4251f904e413c8a468d5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "fe4a7e95b7a280c63314"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -703,7 +703,7 @@
 	    render: function render() {
 	        var that = this;
 	        var lilista = _.map(lista.list, function (x) {
-	            if (x.name && x.name.toLowerCase().match(that.props.term.toLowerCase()) || x.tags && x.tags.toLowerCase().match(that.props.term.toLowerCase()) || x.text && x.text.toLowerCase().match(that.props.term.toLowerCase())) {
+	            if (x.name && x.name.toLowerCase().match(that.props.term && that.props.term.toLowerCase()) || x.tags && x.tags.toLowerCase().match(that.props.term && that.props.term.toLowerCase()) || x.text && x.text.toLowerCase().match(that.props.term && that.props.term.toLowerCase())) {
 	                return _react2['default'].createElement(
 	                    'li',
 	                    { className: 'listing' },
