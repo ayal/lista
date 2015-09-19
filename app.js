@@ -112,7 +112,7 @@ const App = React.createClass({
         };
     },
     routerWillLeave: function(nextLocation) {
-        return 'You have unsaved information, are you sure you want to leave this page?';
+        return null;
     },
     _nav: function(q) {
         this.history.pushState(null, '/', q);
