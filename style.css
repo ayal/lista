@@ -1,0 +1,21 @@
+.listing {
+    border-bottom:1px dotted grey;
+}
+
+.listing > div {
+    margin:4px;
+}
+
+.name {
+    font-size:20px;
+}
+
+
+.tags {
+    font-size:10px;
+    color:grey;
+}
+
+.link, .hours {
+    font-size:12px;
+}

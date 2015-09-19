@@ -1,10 +1,12 @@
 /* jsx */
-import { Router } from 'react-router/lib/Router'
 
-lista = {list: [
+import React from 'react';
+import { Router, Route, Link, History, Lifecycle } from 'react-router';
+
+var lista = {list: [
     {name: 'AM:PM', tags: 'supplies,food,supermarket', text: 'Open all the time, a bit expensive', hours: '24/7', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0610061,34.7726299/@32.0600967,34.7699804,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en' },
     {name: 'Merry Market', tags: 'supplies,food,supermarket', text: 'Grocery store open all the time, cheaper than AM:PM but smaller', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0590647,34.7736014/@32.0595488,34.7729953,18z/data=!4m9!4m8!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0!3e2?hl=en'},
-    {name: 'Sunset spot', tags: 'sunset,beach', text:'A nice place to go watch the sunset. Its in the beginning of a street called "Arlozerov", on the south side of the hilton hotel. there is a nice garden there.  The beach at the bottom of the garden is also nice. You can take <a href="/?term=line 4">line 4/5</a> to get there. Ask the driver to get down at Arlozerov street.', tags:'sunset', hours: '24/7', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/Hilton+Tel+Aviv,+Ha-Yarkon+St+205,+Tel+Aviv-Yafo,+6340506/@32.0741967,34.753034,14z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4c768299324d:0xd54dd0137261b603!2m2!1d34.77089!2d32.089139!3e2?hl=en'},
+    {name: 'Sunset spot', tags: 'sunset,beach', text:'A nice place to go watch the sunset. Its in the beginning of a street called "Arlozerov", on the south side of the hilton hotel. there is a nice garden there.  The beach at the bottom of the garden is also nice. You can take <a href="/?term=line 4">line 4 or line 5</a> to get there. Ask the driver to get down at Arlozerov street.', tags:'sunset', hours: '24/7', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/Hilton+Tel+Aviv,+Ha-Yarkon+St+205,+Tel+Aviv-Yafo,+6340506/@32.0741967,34.753034,14z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4c768299324d:0xd54dd0137261b603!2m2!1d34.77089!2d32.089139!3e2?hl=en'},
 {name: 'Sunset spot, Jaffa', tags: 'sunset,beach', text:'A nice place to go watch the sunset.', tags:'sunset', hours: '24/7', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0544015,34.7531036/@32.0540514,34.7532538,17z/data=!4m9!4m8!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0!3e2?hl=en'},
     {name: 'line 4 or 5 station', 'text': 'take these lines from this station to get to the center/north of tel aviv. There is no real station you just stand in the corner and wait for them to arrive. they look like <a target="_blank" href="http://www.nrg.co.il/images/archive/300x225/1/423/686.jpg">this</a>. they operate even on the weekend and at night (though a bit less frequent than during the weekdays)', hours: '24/7', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0608938,34.7739215/@32.0600371,34.7706351,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en', tags:'public transport,bus,taxi,center,north'},
     {name: 'TEDER.FM', 'text':'nice place where a lot hipsters go. both a bar (downstairs) and a restaurant (upstrairs)', tags:'food,drink,restaurant,bar,music,shows,dj,night', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/Romano+Building,+Tel+Aviv-Yafo/@32.0596742,34.7684399,17z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4c9c10f80dd7:0x2438e7e0961ebac5!2m2!1d34.7694205!2d32.0605883?hl=en',hours: 'sun-thu:21:00+|weekend:16:00+',link:'https://www.facebook.com/events/718848381593377/'},
@@ -19,7 +21,10 @@ lista = {list: [
     {name: 'Casino San Remo', text:'Great place for brunch. They have occasional djs and shows.', link:'https://www.facebook.com/casinosanremo?fref=ts',hours:'everyday till lateish', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%91%D7%A8%D7%9E%D7%A6%D7%95%D7%95%D7%94,+%D7%96%D7%91%D7%95%D7%9C%D7%95%D7%9F+13,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95%E2%80%AD/@32.0594852,34.7701238,17z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4c9d948ff5a5:0xbb8996e5e91f6089!2m2!1d34.7729999!2d32.0600943?hl=en', tags:'drink,food,restaurant'},
 {name: 'SIM card', text:'theres this cheap coffee chain thing called "Cofix" that sells sim cards for only 5 shekel (the plan is 30 shekels per month). it shouldnt be much of a hassle to install it in your phone, probably just buy, put it there and do some confirmation through a website.', hours:'weekdays till night,sat:open at 19:00', map:'https://www.google.co.il/maps/place/Cofix/@32.0607839,34.768996,17z/data=!4m18!1m15!4m14!1m6!1m2!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2sMerkhavya+St+19,+Tel+Aviv-Yafo!2m2!1d34.7719245!2d32.0591828!1m6!1m2!1s0x151d4c9cf566c159:0xcbf8a03ccb64816c!2sCofix,+Isra%C3%ABl,+Lilienblum+St+21,+Tel+Aviv-Yafo!2m2!1d34.7699556!2d32.0622645!3m1!1s0x151d4c9cf566c159:0xcbf8a03ccb64816c?hl=en', tags:'sim card,cheap coffee'},
     {name: 'Diego San', text:'really nice korean-mexican vibe with djs and stuff and cool dishes', link:'https://www.facebook.com/diegosantlv?fref=ts',hours:'everyday 7:00 pm-5:00 am', map:'https://www.google.co.il/maps/dir//%D7%93%D7%99%D7%99%D7%92%D7%95+%D7%A1%D7%90%D7%9F,+%D7%94%D7%9E%D7%A9%D7%91%D7%99%D7%A8+2,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95%E2%80%AD/@32.0604755,34.7709159,17z/data=!4m12!1m3!3m2!1s0x151d4c9c35faa8df:0x429c191470614a91!2z15PXmdeZ15LXlSDXodeQ158!4m7!1m0!1m5!1m1!1s0x151d4c9c35faa8df:0x429c191470614a91!2m2!1d34.7709159!2d32.0604755?hl=en', tags:'drink,food,restaurant,dj,vibes'},
-{name: 'Flea Market', text:'Nice area with restaurants and bars and fashion shops and second hand stores and anthiques.' , map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%A4%D7%95%D7%A2%D7%94,+%D7%A8%D7%91%D7%99+%D7%99%D7%95%D7%97%D7%A0%D7%9F+3,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95%E2%80%AD/@32.0564579,34.7594825,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4cb94729057d:0x2b2a0d7cb7dc2930!2m2!1d34.7562843!2d32.0530602!3e2?hl=en', tags:'second hand,clothes,market,flea,fashion'}
+{name: 'Flea Market', text:'Nice area with restaurants and bars and fashion shops and second hand stores and anthiques.' , map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%A4%D7%95%D7%A2%D7%94,+%D7%A8%D7%91%D7%99+%D7%99%D7%95%D7%97%D7%A0%D7%9F+3,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95%E2%80%AD/@32.0564579,34.7594825,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4cb94729057d:0x2b2a0d7cb7dc2930!2m2!1d34.7562843!2d32.0530602!3e2?hl=en', tags:'second hand,clothes,market,flea,fashion'},
+{name: 'The Block Club', text:'The biggest club here (and in the middleeast?). Very big and sometimes packed, but the place is huge so its usually ok. Parties there are ususally on thursdays.', hours:'thursdays or check the website' , map:'https://www.google.co.il/maps/place/The+Block/@32.0544742,34.7801078,17z/data=!3m1!4b1!4m2!3m1!1s0x151d4b672b196539:0x34982bc061158100?hl=en',  link: 'https://www.facebook.com/blockclubtlv?fref=ts', tags:'club,block,party,dance,music'},
+{name: 'Kuli Alma', text:'A nice hybrid of a club/bar/hipster artsy place', hours:'Mon-Sun:9:00 pm-5:00 am' , map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/KULI+ALMA,+Mikveh+Israel+St+10,+Tel+Aviv-Yafo/@32.0608256,34.7714324,17z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4b62ba091a25:0x8cbd422c87943544!2m2!1d34.7750588!2d32.0624342?hl=en',  link: 'https://www.facebook.com/kulialma/info?tab=page_info', tags:'club,block,party,dance,music'}
+
 ]};
 
 var Lista = React.createClass({
@@ -33,36 +38,38 @@ var Lista = React.createClass({
 
   },
     search:function(e) {
+        console.log('naving');
         this.props.nav('term')(e);
     },
 render: function() {
     var that = this;
-
     var lilista = _.map(lista.list,
                        function(x){
                            if (x.name && x.name.toLowerCase().match(that.props.term) ||
                                x.tags && x.tags.toLowerCase().match(that.props.term) ||
                                x.text && x.text.toLowerCase().match(that.props.term)) {
                                return (
-                                       <li>
-                                       <div class="name">
+                                       <li className="listing">
+                                       <div className="name">
                                        {x.name}
                                    </div>
-                                       <div class="text" dangerouslySetInnerHTML={{__html: x.text }}>
-                                   </div>
-                                       <div class="tags">
-                                       {x.tags}
-                                   </div>
-                                       <div class="hours">
-                                       Hours: {x.hours}
-                                   </div>
-                                       <div class="map">
+                                       <div className="map">
                                        <a target="_blank" href={x.map}>map</a>
                                    </div>
+                                       <div className="text" dangerouslySetInnerHTML={{__html: x.text }}>
+                                   </div>
+                                       <div className="hours">
+                                       Hours: {x.hours}
+                                   </div>
                                       {x.link ? (
-                                       <div class="link">
+                                       <div className="link">
                                        <a target="_blank" href={x.link}>website</a>
                                        </div>) : null }
+
+                                       <div className="tags">
+                                       Tags: {x.tags}
+                                   </div>
+
                                        </li>
                                );
                            }
@@ -72,7 +79,7 @@ render: function() {
     return (
 <div className="lista">
   <div>
-    <input type="text" placeholde="search" onChange={this.search} value={this.props.term}/>
+    <input type="text" placeholde="search" onChange={this.search} value={this.props.term} />
   </div>
   <ul>
     {lilista}
@@ -82,50 +89,50 @@ render: function() {
 }
 });
 
-var App = React.createClass({
+const App = React.createClass({
     name: 'App',
+    mixins: [ Lifecycle, History ],
     getInitialState: function() {
-        return {menustate: ''};
-    },
-    contextTypes: {
-        router: React.PropTypes.func
+        return {term: ''};
     },
     componentWillMount: function() {
-        var cquery = this.context.router.getCurrentQuery();
-        var def = {term: ''};
-        this.context.router.transitionTo('/', '', _.extend(def,cquery));
+        this.setState({term:this.props.location.query.term});
+        // var cquery = this.context.router.getCurrentQuery();
+        // var def = {term: ''};
+        // this.context.router.transitionTo('/', '', _.extend(def,cquery));
     },
     nav: function(name) {
         var that = this;
         return function(e) {
-            console.log('value change',e.target.value);
             var val = event.target.value;
             var q = {};
             q[name] = val;
+            console.log('value change',e.target.value, q);
             that._nav(q);
         };
     },
+    routerWillLeave: function(nextLocation) {
+        return 'You have unsaved information, are you sure you want to leave this page?';
+    },
     _nav: function(q) {
-        var cquery = this.context.router.getCurrentQuery();
-        this.context.router.transitionTo('/', '', _.extend(cquery,q));
+        this.history.pushState(null, '/', q);
+        this.setState(q);
+    },
+    contextTypes: {
+        router: React.PropTypes.func.isRequired
     },
     render: function() {
-        query = this.context.router.getCurrentQuery();
-
         return (
-            <Lista nav={this.nav} term={query.term} />
+            <Lista nav={this.nav} term={this.state.term} />
         );
     }
 });
 
-var Router = ReactRouter;
-var Link = Router.Link;
-var Route = Router.Route;
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 
 React.render((
-  <Router>
+  <Router history={createBrowserHistory()}>
     <Route path="/" component={App}>
-        <Route path="user/:userID" component={Lista} />
     </Route>
   </Router>
 ), document.body);
