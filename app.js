@@ -115,7 +115,7 @@ const App = React.createClass({
         return null;
     },
     _nav: function(q) {
-        this.history.pushState(null, '/', q);
+        this.history.pushState(null, '/lista', q);
         this.setState(q);
     },
     contextTypes: {
