@@ -45,9 +45,9 @@ render: function() {
     var that = this;
     var lilista = _.map(lista.list,
                        function(x){
-                           if (x.name && x.name.toLowerCase().match(that.props.term) ||
-                               x.tags && x.tags.toLowerCase().match(that.props.term) ||
-                               x.text && x.text.toLowerCase().match(that.props.term)) {
+                           if (x.name && x.name.toLowerCase().match(that.props.term.toLowerCase()) ||
+                               x.tags && x.tags.toLowerCase().match(that.props.term.toLowerCase()) ||
+                               x.text && x.text.toLowerCase().match(that.props.term.toLowerCase())) {
                                return (
                                        <li className="listing">
                                        <div className="name">
