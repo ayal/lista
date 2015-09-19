@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2c583deea2584588148d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9b1f052a892cd1c3d51f"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -790,10 +790,10 @@
 	        };
 	    },
 	    routerWillLeave: function routerWillLeave(nextLocation) {
-	        return 'You have unsaved information, are you sure you want to leave this page?';
+	        return null;
 	    },
 	    _nav: function _nav(q) {
-	        this.history.pushState(null, '/', q);
+	        this.history.pushState(null, '/lista', q);
 	        this.setState(q);
 	    },
 	    contextTypes: {
