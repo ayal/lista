@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "5283d19a0a27797d6afc"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2c583deea2584588148d"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -807,7 +807,8 @@
 	_react2['default'].render(_react2['default'].createElement(
 	    _reactRouter.Router,
 	    { history: (0, _historyLibCreateBrowserHistory2['default'])() },
-	    _react2['default'].createElement(_reactRouter.Route, { path: '/', component: App })
+	    _react2['default'].createElement(_reactRouter.Route, { path: '/', component: App }),
+	    _react2['default'].createElement(_reactRouter.Route, { path: '/lista/', component: App })
 	), document.body);
 
 /***/ },
