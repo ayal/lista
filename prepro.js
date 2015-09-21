@@ -6,7 +6,7 @@ trans = require('yandex-translate')(config.yandexkey);
 
 var _ = require('lodash'),
 FB = require('fb'),
-places = ['Tonyveesther','622591387867546','harsinai'];
+places = ['Tonyveesther','622591387867546','harsinai','Minzar-BAR'];
 
 _.each(places, function(p) {
 FB.api(p + '?fields=about,hours,name,location,description',
