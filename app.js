@@ -3,12 +3,12 @@
 import React from 'react';
 import { Router, Route, Link, History, Lifecycle } from 'react-router';
 
-var filter = function(x) {
-    return '<a class="filter" href="/?term='+x+'">'+x+'</a>';
+var filter = function(x,y) {
+    return '<a class="filter" href="?term='+(y !== undefined ? y : x)+'">'+x+'</a>';
 };
 
 var lista = {list: [
-    {name: 'filters', text:'Try these filters: ' + filter('jaffa') + filter('food') + filter('drink') + filter('dance') + filter('24/7'), tags:'*' },
+    {name: 'filters', text:'Try these filters: ' + filter('jaffa') + filter('food') + filter('drink') + filter('dance') + filter('24/7') + filter('all',''), tags:'*' },
     {name: 'Activities', text:'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a>', tags:'*' },
     {name: 'AM:PM', tags: 'supplies,food,supermarket', text: 'Open all the time, a bit expensive', hours: '24/7', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0610061,34.7726299/@32.0600967,34.7699804,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en' },
     {name: 'Merry Market', tags: 'supplies,food,supermarket,24/7', text: 'Grocery store open all the time, cheaper than AM:PM but smaller', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0590647,34.7736014/@32.0595488,34.7729953,18z/data=!4m9!4m8!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0!3e2?hl=en'},
