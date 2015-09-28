@@ -34,7 +34,7 @@ trans = require('yandex-translate')(config.yandexkey);
 
 var _ = require('lodash'),
 FB = require('fb'),
-places = ['525794924182333'];
+places = ['barkayma'];
 objs = {};
 finished = 0;
 
