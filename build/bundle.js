@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "cc85233a56e77c9b3eb5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b3411027722fb295d703"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -907,7 +907,30 @@
 	        link: 'http://facebook.com/525794924182333',
 	        text: 'Some would say a cornerstone of tel aviv bar scene. A 24/7 food & drinks Bar, located at the center of the Tel-Aviv',
 	        tags: '24/7,bar,drink,food',
-	        name: 'Minzar BAR' }, { realhours: { mon_1_open: '12:00',
+	        name: 'Minzar BAR' }, { realhours: undefined,
+	        hours: 'check website',
+	        map: 'https://www.google.com/maps?&daddr=32.0708008%2C34.7832413&dirflg=w',
+	        link: 'http://www.cinema.co.il/',
+	        text: 'Cinema for mostly indie / quality films. Check the website, click "English" at the top',
+	        tags: 'movies',
+	        name: 'Tel Aviv Cinematheque' }, { realhours: { mon_1_open: '10:00',
+	            mon_1_close: '18:00',
+	            tue_1_open: '10:00',
+	            tue_1_close: '21:00',
+	            wed_1_open: '10:00',
+	            wed_1_close: '18:00',
+	            thu_1_open: '10:00',
+	            thu_1_close: '21:00',
+	            fri_1_open: '10:00',
+	            fri_1_close: '14:00',
+	            sat_1_open: '10:00',
+	            sat_1_close: '18:00' },
+	        hours: 'mon-mon or wed-wed or sat:10:00-18:00 | tue-tue or thu:10:00-21:00 | fri:10:00-14:00',
+	        map: 'https://www.google.com/maps?&daddr=32.0773582%2C34.7867508&dirflg=w',
+	        link: 'http://facebook.com/tamuseum',
+	        text: 'Tel Aviv Museum of art ',
+	        tags: 'museum,art',
+	        name: 'Tel Aviv Museum of art' }, { realhours: { mon_1_open: '12:00',
 	            mon_1_close: '01:00',
 	            tue_1_open: '12:00',
 	            tue_1_close: '01:00',
