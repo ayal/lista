@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "b3411027722fb295d703"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2a1b5efe979b8d048895"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -925,9 +925,9 @@
 	            fri_1_close: '14:00',
 	            sat_1_open: '10:00',
 	            sat_1_close: '18:00' },
-	        hours: 'mon-mon or wed-wed or sat:10:00-18:00 | tue-tue or thu:10:00-21:00 | fri:10:00-14:00',
+	        hours: 'mon or wed or sat:10:00-18:00 | tue or thu:10:00-21:00 | fri:10:00-14:00',
 	        map: 'https://www.google.com/maps?&daddr=32.0773582%2C34.7867508&dirflg=w',
-	        link: 'http://facebook.com/tamuseum',
+	        link: 'http://www.tamuseum.org.il/',
 	        text: 'Tel Aviv Museum of art ',
 	        tags: 'museum,art',
 	        name: 'Tel Aviv Museum of art' }, { realhours: { mon_1_open: '12:00',
