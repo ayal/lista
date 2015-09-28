@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "340409dfe0037e42aa72"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "1996d6c4b493f9012a52"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -705,7 +705,7 @@
 	            sun_1_open: '08:15',
 	            sun_1_close: '00:00' },
 	        hours: 'mon-thu or sun:08:15-00:00 | fri:08:00-16:00 | sat:09:00-00:00',
-	        map: 'https://www.google.com/maps?saddr=Merhavia%2019%20Tel%20Aviv&daddr=32.0599098,34.7716103&dirflg=w',
+	        map: 'https://www.google.com/maps?saddr=Merhavia%2019%20Tel%20Aviv&daddr=' + encodeURIComponent('32.0599098,34.7716103'),
 	        link: 'http://facebook.com/Tonyveesther',
 	        text: 'Nice coffee place with food and drinks',
 	        tags: 'Coffee, beer, food',

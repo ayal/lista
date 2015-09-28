@@ -49,7 +49,7 @@ var lista = {list: [
        sun_1_open: '08:15',
        sun_1_close: '00:00' },
     hours: 'mon-thu or sun:08:15-00:00 | fri:08:00-16:00 | sat:09:00-00:00',
-    map: 'https://www.google.com/maps?saddr=Merhavia%2019%20Tel%20Aviv&daddr=32.0599098,34.7716103&dirflg=w',
+    map: 'https://www.google.com/maps?saddr=Merhavia%2019%20Tel%20Aviv&daddr=' + encodeURIComponent('32.0599098,34.7716103'),
     link: 'http://facebook.com/Tonyveesther',
     text: 'Nice coffee place with food and drinks',
     tags: 'Coffee, beer, food',
