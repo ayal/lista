@@ -34,7 +34,7 @@ trans = require('yandex-translate')(config.yandexkey);
 
 var _ = require('lodash'),
 FB = require('fb'),
-places = ['tamuseum'];
+places = ['122465534486876'];
 objs = {};
 finished = 0;
 

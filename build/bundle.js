@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2a1b5efe979b8d048895"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0ea2b8a06bfe489f2933"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -949,7 +949,13 @@
 	        link: 'http://facebook.com/barkayma',
 	        text: 'Vegan and hippieish bar that is open every day until late. kitchen closes at midnight.',
 	        tags: 'Pub-restaurant vegan',
-	        name: 'Bar Kayma' }] };
+	        name: 'Bar Kayma' }, { realhours: undefined,
+	        hours: 'mon-sat:21:00-02:00',
+	        map: 'https://www.google.com/maps?&daddr=32.0533638%2C34.7534027&dirflg=w',
+	        link: 'http://facebook.com/122465534486876',
+	        text: 'A bar in the old city of jaffa, sometimes theres parties and djs there',
+	        tags: 'bar,jaffa',
+	        name: 'Anna Loulou' }] };
 
 	var Lista = _react2['default'].createClass({
 	    displayName: 'Lista',
