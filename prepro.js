@@ -1,3 +1,31 @@
+/*
+
+romano - 1466537460320270
+??? ??????? - levinsky41
+???? ???? - garger.hazahav
+?????? - CaffeKaymak
+casinosanremo
+diegosantlv
+blockclubtlv
+kulialma
+auerbachrecords
+salam bombay - 237914799576331
+port said - 193302427463816
+R2MBrasserie
+
+more 24 hour places
+
+http://israel.dailysecret.com/telaviv/en
+secret tel aviv
+
+todos:
+from current location
+filters
+
+
+*/
+
+
 var config        = require('./config'),
 //translate
 trans = require('yandex-translate')(config.yandexkey);
@@ -6,7 +34,7 @@ trans = require('yandex-translate')(config.yandexkey);
 
 var _ = require('lodash'),
 FB = require('fb'),
-places = ['Tonyveesther','622591387867546','harsinai','uganda.tlv','203264193077701'];
+places = ['525794924182333'];
 objs = {};
 finished = 0;
 
@@ -19,6 +47,7 @@ FB.api(p + '?fields=about,hours,name,location,description',
                console.log(!res ? 'error occurred' : res.error);
                return;
            }
+
 
            if (!objs[res.name]) {
                objs[res.name] = {};
@@ -54,8 +83,8 @@ FB.api(p + '?fields=about,hours,name,location,description',
                return consgrp;
            };
            var hours = _.map(grps, function(a,b){return format(a) + ':' + a[0][0]  }).join(' | ');
-           var map = 'https://www.google.com/maps?saddr=' + encodeURIComponent('Merhavia 19 Tel Aviv') +
-                   '&daddr=' + res.location.latitude + ',' + res.location.longitude +
+           var daddr = res.location.latitude ? (res.location.latitude + ',' + res.location.longitude) : (res.location.street + ', ' + res.location.city) ;
+           var map = 'https://www.google.com/maps?&daddr=' + encodeURIComponent(daddr) +
                    '&dirflg=w';
            var obj = _.extend(obj,{hours:hours,map:map,link:'http://facebook.com/' + p, text:''});
 
