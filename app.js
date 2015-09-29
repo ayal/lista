@@ -8,13 +8,13 @@ var filter = function(x,y) {
 };
 
 var lista = {list: [
-    {name: 'filters', text:'Try these filters: ' + filter('jaffa') + filter('food') + filter('drink') + filter('dance') + filter('24/7') + filter('all',''), tags:'*' },
+    {name: 'filters', text:'Try these filters: ' + filter('jaffa') + filter('food') + filter('drink') + filter('dance') + filter('24/7') + filter('transportation','') + filter('all',''), tags:'*' },
     {name: 'Activities', text:'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a><br><a target="_blank" href="http://activities.co.il/categories/%D7%9E%D7%A1%D7%99%D7%91%D7%94?lng=34.76501&lat=32.03954&tt=2015092915&h=%7B%22Sub%22%3A%7B%22%D7%9E%D7%A1%D7%99%D7%91%D7%94%22%3A%7B%7D%7D%7D&r=5&w=today&lang=en">three</a>', tags:'*' },
     {name: 'AM:PM supermarket', tags: 'supplies,food,supermarket', text: 'Open all the time, a bit expensive', hours: '24/7', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0610061,34.7726299/@32.0600967,34.7699804,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en' },
     {name: 'Merry Market', tags: 'supplies,food,supermarket,24/7', text: 'Grocery store open all the time, cheaper than AM:PM but smaller', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0590647,34.7736014/@32.0595488,34.7729953,18z/data=!4m9!4m8!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0!3e2?hl=en'},
     {name: 'Sunset spot', tags: 'sunset,beach', text:'A nice place to go watch the sunset. Its in the beginning of a street called "Arlozerov", on the south side of the hilton hotel. there is a nice garden there.  The beach at the bottom of the garden is also nice. You can take <a href="/?term=line 4">line 4 or line 5</a> to get there. Ask the driver to get down at Arlozerov street.', tags:'sunset', hours: '24/7', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/Hilton+Tel+Aviv,+Ha-Yarkon+St+205,+Tel+Aviv-Yafo,+6340506/@32.0741967,34.753034,14z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4c768299324d:0xd54dd0137261b603!2m2!1d34.77089!2d32.089139!3e2?hl=en'},
 {name: 'Sunset spot, Jaffa', tags: 'sunset,beach', text:'A nice place to go watch the sunset.', tags:'sunset', hours: '24/7', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0544015,34.7531036/@32.0540514,34.7532538,17z/data=!4m9!4m8!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0!3e2?hl=en'},
-    {name: 'line 4 or 5 station', 'text': 'take these lines from this station to get to the center/north of tel aviv. There is no real station you just stand in the corner and wait for them to arrive. they look like <a target="_blank" href="http://www.nrg.co.il/images/archive/300x225/1/423/686.jpg">this</a>. they operate even on the weekend and at night (though a bit less frequent than during the weekdays)', hours: '24/7', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0608938,34.7739215/@32.0600371,34.7706351,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en', tags:'public transport,bus,taxi,center,north'},
+    {name: 'line 4 or 5 station', 'text': 'take these lines from this station to get to the center/north of tel aviv. There is no real station you just stand in the corner and wait for them to arrive. they look like <a target="_blank" href="http://www.nrg.co.il/images/archive/300x225/1/423/686.jpg">this</a>. they operate even on the weekend and at night (though a bit less frequent than during the weekdays). Costs around $2. ', hours: '24/7', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0608938,34.7739215/@32.0600371,34.7706351,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en', tags:'public transportation,bus,taxi,center,north'},
 
     {name: 'Beta and Grega', 'text':'Very nice coffee place / bar with some food, especially during the day and snacks at night. open almost 24/7.', tags:'food,drink,coffee,bar', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%91%D7%AA%D7%94+%D7%95%D7%92%D7%A8%D7%99%D7%92%D7%94,+%D7%9C%D7%91%D7%95%D7%A0%D7%98%D7%99%D7%9F+2,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95%E2%80%AD/@32.0602854,34.7706351,17z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4c9d7c404227:0xcc1a581a58d261d8!2m2!1d34.7738534!2d32.0612942?hl=en',hours: '24/7'},
 
@@ -103,8 +103,8 @@ var lista = {list: [
     hours: 'check website',
     map: 'https://www.google.com/maps?saddr=Merhavia%2019%20Tel%20Aviv&daddr=32.053847147487,34.784753208717&dirflg=w',
     link: 'http://www.rail.co.il/EN/DrivePlan/Pages/DrivePlan.aspx',
-    text: 'Train station',
-    tags: 'train,station',
+    text: 'Train station. A train costs ~$7',
+    tags: 'train,station,transportation',
     name: 'Ha\'hagana Train Station' },
 {
     hours: 'sun,tue,wed,thu:15:00 - 08:00 | mon 17:00 - 08:00',
