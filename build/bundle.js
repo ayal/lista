@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9c115f5472dfd6496286"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "9eac67b8d3f4149687e6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -783,7 +783,7 @@
 	        map: 'https://www.google.com/maps?&daddr=32.0605782775%2C34.76947105&dirflg=w',
 	        link: 'http://facebook.com/1466537460320270',
 	        text: 'food,drink,music,hipster',
-	        tags: 'A urban hipster restaurant by a famous weirdo chef. nice hang, open everyday beside Sunday ',
+	        tags: 'A urban hipster restaurant by a famous weirdo chef. nice hang, open everyday beside Sunday. Might need to wait in line, better arrive early or very late',
 	        name: 'Romano' }, { realhours: undefined,
 	        hours: 'mon-thu or sun:07:00-17:00|fri:07:00-15:00',
 	        map: 'https://www.google.com/maps?&daddr=32.059853445%2C34.77166673&dirflg=w',
@@ -955,7 +955,7 @@
 	        link: 'http://facebook.com/122465534486876',
 	        text: 'A bar in the old city of jaffa, sometimes theres parties and djs there',
 	        tags: 'bar,jaffa',
-	        name: 'Anna Loulou' }, { name: 'Zvulon 10', text: 'nice place for beer and food' }, { name: 'Nanuchka', text: 'vegan bar-restaurant for gregorian food with a nice bar, might need reservations' }, { name: 'Benedict', text: 'they serve breakfast and pancakes 24/7' }] };
+	        name: 'Anna Loulou' }, { name: 'Zvulon 10', text: 'nice place for beer and food' }, { name: 'Nanuchka', text: 'vegan bar-restaurant for gregorian food with a nice bar, might need reservations' }, { name: 'Benedict', text: 'they serve breakfast and pancakes 24/7' }, { name: 'Barby', text: 'Rock and other shows in this club. check out the website, there is a translate button', link: 'https://www.barby.co.il/' }, { name: 'Hanoi', text: 'Vietnamese restaurant. Might need to call or arrive early.' }] };
 
 	var fsGetHours = function fsGetHours(x) {
 	    return x.venue.hours.timeframes.map(function (tf) {

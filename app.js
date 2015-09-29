@@ -341,7 +341,7 @@ var lista = {list: [
     {name: 'Nanuchka', text:'vegan bar-restaurant for gregorian food with a nice bar, might need reservations'},
     {name: 'Benedict', text:'they serve breakfast and pancakes 24/7'},
     {name: 'Barby', text:'Rock and other shows in this club. check out the website, there is a translate button', link:'https://www.barby.co.il/'},
-    {name:'Hanoi', text:'Vietnamese restaurant. Might need to call or arrive early.'
+    {name:'Hanoi', text:'Vietnamese restaurant. Might need to call or arrive early.'}
 ]};
 
 var fsGetHours = function(x){
