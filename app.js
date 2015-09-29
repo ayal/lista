@@ -10,7 +10,7 @@ var filter = function(x,y) {
 var lista = {list: [
     {name: 'filters', text:'Try these filters: ' + filter('jaffa') + filter('food') + filter('drink') + filter('dance') + filter('24/7') + filter('all',''), tags:'*' },
     {name: 'Activities', text:'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a>', tags:'*' },
-    {name: 'AM:PM', tags: 'supplies,food,supermarket', text: 'Open all the time, a bit expensive', hours: '24/7', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0610061,34.7726299/@32.0600967,34.7699804,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en' },
+    {name: 'AM:PM supermarket', tags: 'supplies,food,supermarket', text: 'Open all the time, a bit expensive', hours: '24/7', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0610061,34.7726299/@32.0600967,34.7699804,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en' },
     {name: 'Merry Market', tags: 'supplies,food,supermarket,24/7', text: 'Grocery store open all the time, cheaper than AM:PM but smaller', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0590647,34.7736014/@32.0595488,34.7729953,18z/data=!4m9!4m8!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0!3e2?hl=en'},
     {name: 'Sunset spot', tags: 'sunset,beach', text:'A nice place to go watch the sunset. Its in the beginning of a street called "Arlozerov", on the south side of the hilton hotel. there is a nice garden there.  The beach at the bottom of the garden is also nice. You can take <a href="/?term=line 4">line 4 or line 5</a> to get there. Ask the driver to get down at Arlozerov street.', tags:'sunset', hours: '24/7', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/Hilton+Tel+Aviv,+Ha-Yarkon+St+205,+Tel+Aviv-Yafo,+6340506/@32.0741967,34.753034,14z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4c768299324d:0xd54dd0137261b603!2m2!1d34.77089!2d32.089139!3e2?hl=en'},
 {name: 'Sunset spot, Jaffa', tags: 'sunset,beach', text:'A nice place to go watch the sunset.', tags:'sunset', hours: '24/7', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0544015,34.7531036/@32.0540514,34.7532538,17z/data=!4m9!4m8!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0!3e2?hl=en'},
@@ -105,7 +105,7 @@ var lista = {list: [
     link: 'http://www.rail.co.il/EN/DrivePlan/Pages/DrivePlan.aspx',
     text: 'Train station',
     tags: 'train,station',
-    name: 'Hahagana Train Station' },
+    name: 'Ha\'hagana Train Station' },
 {
     hours: 'sun,tue,wed,thu:15:00 - 08:00 | mon 17:00 - 08:00',
     map: 'http://google.com/maps/?saddr=merhavya street 19, tel aviv&daddr=' + encodeURIComponent('HaShuk St 38, Tel Aviv-Yafo, Israel') + '&dirflg=w',
@@ -139,7 +139,7 @@ var lista = {list: [
     link: 'http://facebook.com/1466537460320270',
     text: 'food,drink,music,hipster',
     tags: 'A urban hipster restaurant by a famous weirdo chef. nice hang, open everyday beside Sunday ',
-    name: 'Romano restaurant' },
+    name: 'Romano' },
   { realhours: undefined,
     hours: 'mon-thu or sun:07:00-17:00|fri:07:00-15:00',
     map: 'https://www.google.com/maps?&daddr=32.059853445%2C34.77166673&dirflg=w',
@@ -253,7 +253,7 @@ var lista = {list: [
     link: 'http://facebook.com/auerbachrecords',
     text: 'A hybrid of hipster bicycle shop and a vinyl saloon. Nice place for a beer or several.',
     tags: 'vinyls,bicycle,hipsters,beer,drink',
-    name: 'Gordon Bennet / Auerbach Records' },
+    name: 'Auerbach Records' },
 
   { realhours:
      { mon_1_open: '12:00',
@@ -289,7 +289,7 @@ var lista = {list: [
     link: 'http://www.cinema.co.il/',
     text: 'Cinema for mostly indie / quality films. Check the website, click "English" at the top',
     tags: 'movies',
-    name: 'Tel Aviv Cinematheque' },
+    name: 'Cinematheque' },
 { realhours:
      { mon_1_open: '10:00',
        mon_1_close: '18:00',
@@ -308,7 +308,7 @@ var lista = {list: [
     link: 'http://www.tamuseum.org.il/',
     text: 'Tel Aviv Museum of art ',
     tags: 'museum,art',
-    name: 'Tel Aviv Museum of art' },
+    name: 'Museum of art' },
 { realhours:
      { mon_1_open: '12:00',
        mon_1_close: '01:00',
@@ -336,8 +336,58 @@ var lista = {list: [
     link: 'http://facebook.com/122465534486876',
     text: 'A bar in the old city of jaffa, sometimes theres parties and djs there',
     tags: 'bar,jaffa',
-    name: 'Anna Loulou' }
+    name: 'Anna Loulou' },
+    {name: 'Zvulon 10', text:'nice place for beer and food'},
+    {name: 'Nanuchka', text:'vegan bar-restaurant for gregorian food with a nice bar, might need reservations'},
 ]};
+
+var fsGetHours = function(x){
+    return x.venue.hours.timeframes.map(function(tf){return tf.days + ':' + tf.open.map(function(o){return o.renderedTime}).join(',')}).join('|');
+}
+
+var mergelistas = function(cb) {
+    $.getJSON('fsdata.json', function(r){
+        console.log(r);
+        r.forEach(function(x){
+            var match;
+            lista.list.forEach(function(y){
+                if (x.venue.name.toLowerCase().match(y.name.toLowerCase()) || y.name.toLowerCase().match(x.venue.name.toLowerCase())) {
+                    match = y;
+                }
+            });
+
+            match = _.extend(match || {}, _.extend({name: x.venue.name,
+                                                    link: x.venue.canonicalUrl,
+                                                    tags: x.venue.tags.join(',') + ',' + x.venue.categories.map(function(x){return x.name}).join(','), text: x.venue.categories.map(function(x){return x.name}).join(',')}, match));
+            if (x.venue.hours && !match.hours) {
+                match.hours = fsGetHours(x);
+            }
+            match.tel = x.venue.contact.phone;
+            var daddr = x.venue.location.lat + ',' + x.venue.location.lng;
+            var map = 'https://www.google.com/maps?&daddr=' + encodeURIComponent(daddr) +
+                    '&dirflg=w';
+            match.map = map;
+            if (lista.list.indexOf(match) === -1) {
+                lista.list.push(match);
+            }
+        });
+        cb();
+    });
+};
+
+mergelistas(function(){
+React.render((
+  <Router history={createBrowserHistory()}>
+    <Route path="/" component={App}>
+    </Route>
+    <Route path="/lista/" component={App} >
+    </Route>
+    <Route path="/lista" component={App} >
+    </Route>
+  </Router>
+), document.body);
+
+});
 
 var Lista = React.createClass({
   getInitialState: function() {
@@ -382,6 +432,10 @@ render: function() {
                                       {x.link ? (
                                        <div className="link">
                                        <a target="_blank" href={x.link}>website</a>
+                                       </div>) : null }
+                                   {x.tel ? (
+                                       <div className="tel">
+                                       <a target="_blank" href={'tel:' + x.tel}>{x.tel}</a>
                                        </div>) : null }
 
                                        <div className="tags">
@@ -447,14 +501,3 @@ const App = React.createClass({
 });
 
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-
-React.render((
-  <Router history={createBrowserHistory()}>
-    <Route path="/" component={App}>
-    </Route>
-    <Route path="/lista/" component={App} >
-    </Route>
-    <Route path="/lista" component={App} >
-    </Route>
-  </Router>
-), document.body);
