@@ -9,7 +9,7 @@ var filter = function(x,y) {
 
 var lista = {list: [
     {name: 'filters', text:'Try these filters: ' + filter('jaffa') + filter('food') + filter('drink') + filter('dance') + filter('24/7') + filter('all',''), tags:'*' },
-    {name: 'Activities', text:'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a>', tags:'*' },
+    {name: 'Activities', text:'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a><br><a target="_blank" href="http://activities.co.il/categories/%D7%9E%D7%A1%D7%99%D7%91%D7%94?lng=34.76501&lat=32.03954&tt=2015092915&h=%7B%22Sub%22%3A%7B%22%D7%9E%D7%A1%D7%99%D7%91%D7%94%22%3A%7B%7D%7D%7D&r=5&w=today&lang=en">three</a>', tags:'*' },
     {name: 'AM:PM supermarket', tags: 'supplies,food,supermarket', text: 'Open all the time, a bit expensive', hours: '24/7', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0610061,34.7726299/@32.0600967,34.7699804,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en' },
     {name: 'Merry Market', tags: 'supplies,food,supermarket,24/7', text: 'Grocery store open all the time, cheaper than AM:PM but smaller', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0590647,34.7736014/@32.0595488,34.7729953,18z/data=!4m9!4m8!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0!3e2?hl=en'},
     {name: 'Sunset spot', tags: 'sunset,beach', text:'A nice place to go watch the sunset. Its in the beginning of a street called "Arlozerov", on the south side of the hilton hotel. there is a nice garden there.  The beach at the bottom of the garden is also nice. You can take <a href="/?term=line 4">line 4 or line 5</a> to get there. Ask the driver to get down at Arlozerov street.', tags:'sunset', hours: '24/7', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/Hilton+Tel+Aviv,+Ha-Yarkon+St+205,+Tel+Aviv-Yafo,+6340506/@32.0741967,34.753034,14z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4c768299324d:0xd54dd0137261b603!2m2!1d34.77089!2d32.089139!3e2?hl=en'},
@@ -138,7 +138,7 @@ var lista = {list: [
     map: 'https://www.google.com/maps?&daddr=32.0605782775%2C34.76947105&dirflg=w',
     link: 'http://facebook.com/1466537460320270',
     text: 'food,drink,music,hipster',
-    tags: 'A urban hipster restaurant by a famous weirdo chef. nice hang, open everyday beside Sunday ',
+    tags: 'A urban hipster restaurant by a famous weirdo chef. nice hang, open everyday beside Sunday. Might need to wait in line, better arrive early or very late',
     name: 'Romano' },
   { realhours: undefined,
     hours: 'mon-thu or sun:07:00-17:00|fri:07:00-15:00',
@@ -339,6 +339,9 @@ var lista = {list: [
     name: 'Anna Loulou' },
     {name: 'Zvulon 10', text:'nice place for beer and food'},
     {name: 'Nanuchka', text:'vegan bar-restaurant for gregorian food with a nice bar, might need reservations'},
+    {name: 'Benedict', text:'they serve breakfast and pancakes 24/7'},
+    {name: 'Barby', text:'Rock and other shows in this club. check out the website, there is a translate button', link:'https://www.barby.co.il/'},
+    {name:'Hanoi', text:'Vietnamese restaurant. Might need to call or arrive early.'
 ]};
 
 var fsGetHours = function(x){
@@ -356,6 +359,7 @@ var mergelistas = function(cb) {
                 }
             });
 
+            match ? (match.tags = match.tags + ',' + x.venue.tags.join(',') + ',' + x.venue.categories.map(function(x){return x.name}).join(',')) : null;
             match = _.extend(match || {}, _.extend({name: x.venue.name,
                                                     link: x.venue.canonicalUrl,
                                                     tags: x.venue.tags.join(',') + ',' + x.venue.categories.map(function(x){return x.name}).join(','), text: x.venue.categories.map(function(x){return x.name}).join(',')}, match));
