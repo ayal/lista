@@ -349,6 +349,24 @@ var lista = {list: [
     {name: 'Container', tags:'food,drink,jaffa,port'}
 ]};
 
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1);
+  var a =
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ;
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  var d = R * c; // Distance in km
+  return d;
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
+}
+
 var fsGetHours = function(x){
     return x.venue.hours.timeframes.map(function(tf){return tf.days + ':' + tf.open.map(function(o){return o.renderedTime}).join(',')}).join('|');
 }
@@ -384,17 +402,26 @@ var mergelistas = function(cb) {
     });
 };
 
+var pos;
 mergelistas(function(){
-React.render((
-  <Router history={createBrowserHistory()}>
-    <Route path="/" component={App}>
-    </Route>
-    <Route path="/lista/" component={App} >
-    </Route>
-    <Route path="/lista" component={App} >
-    </Route>
-  </Router>
-), document.body);
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(p){
+            pos = p.coords;
+
+            React.render((
+                    <Router history={createBrowserHistory()}>
+                    <Route path="/" component={App}>
+                    </Route>
+                    <Route path="/lista/" component={App} >
+                    </Route>
+                    <Route path="/lista" component={App} >
+                    </Route>
+                    </Router>
+            ), document.body);
+
+
+        });
+    }
 
 });
 
@@ -411,6 +438,17 @@ var Lista = React.createClass({
     search:function(e) {
         console.log('naving');
         this.props.nav('term')(e);
+    },
+    getdist: function(x) {
+        if (x && x.map) {
+            var rgx = /daddr=(.*?)%2C(.*?)&/gim;
+            var match = rgx.exec(x.map);
+            if (match) {
+                var lat1 = parseFloat(match[1]);
+                var lng1 = parseFloat(match[2]);
+                return getDistanceFromLatLonInKm( lat1, lng1, pos.latitude, pos.longitude).toFixed(2);
+            }
+        }
     },
 render: function() {
     var that = this;
@@ -446,6 +484,11 @@ render: function() {
                                        <div className="tel">
                                        <a target="_blank" href={'tel:' + x.tel}>{x.tel}</a>
                                        </div>) : null }
+                                   {pos && x.map ? (
+                                       <div className="dist">
+                                           {'Distance: ' + that.getdist(x)}
+                                       </div>) : null }
+
 
                                        <div className="tags">
                                        Tags: {x.tags}

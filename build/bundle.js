@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "95e70ca4b6121ad6661a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "048836774ace4fe10687"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -957,6 +957,20 @@
 	        tags: 'bar,jaffa',
 	        name: 'Anna Loulou' }, { name: 'Zvulon 10', text: 'nice place for beer and food' }, { name: 'Nanuchka', text: 'vegan bar-restaurant for gregorian food with a nice bar, might need reservations' }, { name: 'Benedict', text: 'they serve breakfast and pancakes 24/7' }, { name: 'Barby', text: 'Rock and other shows in this club. check out the website, there is a translate button', link: 'https://www.barby.co.il/' }, { name: 'Hanoi', text: 'Vietnamese restaurant. Might need to call or arrive early.' }, { name: 'Hakosem', tags: 'street food', text: 'famous falafel' }, { name: 'Miznon', tags: 'street food', text: 'mildly overpriced but very good street-food in a loud nice atmosphere' }, { name: 'סביח Sabich', tags: 'street food', text: 'famouse street food, pita bread with eggplant and other salads' }, { name: 'Ha\'achim', tags: 'food,drink', text: 'Nice restaurant with local food, cheap alchohol menu' }, { name: 'Container', tags: 'food,drink,jaffa,port' }] };
 
+	function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+	    var R = 6371; // Radius of the earth in km
+	    var dLat = deg2rad(lat2 - lat1); // deg2rad below
+	    var dLon = deg2rad(lon2 - lon1);
+	    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+	    var d = R * c; // Distance in km
+	    return d;
+	}
+
+	function deg2rad(deg) {
+	    return deg * (Math.PI / 180);
+	}
+
 	var fsGetHours = function fsGetHours(x) {
 	    return x.venue.hours.timeframes.map(function (tf) {
 	        return tf.days + ':' + tf.open.map(function (o) {
@@ -1001,14 +1015,21 @@
 	    });
 	};
 
+	var pos;
 	mergelistas(function () {
-	    _react2['default'].render(_react2['default'].createElement(
-	        _reactRouter.Router,
-	        { history: (0, _historyLibCreateBrowserHistory2['default'])() },
-	        _react2['default'].createElement(_reactRouter.Route, { path: '/', component: App }),
-	        _react2['default'].createElement(_reactRouter.Route, { path: '/lista/', component: App }),
-	        _react2['default'].createElement(_reactRouter.Route, { path: '/lista', component: App })
-	    ), document.body);
+	    if (navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(function (p) {
+	            pos = p.coords;
+
+	            _react2['default'].render(_react2['default'].createElement(
+	                _reactRouter.Router,
+	                { history: (0, _historyLibCreateBrowserHistory2['default'])() },
+	                _react2['default'].createElement(_reactRouter.Route, { path: '/', component: App }),
+	                _react2['default'].createElement(_reactRouter.Route, { path: '/lista/', component: App }),
+	                _react2['default'].createElement(_reactRouter.Route, { path: '/lista', component: App })
+	            ), document.body);
+	        });
+	    }
 	});
 
 	var Lista = _react2['default'].createClass({
@@ -1022,6 +1043,17 @@
 	    search: function search(e) {
 	        console.log('naving');
 	        this.props.nav('term')(e);
+	    },
+	    getdist: function getdist(x) {
+	        if (x && x.map) {
+	            var rgx = /daddr=(.*?)%2C(.*?)&/gim;
+	            var match = rgx.exec(x.map);
+	            if (match) {
+	                var lat1 = parseFloat(match[1]);
+	                var lng1 = parseFloat(match[2]);
+	                return getDistanceFromLatLonInKm(lat1, lng1, pos.latitude, pos.longitude).toFixed(2);
+	            }
+	        }
 	    },
 	    render: function render() {
 	        var that = this;
@@ -1074,6 +1106,11 @@
 	                            { target: '_blank', href: 'tel:' + x.tel },
 	                            x.tel
 	                        )
+	                    ) : null,
+	                    pos && x.map ? _react2['default'].createElement(
+	                        'div',
+	                        { className: 'dist' },
+	                        'Distance: ' + that.getdist(x)
 	                    ) : null,
 	                    _react2['default'].createElement(
 	                        'div',
