@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d9db3a1d974f66801cf7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2ae9bad03e1c104b932e"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -1066,7 +1066,7 @@
 	            if (match) {
 	                var lat1 = parseFloat(match[1]);
 	                var lng1 = parseFloat(match[2]);
-	                return getDistanceFromLatLonInKm(lat1, lng1, pos.latitude, pos.longitude).toFixed(2);
+	                return (Math.round(getDistanceFromLatLonInKm(lat1, lng1, pos.latitude, pos.longitude) * 10) / 10).toFixed(1);
 	            }
 	        }
 	    },

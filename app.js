@@ -463,7 +463,7 @@ var Lista = React.createClass({
             if (match) {
                 var lat1 = parseFloat(match[1]);
                 var lng1 = parseFloat(match[2]);
-                return getDistanceFromLatLonInKm( lat1, lng1, pos.latitude, pos.longitude).toFixed(2);
+                return (Math.round(getDistanceFromLatLonInKm( lat1, lng1, pos.latitude, pos.longitude) * 10) / 10).toFixed(1);
             }
         }
     },
