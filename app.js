@@ -363,7 +363,7 @@ var lista = {list: [
       hours: 'mon-thu or sun:11:00-23:00 | fri:09:00-17:00',
       link: 'http://facebook.com/knaffe.banamal',
       text: 'Knafe is an arabic desert and this place serves a boutique version of it',
-      name: 'ëğàôä' }
+      name: '×›× ××¤×”' }
 ]};
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
