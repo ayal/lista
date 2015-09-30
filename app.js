@@ -8,7 +8,7 @@ var filter = function(x,y) {
 };
 
 var lista = {list: [
-    {name: 'filters', text:'Try these filters: ' + filter('jaffa') + filter('food') + filter('drink') + filter('dance') + filter('24/7') + filter('transportation') + filter('all',''), tags:'*' },
+    {name: 'filters', text:'Try these filters: ' + filter('jaffa') + filter('food') + filter('drink') + filter('street food')  + filter('club') + filter('24/7') + filter('transportation') + filter('all',''), tags:'*' },
     {name: 'Activities', text:'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a><br><a target="_blank" href="http://activities.co.il/categories/%D7%9E%D7%A1%D7%99%D7%91%D7%94?lng=34.76501&lat=32.03954&tt=2015092915&h=%7B%22Sub%22%3A%7B%22%D7%9E%D7%A1%D7%99%D7%91%D7%94%22%3A%7B%7D%7D%7D&r=5&w=today&lang=en">three</a>', tags:'*' },
     {name: 'AM:PM supermarket', tags: 'supplies,food,supermarket', text: 'Open all the time, a bit expensive', hours: '24/7', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0610061,34.7726299/@32.0600967,34.7699804,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en' },
     {name: 'Merry Market', tags: 'supplies,food,supermarket,24/7', text: 'Grocery store open all the time, cheaper than AM:PM but smaller', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0590647,34.7736014/@32.0595488,34.7729953,18z/data=!4m9!4m8!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0!3e2?hl=en'},
@@ -18,8 +18,8 @@ var lista = {list: [
 
     {name: 'Beta and Grega', 'text':'Very nice coffee place / bar with some food, especially during the day and snacks at night. open almost 24/7.', tags:'food,drink,coffee,bar', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%91%D7%AA%D7%94+%D7%95%D7%92%D7%A8%D7%99%D7%92%D7%94,+%D7%9C%D7%91%D7%95%D7%A0%D7%98%D7%99%D7%9F+2,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95%E2%80%AD/@32.0602854,34.7706351,17z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4c9d7c404227:0xcc1a581a58d261d8!2m2!1d34.7738534!2d32.0612942?hl=en',hours: '24/7'},
 
-{name: 'Abu Hassan Hummus branch 1', 'text':'Best Hummus restaurant in tel aviv (Jaffa)', tags:'food,hummus,jaffa', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%A2%D7%9C%D7%99+%D7%A7%D7%A8%D7%95%D7%90%D7%9F+%D7%90%D7%91%D7%95+%D7%97%D7%A1%D7%9F,+%D7%94%D7%93%D7%95%D7%9C%D7%A4%D7%99%D7%9F+1,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95%E2%80%AD/@32.0550299,34.7521788,15z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4cc80daafe67:0x129d4e2acf06abee!2m2!1d34.7508605!2d32.0501865!3e2?hl=en',hours: 'weekdays:09:00-15:00'},
-{name: 'Abu Hassan Hummus branch 2', 'text':'Best Hummus restaurant in tel aviv (Jaffa)', tags:'food,hummus,jaffa', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%A2%D7%9C%D7%99+%D7%A7%D7%A8%D7%90%D7%95%D7%95%D7%9F+%D7%90%D7%91%D7%95+%D7%97%D7%A1%D7%9F,+%D7%A9%D7%91%D7%98%D7%99+%D7%99%D7%A9%D7%A8%D7%90%D7%9C+14,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95%E2%80%AD/@32.0543824,34.7601277,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4cb9f8e71dcd:0x60406f6868e117bf!2m2!1d34.7574593!2d32.0494615!3e2?hl=en',hours: 'weekends:09:00-15:00'},
+{name: 'Abu Hassan Hummus branch 1', 'text':'Best Hummus restaurant in tel aviv (Jaffa)', tags:'food,hummus,jaffa,street food', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%A2%D7%9C%D7%99+%D7%A7%D7%A8%D7%95%D7%90%D7%9F+%D7%90%D7%91%D7%95+%D7%97%D7%A1%D7%9F,+%D7%94%D7%93%D7%95%D7%9C%D7%A4%D7%99%D7%9F+1,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95%E2%80%AD/@32.0550299,34.7521788,15z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4cc80daafe67:0x129d4e2acf06abee!2m2!1d34.7508605!2d32.0501865!3e2?hl=en',hours: 'weekdays:09:00-15:00'},
+{name: 'Abu Hassan Hummus branch 2', 'text':'Best Hummus restaurant in tel aviv (Jaffa)', tags:'food,hummus,jaffa,street food', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%A2%D7%9C%D7%99+%D7%A7%D7%A8%D7%90%D7%95%D7%95%D7%9F+%D7%90%D7%91%D7%95+%D7%97%D7%A1%D7%9F,+%D7%A9%D7%91%D7%98%D7%99+%D7%99%D7%A9%D7%A8%D7%90%D7%9C+14,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95%E2%80%AD/@32.0543824,34.7601277,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4cb9f8e71dcd:0x60406f6868e117bf!2m2!1d34.7574593!2d32.0494615!3e2?hl=en',hours: 'weekends:09:00-15:00'},
 {name:'Bicycle rent station', text:'Station where you rent green bicycle. The full map of all the stations is <a target="blank" href="https://www.google.com/maps/d/viewer?mid=zdi_rVF5Mzjw.kbZqZIxGbWuc&hl">here</a>', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/Sderot+Washington+15,+Tel+Aviv-Yafo/@32.0576879,34.7684299,17z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4c9f43628123:0x171874af5f92cb99!2m2!1d34.7695488!2d32.0561839?hl=en', tags:'bicycle,telofun', hours:'24/7'},
 {name:'Tourist info center, Jaffa', tags: 'tourist,info', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/Tourist+Information+Center,+Tel+Aviv-Yafo/@32.0575303,34.7597386,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4cbe97822df7:0x831a29df576eaee5!2m2!1d34.756791!2d32.055205!3e2?hl=en', hours:'mon-thu or sun 9:30-18:30|fri: 9:30-16:00|sat/holidays: 10:00-16:00'},
 
@@ -131,7 +131,7 @@ var lista = {list: [
     map: 'https://www.google.com/maps?&daddr=32.05973075923%2C34.771474332046&dirflg=w',
     link: 'http://facebook.com/garger.hazahav',
     text: 'Hummus place with other nice salads and beer',
-    tags: 'hummus,saladas,beer',
+    tags: 'hummus,saladas,beer,street food',
     name: 'Gold Hummus' },
   { realhours: undefined,
     hours: 'mon-fri or sun:20:00-02:00',
@@ -341,7 +341,12 @@ var lista = {list: [
     {name: 'Nanuchka', text:'vegan bar-restaurant for gregorian food with a nice bar, might need reservations'},
     {name: 'Benedict', text:'they serve breakfast and pancakes 24/7'},
     {name: 'Barby', text:'Rock and other shows in this club. check out the website, there is a translate button', link:'https://www.barby.co.il/'},
-    {name:'Hanoi', text:'Vietnamese restaurant. Might need to call or arrive early.'}
+    {name:'Hanoi', text:'Vietnamese restaurant. Might need to call or arrive early.'},
+    {name: 'Hakosem', tags:'street food', text: 'famous falafel'},
+    {name: 'Miznon', tags:'street food', text: 'mildly overpriced but very good street-food in a loud nice atmosphere'},
+    {name: 'סביח Sabich', tags:'street food', text: 'famouse street food, pita bread with eggplant and other salads'},
+    {name: 'Ha\'achim', tags:'food,drink', text: 'Nice restaurant with local food, cheap alchohol menu'},
+    {name: 'Container', tags:'food,drink,jaffa,port'}
 ]};
 
 var fsGetHours = function(x){
