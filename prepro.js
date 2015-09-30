@@ -34,7 +34,7 @@ trans = require('yandex-translate')(config.yandexkey);
 
 var _ = require('lodash'),
 FB = require('fb'),
-places = ['122465534486876'];
+places = ['knaffe.banamal'];
 objs = {};
 finished = 0;
 

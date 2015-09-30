@@ -346,21 +346,38 @@ var lista = {list: [
     {name: 'Miznon', tags:'street food', text: 'mildly overpriced but very good street-food in a loud nice atmosphere'},
     {name: '×¡×‘×™×— Sabich', tags:'street food', text: 'famouse street food, pita bread with eggplant and other salads'},
     {name: 'Ha\'achim', tags:'food,drink', text: 'Nice restaurant with local food, cheap alchohol menu'},
-    {name: 'Container', tags:'food,drink,jaffa,port'}
+    {name: 'Container', tags:'food,drink,jaffa,port'},
+    { realhours:
+      { mon_1_open: '11:00',
+        mon_1_close: '23:00',
+        tue_1_open: '11:00',
+        tue_1_close: '23:00',
+        wed_1_open: '11:00',
+        wed_1_close: '23:00',
+        thu_1_open: '11:00',
+        thu_1_close: '23:00',
+        fri_1_open: '09:00',
+        fri_1_close: '17:00',
+        sun_1_open: '11:00',
+        sun_1_close: '23:00' },
+      hours: 'mon-thu or sun:11:00-23:00 | fri:09:00-17:00',
+      link: 'http://facebook.com/knaffe.banamal',
+      text: 'Knafe is an arabic desert and this place serves a boutique version of it',
+      name: 'ëðàôä' }
 ]};
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
-  var R = 6371; // Radius of the earth in km
-  var dLat = deg2rad(lat2-lat1);  // deg2rad below
-  var dLon = deg2rad(lon2-lon1);
-  var a =
-    Math.sin(dLat/2) * Math.sin(dLat/2) +
-    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-    Math.sin(dLon/2) * Math.sin(dLon/2)
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = deg2rad(lon2-lon1);
+    var a =
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+            Math.sin(dLon/2) * Math.sin(dLon/2)
     ;
-  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-  var d = R * c; // Distance in km
-  return d;
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var d = R * c; // Distance in km
+    return d;
 }
 
 function deg2rad(deg) {
@@ -373,15 +390,15 @@ var fsGetHours = function(x){
 
 var mergelistas = function(cb) {
     $.getJSON('fsdata.json', function(r){
-        console.log(r);
+
         r.forEach(function(x){
             var match;
             lista.list.forEach(function(y){
                 if (x.venue.name.toLowerCase().match(y.name.toLowerCase()) || y.name.toLowerCase().match(x.venue.name.toLowerCase())) {
                     match = y;
+                    console.log('match!', x.venue.name, y.name);
                 }
             });
-
             match ? (match.tags = match.tags + ',' + x.venue.tags.join(',') + ',' + x.venue.categories.map(function(x){return x.name}).join(',')) : null;
             match = _.extend(match || {}, _.extend({name: x.venue.name,
                                                     link: x.venue.canonicalUrl,
@@ -486,7 +503,7 @@ render: function() {
                                        </div>) : null }
                                    {pos && x.map ? (
                                        <div className="dist">
-                                           {'Distance: ' + that.getdist(x)}
+                                           {'Distance: ' + that.getdist(x) + ' km'}
                                        </div>) : null }
 
 

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "048836774ace4fe10687"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d9db3a1d974f66801cf7"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -955,7 +955,22 @@
 	        link: 'http://facebook.com/122465534486876',
 	        text: 'A bar in the old city of jaffa, sometimes theres parties and djs there',
 	        tags: 'bar,jaffa',
-	        name: 'Anna Loulou' }, { name: 'Zvulon 10', text: 'nice place for beer and food' }, { name: 'Nanuchka', text: 'vegan bar-restaurant for gregorian food with a nice bar, might need reservations' }, { name: 'Benedict', text: 'they serve breakfast and pancakes 24/7' }, { name: 'Barby', text: 'Rock and other shows in this club. check out the website, there is a translate button', link: 'https://www.barby.co.il/' }, { name: 'Hanoi', text: 'Vietnamese restaurant. Might need to call or arrive early.' }, { name: 'Hakosem', tags: 'street food', text: 'famous falafel' }, { name: 'Miznon', tags: 'street food', text: 'mildly overpriced but very good street-food in a loud nice atmosphere' }, { name: 'סביח Sabich', tags: 'street food', text: 'famouse street food, pita bread with eggplant and other salads' }, { name: 'Ha\'achim', tags: 'food,drink', text: 'Nice restaurant with local food, cheap alchohol menu' }, { name: 'Container', tags: 'food,drink,jaffa,port' }] };
+	        name: 'Anna Loulou' }, { name: 'Zvulon 10', text: 'nice place for beer and food' }, { name: 'Nanuchka', text: 'vegan bar-restaurant for gregorian food with a nice bar, might need reservations' }, { name: 'Benedict', text: 'they serve breakfast and pancakes 24/7' }, { name: 'Barby', text: 'Rock and other shows in this club. check out the website, there is a translate button', link: 'https://www.barby.co.il/' }, { name: 'Hanoi', text: 'Vietnamese restaurant. Might need to call or arrive early.' }, { name: 'Hakosem', tags: 'street food', text: 'famous falafel' }, { name: 'Miznon', tags: 'street food', text: 'mildly overpriced but very good street-food in a loud nice atmosphere' }, { name: 'סביח Sabich', tags: 'street food', text: 'famouse street food, pita bread with eggplant and other salads' }, { name: 'Ha\'achim', tags: 'food,drink', text: 'Nice restaurant with local food, cheap alchohol menu' }, { name: 'Container', tags: 'food,drink,jaffa,port' }, { realhours: { mon_1_open: '11:00',
+	            mon_1_close: '23:00',
+	            tue_1_open: '11:00',
+	            tue_1_close: '23:00',
+	            wed_1_open: '11:00',
+	            wed_1_close: '23:00',
+	            thu_1_open: '11:00',
+	            thu_1_close: '23:00',
+	            fri_1_open: '09:00',
+	            fri_1_close: '17:00',
+	            sun_1_open: '11:00',
+	            sun_1_close: '23:00' },
+	        hours: 'mon-thu or sun:11:00-23:00 | fri:09:00-17:00',
+	        link: 'http://facebook.com/knaffe.banamal',
+	        text: 'Knafe is an arabic desert and this place serves a boutique version of it',
+	        name: '�����' }] };
 
 	function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 	    var R = 6371; // Radius of the earth in km
@@ -981,15 +996,15 @@
 
 	var mergelistas = function mergelistas(cb) {
 	    $.getJSON('fsdata.json', function (r) {
-	        console.log(r);
+
 	        r.forEach(function (x) {
 	            var match;
 	            lista.list.forEach(function (y) {
 	                if (x.venue.name.toLowerCase().match(y.name.toLowerCase()) || y.name.toLowerCase().match(x.venue.name.toLowerCase())) {
 	                    match = y;
+	                    console.log('match!', x.venue.name, y.name);
 	                }
 	            });
-
 	            match ? match.tags = match.tags + ',' + x.venue.tags.join(',') + ',' + x.venue.categories.map(function (x) {
 	                return x.name;
 	            }).join(',') : null;
@@ -1110,7 +1125,7 @@
 	                    pos && x.map ? _react2['default'].createElement(
 	                        'div',
 	                        { className: 'dist' },
-	                        'Distance: ' + that.getdist(x)
+	                        'Distance: ' + that.getdist(x) + ' km'
 	                    ) : null,
 	                    _react2['default'].createElement(
 	                        'div',
