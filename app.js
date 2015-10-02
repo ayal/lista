@@ -282,7 +282,7 @@ window.lista = {list: [
     link: 'http://facebook.com/525794924182333',
     text: 'Some would say a cornerstone of tel aviv bar scene. A 24/7 food & drinks Bar, located at the center of the Tel-Aviv',
     tags: '24/7,bar,drink,food',
-    name: 'Minzar BAR' },
+    name: 'Minzar' },
 { realhours: undefined,
     hours: 'check website',
     map: 'https://www.google.com/maps?&daddr=32.0708008%2C34.7832413&dirflg=w',

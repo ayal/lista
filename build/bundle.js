@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e512a68a74c4987b46be"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "568312660855b896f1f6"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -907,7 +907,7 @@
 	        link: 'http://facebook.com/525794924182333',
 	        text: 'Some would say a cornerstone of tel aviv bar scene. A 24/7 food & drinks Bar, located at the center of the Tel-Aviv',
 	        tags: '24/7,bar,drink,food',
-	        name: 'Minzar BAR' }, { realhours: undefined,
+	        name: 'Minzar' }, { realhours: undefined,
 	        hours: 'check website',
 	        map: 'https://www.google.com/maps?&daddr=32.0708008%2C34.7832413&dirflg=w',
 	        link: 'http://www.cinema.co.il/',
