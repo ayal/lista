@@ -7,8 +7,8 @@ var filter = function(x,y) {
     return '<a class="filter" href="?term='+(y !== undefined ? y : x)+'">'+x+'</a>';
 };
 
-var lista = {list: [
-    {name: 'filters', text:'Try these filters: ' + filter('jaffa') + filter('food') + filter('drink') + filter('street food')  + filter('club') + filter('24/7') + filter('transportation') + filter('all',''), tags:'*' },
+window.lista = {list: [
+    {name: 'filters', text:'Try these filters: ' + filter('near') + filter('walking') + filter('jaffa') + filter('food') + filter('drink') + filter('street food')  + filter('club') + filter('24/7') + filter('transportation') + filter('all',''), tags:'*' },
     {name: 'Activities', text:'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a><br><a target="_blank" href="http://activities.co.il/categories/%D7%9E%D7%A1%D7%99%D7%91%D7%94?lng=34.76501&lat=32.03954&tt=2015092915&h=%7B%22Sub%22%3A%7B%22%D7%9E%D7%A1%D7%99%D7%91%D7%94%22%3A%7B%7D%7D%7D&r=5&w=today&lang=en">three</a>', tags:'*' },
     {name: 'AM:PM supermarket', tags: 'supplies,food,supermarket', text: 'Open all the time, a bit expensive', hours: '24/7', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0610061,34.7726299/@32.0600967,34.7699804,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en' },
     {name: 'Merry Market', tags: 'supplies,food,supermarket,24/7', text: 'Grocery store open all the time, cheaper than AM:PM but smaller', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/32.0590647,34.7736014/@32.0595488,34.7729953,18z/data=!4m9!4m8!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0!3e2?hl=en'},
@@ -419,28 +419,41 @@ var mergelistas = function(cb) {
     });
 };
 
+
+
 var pos;
 mergelistas(function(){
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(p){
             pos = p.coords;
-
-            React.render((
-                    <Router history={createBrowserHistory()}>
-                    <Route path="/" component={App}>
-                    </Route>
-                    <Route path="/lista/" component={App} >
-                    </Route>
-                    <Route path="/lista" component={App} >
-                    </Route>
-                    </Router>
-            ), document.body);
-
-
+            _.map(lista.list, function(x){
+                x.dist = getdist(x);
+            });
+            xupdate();
         });
     }
-
+    xupdate();
 });
+
+var     getdist = function(x) {
+        if (x && x.map && pos) {
+            var rgx = /daddr=(.*?)%2C(.*?)&/gim;
+            var match = rgx.exec(x.map);
+            if (match) {
+                var lat1 = parseFloat(match[1]);
+                var lng1 = parseFloat(match[2]);
+                var d = getDistanceFromLatLonInKm( lat1, lng1, pos.latitude, pos.longitude);
+                if (d < 1) {
+                    !x.tags.match('near') && (x.tags+=',near');
+                }
+                else if (d < 2) {
+                    !x.tags.match('walking') && (x.tags+=',walking');
+                }
+
+                return (Math.round(d * 10) / 10).toFixed(1);
+            }
+        }
+    };
 
 var Lista = React.createClass({
   getInitialState: function() {
@@ -456,20 +469,9 @@ var Lista = React.createClass({
         console.log('naving');
         this.props.nav('term')(e);
     },
-    getdist: function(x) {
-        if (x && x.map) {
-            var rgx = /daddr=(.*?)%2C(.*?)&/gim;
-            var match = rgx.exec(x.map);
-            if (match) {
-                var lat1 = parseFloat(match[1]);
-                var lng1 = parseFloat(match[2]);
-                return (Math.round(getDistanceFromLatLonInKm( lat1, lng1, pos.latitude, pos.longitude) * 10) / 10).toFixed(1);
-            }
-        }
-    },
 render: function() {
     var that = this;
-    var lilista = _.map(lista.list,
+    var lilista = _.map(lista.list.sort(function(a,b){return parseFloat(a.dist) - parseFloat(b.dist)}),
                        function(x){
                            if (x.name && x.name.toLowerCase().match(that.props.term && that.props.term.toLowerCase()) ||
                                (x.tags ==='*' || x.tags && x.tags.toLowerCase().match(that.props.term && that.props.term.toLowerCase())) ||
@@ -503,7 +505,7 @@ render: function() {
                                        </div>) : null }
                                    {pos && x.map ? (
                                        <div className="dist">
-                                           {'Distance: ' + that.getdist(x) + ' km'}
+                                           {'Distance: ' + x.dist + ' km'}
                                        </div>) : null }
 
 
@@ -530,6 +532,9 @@ render: function() {
 }
 });
 
+var xupdate = function() {
+};
+
 const App = React.createClass({
     name: 'App',
     mixins: [ Lifecycle, History ],
@@ -538,6 +543,10 @@ const App = React.createClass({
     },
     componentWillMount: function() {
         this.setState({term:this.props.location.query.term});
+        var that = this;
+        xupdate = function() {
+            that.forceUpdate();
+        };
         // var cquery = this.context.router.getCurrentQuery();
         // var def = {term: ''};
         // this.context.router.transitionTo('/', '', _.extend(def,cquery));
@@ -570,3 +579,13 @@ const App = React.createClass({
 });
 
 import createBrowserHistory from 'history/lib/createBrowserHistory';
+React.render((
+        <Router history={createBrowserHistory()}>
+        <Route path="/" component={App}>
+        </Route>
+        <Route path="/lista/" component={App} >
+        </Route>
+        <Route path="/lista" component={App} >
+        </Route>
+        </Router>
+), document.body);
