@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "97764f9145fa9b644602"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7574c2a41d879f6ba7a8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -880,7 +880,7 @@
 	                }) : _react2['default'].createElement(
 	                    'a',
 	                    { target: '_blank', href: x.map },
-	                    'map'
+	                    'directions'
 	                )
 	            ) : null,
 	            _react2['default'].createElement('div', { className: 'text', dangerouslySetInnerHTML: { __html: x.text } }),

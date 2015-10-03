@@ -190,7 +190,7 @@ var Listing = React.createClass({
                                        {
                                            x.map.push ? _.map(x.map, function(y,i){
                                                return <a target="_blank" href={y}>{"directions" + i}</a>;
-                                           }) : (<a target="_blank" href={x.map}>map</a>)
+                                           }) : (<a target="_blank" href={x.map}>directions</a>)
                                        }
                                    </div>) : null}
                                        <div className="text" dangerouslySetInnerHTML={{__html: x.text }}>
