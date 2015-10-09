@@ -104,9 +104,9 @@ var lista = {list: [
 {
     hours: 'sun,tue,wed,thu:15:00 - 08:00 | mon 17:00 - 08:00',
     map: 'http://google.com/maps/?saddr=merhavya street 19, tel aviv&daddr=' + encodeURIComponent('HaShuk St 38, Tel Aviv-Yafo, Israel') + '&dirflg=w',
-    link: 'http://www.rail.co.il/EN/DrivePlan/Pages/DrivePlan.aspx',
-    text: 'post office. you can get a SIM card here, check out an explenation <a target="_blank" href="http://www.gaytlvguide.com/do-see-go/get-local-israeli-sim-card-internet-3g-access">here</a>',
-    tags: 'sim card.post office',
+    link: '',
+    text: 'post office.',
+    tags: 'post office',
     name: 'Post office' },
 
 { realhours:
@@ -360,7 +360,7 @@ var lista = {list: [
       text: 'Knafe is an arabic desert and this place serves a boutique version of it',
       orig: '528e45b011d2161a074a202e',
       name: 'knafe' },
-{name: 'Dizengoff Center', text:'Big mall with many things. One store named "Bug" for computer supply is on the bottom floor (ask people where it is) - it has a representative of a cellular firm called "Golan Telecom" from which you can buy a SIM card with credit card and passport. it should cost ~$12 for the SIM and then you need to choose a plan, for example i think they have ~$20 for no limit calls in israel and 6GB data plan. remember to cancel before you leave!'}
+{name: 'Dizengoff Center', text:'Big mall with many things. One store named "Bug" for computer supply is on the bottom floor (ask people where it is) - it has a representative of a cellular firm called "Golan Telecom" from which you can buy a SIM card with credit card and passport. it should cost ~$12 for the SIM and then you need to choose a plan, for example i think they have ~$20 for no limit calls in israel and 6GB data plan. remember to cancel before you leave!', tags:'sim card'}
 ]};
 
 module.exports = {lista:lista};
