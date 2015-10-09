@@ -359,7 +359,8 @@ var lista = {list: [
       link: 'http://facebook.com/knaffe.banamal',
       text: 'Knafe is an arabic desert and this place serves a boutique version of it',
       orig: '528e45b011d2161a074a202e',
-      name: 'knafe' }
+      name: 'knafe' },
+{name: 'Dizengoff Center', text:'Big mall with many things. One store named "Bug" for computer supply is on the bottom floor (ask people where it is) - it has a representative of a cellular firm called "Golan Telecom" from which you can buy a SIM card with credit card and passport. it should cost ~$12 for the SIM and then you need to choose a plan, for example i think they have ~$20 for no limit calls in israel and 6GB data plan. remember to cancel before you leave!'}
 ]};
 
 module.exports = {lista:lista};
