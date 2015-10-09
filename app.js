@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Router, Route, Link, History, Lifecycle } from 'react-router';
-
 import {lista} from './lista.js';
+
 window.lista = lista;
 
 $(function(){
