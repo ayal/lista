@@ -3,6 +3,7 @@
 import React from 'react';
 import { Router, Route, Link, History, Lifecycle } from 'react-router';
 import {lista} from './lista.js';
+import {geo} from './geo.js';
 
 window.lista = lista;
 
@@ -15,6 +16,7 @@ $(function(){
         zoom: 18,
         center: {lat: 32.0591797, lng: 34.771954},
         scrollwheel: true,
+
     };
 
     window.map = new google.maps.Map(document.getElementById("map"),
@@ -22,9 +24,6 @@ $(function(){
     window.infowindow = new google.maps.InfoWindow();
     window.directionsDisplay = new google.maps.DirectionsRenderer();
     window.directionsDisplay.setMap(map);
-
-
-
 })
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
@@ -86,27 +85,30 @@ var mergelistas = function(cb) {
 
 var pos;
 mergelistas(function(){
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(p){
+    if(geo.init()){
+        geo.getCurrentPosition(function(p){
             pos = p.coords;
             console.log('pos', pos);
             _.map(lista.list, function(x){
                 var xydist = getdist(x);
                 if (xydist) {
-                x.dist = xydist.dist;
-                x.lat = xydist.lat;
-                x.lng = xydist.lng;
+                    x.dist = xydist.dist;
+                    x.lat = xydist.lat;
+                    x.lng = xydist.lng;
                 }
             });
             xupdate();
-        });
+        }, function(){console.log('error getting postion', arguments)});
+    }
+    else{
+        alert("Functionality not available");
     }
     xupdate();
 });
 
 var getdist = function(x) {
-        if (x && x.map && pos) {
-            var rgx = /daddr=(.*?)((%2C)|,)(.*?)&/gim;
+    if (x && x.map && pos) {
+        var rgx = /daddr=(.*?)((%2C)|,)(.*?)&/gim;
             var match = rgx.exec(x.map);
             if (match) {
                 var lat1 = parseFloat(match[1]);
