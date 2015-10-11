@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "092120e3a35e156b3213"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "cc484d597f34b17f2df8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -684,9 +684,9 @@
 
 	var _listaJs = __webpack_require__(202);
 
-	var _geoJs = __webpack_require__(217);
+	var _geoJs = __webpack_require__(203);
 
-	var _historyLibCreateBrowserHistory = __webpack_require__(203);
+	var _historyLibCreateBrowserHistory = __webpack_require__(204);
 
 	var _historyLibCreateBrowserHistory2 = _interopRequireDefault(_historyLibCreateBrowserHistory);
 
@@ -25525,6 +25525,147 @@
 
 /***/ },
 /* 203 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	(function () {
+	  if (window.google && google.gears) {
+	    return;
+	  }var factory = null;if (typeof GearsFactory != 'undefined') {
+	    factory = new GearsFactory();
+	  } else {
+	    try {
+	      factory = new ActiveXObject('Gears.Factory');if (factory.getBuildInfo().indexOf('ie_mobile') != -1) {
+	        factory.privateSetGlobalObject(this);
+	      }
+	    } catch (e) {
+	      if (typeof navigator.mimeTypes != 'undefined' && navigator.mimeTypes["application/x-googlegears"]) {
+	        factory = document.createElement("object");factory.style.display = "none";factory.width = 0;factory.height = 0;factory.type = "application/x-googlegears";document.documentElement.appendChild(factory);if (factory && typeof factory.create == 'undefined') {
+	          factory = null;
+	        }
+	      }
+	    }
+	  }if (!factory) {
+	    return;
+	  }if (!window.google) {
+	    google = {};
+	  }if (!google.gears) {
+	    google.gears = { factory: factory };
+	  }
+	})();
+	var bb_success;var bb_error;var bb_blackberryTimeout_id = -1;function handleBlackBerryLocationTimeout() {
+	  if (bb_blackberryTimeout_id != -1) {
+	    bb_error({ message: "Timeout error", code: 3 });
+	  }
+	}function handleBlackBerryLocation() {
+	  clearTimeout(bb_blackberryTimeout_id);bb_blackberryTimeout_id = -1;if (bb_success && bb_error) {
+	    if (blackberry.location.latitude == 0 && blackberry.location.longitude == 0) {
+	      bb_error({ message: "Position unavailable", code: 2 });
+	    } else {
+	      var a = null;if (blackberry.location.timestamp) {
+	        a = new Date(blackberry.location.timestamp);
+	      }bb_success({ timestamp: a, coords: { latitude: blackberry.location.latitude, longitude: blackberry.location.longitude } });
+	    }bb_success = null;bb_error = null;
+	  }
+	}var geo_position_js = (function () {
+	  var b = {};var c = null;var a = "undefined";b.getCurrentPosition = function (f, d, e) {
+	    c.getCurrentPosition(f, d, e);
+	  };b.init = function () {
+	    try {
+	      if (typeof geo_position_js_simulator != a) {
+	        c = geo_position_js_simulator;
+	      } else {
+	        if (typeof bondi != a && typeof bondi.geolocation != a) {
+	          c = bondi.geolocation;
+	        } else {
+	          if (typeof navigator.geolocation != a) {
+	            c = navigator.geolocation;b.getCurrentPosition = function (h, e, g) {
+	              function f(i) {
+	                if (typeof i.latitude != a) {
+	                  h({ timestamp: i.timestamp, coords: { latitude: i.latitude, longitude: i.longitude } });
+	                } else {
+	                  h(i);
+	                }
+	              }c.getCurrentPosition(f, e, g);
+	            };
+	          } else {
+	            if (typeof window.blackberry != a && blackberry.location.GPSSupported) {
+	              if (typeof blackberry.location.setAidMode == a) {
+	                return false;
+	              }blackberry.location.setAidMode(2);b.getCurrentPosition = function (g, e, f) {
+	                bb_success = g;bb_error = e;if (f.timeout) {
+	                  bb_blackberryTimeout_id = setTimeout("handleBlackBerryLocationTimeout()", f.timeout);
+	                } else {
+	                  bb_blackberryTimeout_id = setTimeout("handleBlackBerryLocationTimeout()", 60000);
+	                }blackberry.location.onLocationUpdate("handleBlackBerryLocation()");blackberry.location.refreshLocation();
+	              };c = blackberry.location;
+	            } else {
+	              if (typeof window.google != a && typeof google.gears != a) {
+	                c = google.gears.factory.create("beta.geolocation");
+	              } else {
+	                if (typeof Mojo != a && typeof Mojo.Service.Request != "Mojo.Service.Request") {
+	                  c = true;b.getCurrentPosition = function (g, e, f) {
+	                    parameters = {};if (f) {
+	                      if (f.enableHighAccuracy && f.enableHighAccuracy == true) {
+	                        parameters.accuracy = 1;
+	                      }if (f.maximumAge) {
+	                        parameters.maximumAge = f.maximumAge;
+	                      }if (f.responseTime) {
+	                        if (f.responseTime < 5) {
+	                          parameters.responseTime = 1;
+	                        } else {
+	                          if (f.responseTime < 20) {
+	                            parameters.responseTime = 2;
+	                          } else {
+	                            parameters.timeout = 3;
+	                          }
+	                        }
+	                      }
+	                    }r = new Mojo.Service.Request("palm://com.palm.location", { method: "getCurrentPosition", parameters: parameters, onSuccess: function onSuccess(h) {
+	                        g({ timestamp: h.timestamp, coords: { latitude: h.latitude, longitude: h.longitude, heading: h.heading } });
+	                      }, onFailure: function onFailure(h) {
+	                        if (h.errorCode == 1) {
+	                          e({ code: 3, message: "Timeout" });
+	                        } else {
+	                          if (h.errorCode == 2) {
+	                            e({ code: 2, message: "Position Unavailable" });
+	                          } else {
+	                            e({ code: 0, message: "Unknown Error: webOS-code" + errorCode });
+	                          }
+	                        }
+	                      } });
+	                  };
+	                } else {
+	                  if (typeof device != a && typeof device.getServiceObject != a) {
+	                    c = device.getServiceObject("Service.Location", "ILocation");b.getCurrentPosition = function (g, e, f) {
+	                      function i(l, k, j) {
+	                        if (k == 4) {
+	                          e({ message: "Position unavailable", code: 2 });
+	                        } else {
+	                          g({ timestamp: null, coords: { latitude: j.ReturnValue.Latitude, longitude: j.ReturnValue.Longitude, altitude: j.ReturnValue.Altitude, heading: j.ReturnValue.Heading } });
+	                        }
+	                      }var h = new Object();h.LocationInformationClass = "BasicLocationInformation";c.ILocation.GetLocation(h, i);
+	                    };
+	                  }
+	                }
+	              }
+	            }
+	          }
+	        }
+	      }
+	    } catch (d) {
+	      if (typeof console != a) {
+	        console.log(d);
+	      }return false;
+	    }return c != null;
+	  };return b;
+	})();
+
+	module.exports = { geo: geo_position_js };
+
+/***/ },
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25535,23 +25676,23 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _invariant = __webpack_require__(204);
+	var _invariant = __webpack_require__(205);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
-	var _Actions = __webpack_require__(205);
+	var _Actions = __webpack_require__(206);
 
-	var _ExecutionEnvironment = __webpack_require__(206);
+	var _ExecutionEnvironment = __webpack_require__(207);
 
-	var _DOMUtils = __webpack_require__(207);
+	var _DOMUtils = __webpack_require__(208);
 
-	var _DOMStateStorage = __webpack_require__(208);
+	var _DOMStateStorage = __webpack_require__(209);
 
-	var _createDOMHistory = __webpack_require__(209);
+	var _createDOMHistory = __webpack_require__(210);
 
 	var _createDOMHistory2 = _interopRequireDefault(_createDOMHistory);
 
-	var _createLocation = __webpack_require__(216);
+	var _createLocation = __webpack_require__(217);
 
 	var _createLocation2 = _interopRequireDefault(_createLocation);
 
@@ -25666,7 +25807,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 204 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -25726,7 +25867,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 205 */
+/* 206 */
 /***/ function(module, exports) {
 
 	/**
@@ -25762,7 +25903,7 @@
 	};
 
 /***/ },
-/* 206 */
+/* 207 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25772,7 +25913,7 @@
 	exports.canUseDOM = canUseDOM;
 
 /***/ },
-/* 207 */
+/* 208 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25852,7 +25993,7 @@
 	}
 
 /***/ },
-/* 208 */
+/* 209 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -25885,7 +26026,7 @@
 	}
 
 /***/ },
-/* 209 */
+/* 210 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25896,15 +26037,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _invariant = __webpack_require__(204);
+	var _invariant = __webpack_require__(205);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
-	var _ExecutionEnvironment = __webpack_require__(206);
+	var _ExecutionEnvironment = __webpack_require__(207);
 
-	var _DOMUtils = __webpack_require__(207);
+	var _DOMUtils = __webpack_require__(208);
 
-	var _createHistory = __webpack_require__(210);
+	var _createHistory = __webpack_require__(211);
 
 	var _createHistory2 = _interopRequireDefault(_createHistory);
 
@@ -25930,7 +26071,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 210 */
+/* 211 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25941,23 +26082,23 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(211);
+	var _warning = __webpack_require__(212);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _invariant = __webpack_require__(204);
+	var _invariant = __webpack_require__(205);
 
 	var _invariant2 = _interopRequireDefault(_invariant);
 
-	var _deepEqual = __webpack_require__(212);
+	var _deepEqual = __webpack_require__(213);
 
 	var _deepEqual2 = _interopRequireDefault(_deepEqual);
 
-	var _AsyncUtils = __webpack_require__(215);
+	var _AsyncUtils = __webpack_require__(216);
 
-	var _Actions = __webpack_require__(205);
+	var _Actions = __webpack_require__(206);
 
-	var _createLocation = __webpack_require__(216);
+	var _createLocation = __webpack_require__(217);
 
 	var _createLocation2 = _interopRequireDefault(_createLocation);
 
@@ -26171,7 +26312,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 211 */
+/* 212 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -26238,12 +26379,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6)))
 
 /***/ },
-/* 212 */
+/* 213 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var pSlice = Array.prototype.slice;
-	var objectKeys = __webpack_require__(213);
-	var isArguments = __webpack_require__(214);
+	var objectKeys = __webpack_require__(214);
+	var isArguments = __webpack_require__(215);
 
 	var deepEqual = module.exports = function (actual, expected, opts) {
 	  if (!opts) opts = {};
@@ -26338,7 +26479,7 @@
 
 
 /***/ },
-/* 213 */
+/* 214 */
 /***/ function(module, exports) {
 
 	exports = module.exports = typeof Object.keys === 'function'
@@ -26353,7 +26494,7 @@
 
 
 /***/ },
-/* 214 */
+/* 215 */
 /***/ function(module, exports) {
 
 	var supportsArgumentsClass = (function(){
@@ -26379,7 +26520,7 @@
 
 
 /***/ },
-/* 215 */
+/* 216 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -26410,7 +26551,7 @@
 	}
 
 /***/ },
-/* 216 */
+/* 217 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -26419,11 +26560,11 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
-	var _warning = __webpack_require__(211);
+	var _warning = __webpack_require__(212);
 
 	var _warning2 = _interopRequireDefault(_warning);
 
-	var _Actions = __webpack_require__(205);
+	var _Actions = __webpack_require__(206);
 
 	function extractPath(string) {
 	  var match = string.match(/https?:\/\/[^\/]*/);
@@ -26473,147 +26614,6 @@
 
 	exports['default'] = createLocation;
 	module.exports = exports['default'];
-
-/***/ },
-/* 217 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	(function () {
-	  if (window.google && google.gears) {
-	    return;
-	  }var factory = null;if (typeof GearsFactory != 'undefined') {
-	    factory = new GearsFactory();
-	  } else {
-	    try {
-	      factory = new ActiveXObject('Gears.Factory');if (factory.getBuildInfo().indexOf('ie_mobile') != -1) {
-	        factory.privateSetGlobalObject(this);
-	      }
-	    } catch (e) {
-	      if (typeof navigator.mimeTypes != 'undefined' && navigator.mimeTypes["application/x-googlegears"]) {
-	        factory = document.createElement("object");factory.style.display = "none";factory.width = 0;factory.height = 0;factory.type = "application/x-googlegears";document.documentElement.appendChild(factory);if (factory && typeof factory.create == 'undefined') {
-	          factory = null;
-	        }
-	      }
-	    }
-	  }if (!factory) {
-	    return;
-	  }if (!window.google) {
-	    google = {};
-	  }if (!google.gears) {
-	    google.gears = { factory: factory };
-	  }
-	})();
-	var bb_success;var bb_error;var bb_blackberryTimeout_id = -1;function handleBlackBerryLocationTimeout() {
-	  if (bb_blackberryTimeout_id != -1) {
-	    bb_error({ message: "Timeout error", code: 3 });
-	  }
-	}function handleBlackBerryLocation() {
-	  clearTimeout(bb_blackberryTimeout_id);bb_blackberryTimeout_id = -1;if (bb_success && bb_error) {
-	    if (blackberry.location.latitude == 0 && blackberry.location.longitude == 0) {
-	      bb_error({ message: "Position unavailable", code: 2 });
-	    } else {
-	      var a = null;if (blackberry.location.timestamp) {
-	        a = new Date(blackberry.location.timestamp);
-	      }bb_success({ timestamp: a, coords: { latitude: blackberry.location.latitude, longitude: blackberry.location.longitude } });
-	    }bb_success = null;bb_error = null;
-	  }
-	}var geo_position_js = (function () {
-	  var b = {};var c = null;var a = "undefined";b.getCurrentPosition = function (f, d, e) {
-	    c.getCurrentPosition(f, d, e);
-	  };b.init = function () {
-	    try {
-	      if (typeof geo_position_js_simulator != a) {
-	        c = geo_position_js_simulator;
-	      } else {
-	        if (typeof bondi != a && typeof bondi.geolocation != a) {
-	          c = bondi.geolocation;
-	        } else {
-	          if (typeof navigator.geolocation != a) {
-	            c = navigator.geolocation;b.getCurrentPosition = function (h, e, g) {
-	              function f(i) {
-	                if (typeof i.latitude != a) {
-	                  h({ timestamp: i.timestamp, coords: { latitude: i.latitude, longitude: i.longitude } });
-	                } else {
-	                  h(i);
-	                }
-	              }c.getCurrentPosition(f, e, g);
-	            };
-	          } else {
-	            if (typeof window.blackberry != a && blackberry.location.GPSSupported) {
-	              if (typeof blackberry.location.setAidMode == a) {
-	                return false;
-	              }blackberry.location.setAidMode(2);b.getCurrentPosition = function (g, e, f) {
-	                bb_success = g;bb_error = e;if (f.timeout) {
-	                  bb_blackberryTimeout_id = setTimeout("handleBlackBerryLocationTimeout()", f.timeout);
-	                } else {
-	                  bb_blackberryTimeout_id = setTimeout("handleBlackBerryLocationTimeout()", 60000);
-	                }blackberry.location.onLocationUpdate("handleBlackBerryLocation()");blackberry.location.refreshLocation();
-	              };c = blackberry.location;
-	            } else {
-	              if (typeof window.google != a && typeof google.gears != a) {
-	                c = google.gears.factory.create("beta.geolocation");
-	              } else {
-	                if (typeof Mojo != a && typeof Mojo.Service.Request != "Mojo.Service.Request") {
-	                  c = true;b.getCurrentPosition = function (g, e, f) {
-	                    parameters = {};if (f) {
-	                      if (f.enableHighAccuracy && f.enableHighAccuracy == true) {
-	                        parameters.accuracy = 1;
-	                      }if (f.maximumAge) {
-	                        parameters.maximumAge = f.maximumAge;
-	                      }if (f.responseTime) {
-	                        if (f.responseTime < 5) {
-	                          parameters.responseTime = 1;
-	                        } else {
-	                          if (f.responseTime < 20) {
-	                            parameters.responseTime = 2;
-	                          } else {
-	                            parameters.timeout = 3;
-	                          }
-	                        }
-	                      }
-	                    }r = new Mojo.Service.Request("palm://com.palm.location", { method: "getCurrentPosition", parameters: parameters, onSuccess: function onSuccess(h) {
-	                        g({ timestamp: h.timestamp, coords: { latitude: h.latitude, longitude: h.longitude, heading: h.heading } });
-	                      }, onFailure: function onFailure(h) {
-	                        if (h.errorCode == 1) {
-	                          e({ code: 3, message: "Timeout" });
-	                        } else {
-	                          if (h.errorCode == 2) {
-	                            e({ code: 2, message: "Position Unavailable" });
-	                          } else {
-	                            e({ code: 0, message: "Unknown Error: webOS-code" + errorCode });
-	                          }
-	                        }
-	                      } });
-	                  };
-	                } else {
-	                  if (typeof device != a && typeof device.getServiceObject != a) {
-	                    c = device.getServiceObject("Service.Location", "ILocation");b.getCurrentPosition = function (g, e, f) {
-	                      function i(l, k, j) {
-	                        if (k == 4) {
-	                          e({ message: "Position unavailable", code: 2 });
-	                        } else {
-	                          g({ timestamp: null, coords: { latitude: j.ReturnValue.Latitude, longitude: j.ReturnValue.Longitude, altitude: j.ReturnValue.Altitude, heading: j.ReturnValue.Heading } });
-	                        }
-	                      }var h = new Object();h.LocationInformationClass = "BasicLocationInformation";c.ILocation.GetLocation(h, i);
-	                    };
-	                  }
-	                }
-	              }
-	            }
-	          }
-	        }
-	      }
-	    } catch (d) {
-	      if (typeof console != a) {
-	        console.log(d);
-	      }return false;
-	    }return c != null;
-	  };return b;
-	})();
-
-	module.exports = { geo: geo_position_js };
 
 /***/ }
 /******/ ]);

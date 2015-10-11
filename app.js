@@ -173,8 +173,6 @@ var Listing = React.createClass({
                     directionsDisplay.setDirections(result);
                 }
             });
-
-
         }
 
     },
