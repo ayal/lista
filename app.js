@@ -184,7 +184,7 @@ var Listing = React.createClass({
     render: function() {
         var x = this.props.x;
         return (
-                                       <div className="listing" onClick={this.setCenter}>
+                                       <div className="listing" onClick={this.setCenter} style={{cursor:"pointer"}}>
                                        <div className="name">
                                        {x.name}
                                    </div>
