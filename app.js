@@ -187,7 +187,7 @@ var Listing = React.createClass({
         var that = this;
         var x = this.props.x;
         return (
-                                       <div className="listing" onClick={this.setCenter} style={{cursor:"pointer"}}>
+                                       <div className={"listing " + this.props.cls} onClick={this.setCenter} style={{cursor:"pointer"}}>
                                        <div className="name">
                                        {x.name}
                                    </div>
@@ -256,19 +256,34 @@ var Lista = React.createClass({
     },
     render: function() {
     var that = this;
-    var lilista = _.map(lista.list.sort(function(a,b){return parseFloat(a.dist) - parseFloat(b.dist)}),
-                       function(x){
-                           if (x.name && x.name.toLowerCase().match(that.props.term && that.props.term.toLowerCase()) ||
-                               (x.tags ==='*' || x.tags && x.tags.toLowerCase().match(that.props.term && that.props.term.toLowerCase())) ||
-                               x.text && x.text.toLowerCase().match(that.props.term && that.props.term.toLowerCase())) {
+    var lilista = _.union(
+        _.map(lista.extra,
+              function(x){
+                  if (x.name && x.name.toLowerCase().match(that.props.term && that.props.term.toLowerCase()) ||
+                      (x.tags ==='*' || x.tags && x.tags.toLowerCase().match(that.props.term && that.props.term.toLowerCase())) ||
+                      x.text && x.text.toLowerCase().match(that.props.term && that.props.term.toLowerCase())) {
 
 
-                               return (
-                                       <Listing x={x} aside={that.aside} />
-                               );
-                           }
-                           return null;
-                       });
+                      return (
+                              <Listing x={x} aside={that.aside} cls="extra" />
+                      );
+                  }
+                  return null;
+              }),
+
+        _.map(lista.list.sort(function(a,b){return parseFloat(a.dist) - parseFloat(b.dist)}),
+              function(x){
+                  if (x.name && x.name.toLowerCase().match(that.props.term && that.props.term.toLowerCase()) ||
+                      (x.tags ==='*' || x.tags && x.tags.toLowerCase().match(that.props.term && that.props.term.toLowerCase())) ||
+                      x.text && x.text.toLowerCase().match(that.props.term && that.props.term.toLowerCase())) {
+
+
+                      return (
+                              <Listing x={x} aside={that.aside} />
+                      );
+                  }
+                  return null;
+              }));
 
     return (
 <div className="lista">

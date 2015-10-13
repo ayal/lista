@@ -5,6 +5,10 @@
     font-family: courier;
 }
 
+.listing.extra {
+    background-color: rgb(176, 168, 225);
+}
+
 .listing > div {
     margin:4px;
 }

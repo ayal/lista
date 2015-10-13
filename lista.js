@@ -2,9 +2,10 @@ var filter = function(x,y) {
     return '<a class="filter" href="?term='+(y !== undefined ? y : x)+'">'+x+'</a>';
 };
 
-var lista = {list: [
-    {name: 'filters', text:'Try these filters: ' + filter('basic') + filter('near') + filter('walking') + filter('jaffa') + filter('food') + filter('drink') + filter('street food')  + filter('club') + filter('24/7') + filter('transportation') + filter('SIM') + filter('co-working') + filter('all',''), tags:'*' },
-    {name: 'Activities', text:'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a><br><a target="_blank" href="http://activities.co.il/categories/%D7%9E%D7%A1%D7%99%D7%91%D7%94?lng=34.76501&lat=32.03954&h=%7B%22Sub%22%3A%7B%22%D7%9E%D7%A1%D7%99%D7%91%D7%94%22%3A%7B%7D%7D%7D&r=5&w=today&lang=en">three</a>', tags:'*' },
+var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basic') + filter('near') + filter('walking') + filter('jaffa') + filter('food') + filter('drink') + filter('street food')  + filter('club') + filter('24/7') + filter('transportation') + filter('SIM') + filter('co-working') + filter('all',''), tags:'*' },
+    {name: 'Activities', text:'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a><br><a target="_blank" href="http://activities.co.il/categories/%D7%9E%D7%A1%D7%99%D7%91%D7%94?lng=34.76501&lat=32.03954&h=%7B%22Sub%22%3A%7B%22%D7%9E%D7%A1%D7%99%D7%91%D7%94%22%3A%7B%7D%7D%7D&r=5&w=today&lang=en">three</a>', tags:'*' }],
+             list: [
+
     {name: 'AM:PM supermarket', tags: 'basic,supplies,food,supermarket', text: 'Open all the time, a bit expensive', hours: '24/7' },
     {name: 'Merry Market', tags: 'supplies,food,supermarket,24/7', text: 'Grocery store open all the time, cheaper than AM:PM but smaller', map: 'https://www.google.com/maps?saddr=&daddr='+ encodeURIComponent('32.058982,34.773444') + '&dirflg=w'},
 
@@ -324,7 +325,7 @@ var lista = {list: [
     hours: 'mon-sun:12:00-01:00',
     map: 'https://www.google.com/maps?&daddr=32.059032084001%2C34.771194003487&dirflg=w',
     link: 'http://facebook.com/barkayma',
-    text: 'Vegan and hippieish bar that is open every day until late. kitchen closes at midnight. ALSO the place has a second floor which operates as a coworking space everyday from 12:00 to 18:00',
+    text: 'Vegan and hippieish bar that is open every day until late. kitchen closes at midnight. ALSO the place has a second floor which operates as a co-working space everyday from 12:00 to 18:00',
     tags: 'Pub-restaurant vegan',
     name: 'Bar Kayma' },
 { realhours: undefined,
