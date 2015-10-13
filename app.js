@@ -265,7 +265,7 @@ var Lista = React.createClass({
 
 
                       return (
-                              <Listing x={x} aside={that.aside} cls="extra" />
+                              <Listing x={x} aside={$.noop} cls="extra" />
                       );
                   }
                   return null;

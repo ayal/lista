@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "82e5c5a6e22f076f66bb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "b3aac8e29cdd448d9878"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -962,7 +962,7 @@
 	        var lilista = _.union(_.map(_listaJs.lista.extra, function (x) {
 	            if (x.name && x.name.toLowerCase().match(that.props.term && that.props.term.toLowerCase()) || (x.tags === '*' || x.tags && x.tags.toLowerCase().match(that.props.term && that.props.term.toLowerCase())) || x.text && x.text.toLowerCase().match(that.props.term && that.props.term.toLowerCase())) {
 
-	                return _react2['default'].createElement(Listing, { x: x, aside: that.aside, cls: 'extra' });
+	                return _react2['default'].createElement(Listing, { x: x, aside: $.noop, cls: 'extra' });
 	            }
 	            return null;
 	        }), _.map(_listaJs.lista.list.sort(function (a, b) {
