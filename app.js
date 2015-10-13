@@ -69,6 +69,7 @@ var mergelistas = function(cb) {
                 match.hours = fsGetHours(x);
             }
             match.tel = x.venue.contact.phone;
+            match.address = x.venue.location.address;
             var daddr = x.venue.location.lat + ',' + x.venue.location.lng;
             var map = 'https://www.google.com/maps?&daddr=' + encodeURIComponent(daddr) +
                     '&dirflg=w';
@@ -108,7 +109,7 @@ mergelistas(function(){
 
 var getdist = function(x) {
     if (x && x.map && pos) {
-        var rgx = /daddr=(.*?)((%2C)|,)(.*?)&/gim;
+        var rgx = (x.map.match && x.map.match('@')) ?  /@(.*?)((%2C)|,)(.*?),/gim:  /daddr=(.*?)((%2C)|,)(.*?)&/gim;
             var match = rgx.exec(x.map);
             if (match) {
                 var lat1 = parseFloat(match[1]);
@@ -176,10 +177,14 @@ var Listing = React.createClass({
         }
 
     },
+    direct: function(e) {
+        e.stopPropagation();
+    },
     componentWillUnmount: function() {
         this.marker && this.marker.setMap(null);
     },
     render: function() {
+        var that = this;
         var x = this.props.x;
         return (
                                        <div className="listing" onClick={this.setCenter} style={{cursor:"pointer"}}>
@@ -189,8 +194,8 @@ var Listing = React.createClass({
                                        {x.map ? (<div className="map">
                                        {
                                            x.map.push ? _.map(x.map, function(y,i){
-                                               return <a target="_blank" href={y}>{"directions" + i}</a>;
-                                           }) : (<a target="_blank" href={x.map}>directions</a>)
+                                               return <a target="_blank" href={y} onClick={that.direct}>{"directions" + i}</a>;
+                                           }) : (<a target="_blank" href={x.map} onClick={that.direct}>{x.address || 'directions'}</a>)
                                        }
                                    </div>) : null}
                                        <div className="text" dangerouslySetInnerHTML={{__html: x.text }}>
