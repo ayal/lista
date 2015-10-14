@@ -366,10 +366,9 @@ var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basi
 {name: 'Dizengoff Center', text:'Big mall with many things. One store named "Bug" for computer supply is on the bottom floor (ask people where it is) - it has a representative of a cellular firm called "Golan Telecom" from which you can buy a SIM card with credit card and passport. it should cost ~$12 for the SIM and then you need to choose a plan, for example i think they have ~$20 for no limit calls in israel and 6GB data plan. remember to cancel before you leave!', tags:'sim card,basic'},
     {name:'ATM and bank', text:'ATM and bank leumi. ATM open 24 hrs', hours:'mon-fri:08:30-12:00', map: 'http://google.com/maps/?saddr=&daddr=' + encodeURIComponent('32.0604719,34.7692777') + '&dirflg=w', tags:''},
     {name:'Tel Aviv University', text:'You can take line 25 from <a href="http://www.bus.co.il/otobusimmvc/Line_Places/1010/25_11_-528046747?Language=en" target="_blank">ha\'aliya or allenby street</a>',tags:''},
-    {name:'The Library', text:'A nice co-working space with some startups sitting there.'}
+    {name:'The Library', text:'A nice co-working space with some startups sitting there.'},
+    {name:'Oz Bicycle shop', map:'http://google.com/maps/?saddr=&daddr=' + encodeURIComponent('32.058825,34.774999') + '&dirflg=w', text:'Good bicycle shop. Might sell and re-buy bicycle from you', tags:'bicycle'}
 ]};
-
-
 
 
 module.exports = {lista:lista};
