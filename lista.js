@@ -7,8 +7,8 @@ var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basi
              list: [
 
     {name: 'AM:PM supermarket', tags: 'basic,supplies,food,supermarket', text: 'Open all the time, a bit expensive', hours: '24/7' },
-    {name: 'Merry Market', tags: 'supplies,food,supermarket,24/7', text: 'Grocery store open all the time, cheaper than AM:PM but smaller', map: 'https://www.google.com/maps?saddr=&daddr='+ encodeURIComponent('32.058982,34.773444') + '&dirflg=w'},
-
+    {name: 'Merry Market', tags: 'supplies,food,supermarket,24/7,saturday', text: 'Grocery store open all the time, cheaper than AM:PM but smaller', map: 'https://www.google.com/maps?saddr=&daddr='+ encodeURIComponent('32.058982,34.773444') + '&dirflg=w'},
+{name: 'Cheap Vegetables', tags: 'supplies,food,supermarket,saturday', text: 'Cheap vegetables place that is open almost 24/7', map: 'https://www.google.com/maps?saddr=&daddr='+ encodeURIComponent('32.058782,34.77354') + '&dirflg=w'},
     {name: 'Sunset spot', tags: 'sunset,beach', text:'A nice place to go watch the sunset. Its in the beginning of a street called "Arlozerov", on the south side of the hilton hotel. there is a nice garden there.  The beach at the bottom of the garden is also nice. You can take <a href="/?term=line 4">line 4 or line 5</a> to get there. Ask the driver to get down at Arlozerov street.',  hours: '24/7', map: 'https://www.google.com/maps?saddr=&daddr='+ encodeURIComponent('32.0884965,34.7717279') + '&dirflg=w'},
 {name: 'Sunset spot, Jaffa', tags: 'sunset,beach', text:'A nice place to go watch the sunset.',  hours: '24/7', map: 'https://www.google.com/maps?saddr=&daddr=' + encodeURIComponent('32.0540514,34.7532538') + '&dirflg=w'},
 
@@ -16,21 +16,21 @@ var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basi
 
     {name: 'Beta and Grega', 'text':'Very nice coffee place / bar with some food, especially during the day and snacks at night. open almost 24/7.', tags:'food,drink,coffee,bar', map: 'https://www.google.com/maps?saddr&daddr=' + encodeURIComponent('32.0602854,34.7706351') + '&dirflg=w',hours: '24/7',orig:'5247cca611d23acfdc58758b'},
 
-{name: 'Abu Hassan Hummus branch 1', 'text':'Best Hummus restaurant in tel aviv (Jaffa)', tags:'food,hummus,jaffa,street food', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%A2%D7%9C%D7%99+%D7%A7%D7%A8%D7%95%D7%90%D7%9F+%D7%90%D7%91%D7%95+%D7%97%D7%A1%D7%9F,+%D7%94%D7%93%D7%95%D7%9C%D7%A4%D7%99%D7%9F+1,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95%E2%80%AD/@32.0550299,34.7521788,15z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4cc80daafe67:0x129d4e2acf06abee!2m2!1d34.7508605!2d32.0501865!3e2?hl=en',hours: 'weekdays:09:00-15:00'},
-{name: 'Abu Hassan Hummus branch 2', 'text':'Best Hummus restaurant in tel aviv (Jaffa)', tags:'food,hummus,jaffa,street food', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%A2%D7%9C%D7%99+%D7%A7%D7%A8%D7%90%D7%95%D7%95%D7%9F+%D7%90%D7%91%D7%95+%D7%97%D7%A1%D7%9F,+%D7%A9%D7%91%D7%98%D7%99+%D7%99%D7%A9%D7%A8%D7%90%D7%9C+14,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95%E2%80%AD/@32.0543824,34.7601277,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4cb9f8e71dcd:0x60406f6868e117bf!2m2!1d34.7574593!2d32.0494615!3e2?hl=en',hours: 'weekends:09:00-15:00'},
-{name:'Bicycle rent station', text:'Station where you rent green bicycle. The full map of all the stations is <a target="blank" href="https://www.google.com/maps/d/viewer?mid=zdi_rVF5Mzjw.kbZqZIxGbWuc&hl">here</a>', map: 'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/Sderot+Washington+15,+Tel+Aviv-Yafo/@32.0576879,34.7684299,17z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4c9f43628123:0x171874af5f92cb99!2m2!1d34.7695488!2d32.0561839?hl=en', tags:'bicycle,telofun', hours:'24/7'},
-{name:'Tourist info center, Jaffa', tags: 'tourist,info,basic', map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/Tourist+Information+Center,+Tel+Aviv-Yafo/@32.0575303,34.7597386,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4cbe97822df7:0x831a29df576eaee5!2m2!1d34.756791!2d32.055205!3e2?hl=en', hours:'mon-thu or sun 9:30-18:30|fri: 9:30-16:00|sat/holidays: 10:00-16:00'},
+
+{name:'Bicycle rent station (telofun)', text:'Station where you rent green bicycle. The full map of all the stations is <a target="blank" href="https://www.google.com/maps/d/viewer?mid=zdi_rVF5Mzjw.kbZqZIxGbWuc&hl">here</a>', map: 'https://www.google.com/maps?saddr=&daddr=' + encodeURIComponent('32.056184,34.769567') + '&dirflg=w', tags:'bicycle,telofun', hours:'24/7', address:'Sderot Washington 15-35'},
+
+{name:'Tourist info center, Jaffa', tags: 'tourist,info,basic', map:'https://www.google.com/maps?saddr=&daddr=' + encodeURIComponent('32.055334,34.756832') + '&dirflg=w', hours:'mon-thu or sun 9:30-18:30|fri: 9:30-16:00|sat/holidays: 10:00-16:00', address:'Marzuk Ve-Azar St 2'},
 
 {name: 'Bar Mitzva', text:'Great place for drinking at night. prolly some food. prolly good food.', hours:'weekday nights and sat night maybe also :)', tags:'drink,snacks'},
 
 
-{name: 'Flea Market', text:'Nice area with restaurants and bars and fashion shops and second hand stores and anthiques.' , map:'https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%A4%D7%95%D7%A2%D7%94,+%D7%A8%D7%91%D7%99+%D7%99%D7%95%D7%97%D7%A0%D7%9F+3,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95%E2%80%AD/@32.0564579,34.7594825,16z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4cb94729057d:0x2b2a0d7cb7dc2930!2m2!1d34.7562843!2d32.0530602!3e2?hl=en', tags:'second hand,clothes,market,flea,fashion'},
+{name: 'Flea Market', text:'Nice area with restaurants and bars and fashion shops and second hand stores and anthiques.' , map:'', tags:'second hand,clothes,market,flea,fashion'},
 
 {name: 'Studio Naim', text:'Very famous yoga studio. The map is for one specific but there are three branches. See maps and website. <a target="_blank" href="http://www.naim.org.il/en/memberships/">prices</a>', hours:'see website' , map:['https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%A1%D7%98%D7%95%D7%93%D7%99%D7%95+%D7%A0%D7%A2%D7%99%D7%9D+-+%D7%99%D7%95%D7%92%D7%94,+%D7%A4%D7%99%D7%9C%D7%90%D7%98%D7%99%D7%A1,+%D7%9E%D7%97%D7%95%D7%9C,+%D7%93%D7%A8%D7%9A+%D7%A9%D7%9C%D7%9E%D7%94+46,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95,+66073%E2%80%AD/@32.0570674,34.7674,17z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4ca20e6cdb4d:0x981fc3cef6a7ff88!2m2!1d34.767489!2d32.054943!3e2?hl=en', 'https://www.google.com/maps/dir/%D7%9E%D7%A8%D7%97%D7%91%D7%99%D7%94+19,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95,+%D7%99%D7%A9%D7%A8%D7%90%D7%9C%E2%80%AD%E2%80%AD/32.0552788,34.7695408/@32.0572308,34.768548,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en', 'https://www.google.com/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo,+Israel/32.0630026,34.7694669/@32.0612194,34.7687516,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en'],  link: 'http://www.naim.org.il/en/', tags:'yoga'},
 {name: 'Yoga Levontin', text:'Nice yoga studio. <a href="http://yogalev.com/pricelist">prices</a>', hours:'see website' , map:'https://www.google.com/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo,+Israel/Lavontin+St+7,+Tel+Aviv-Yafo,+Israel/@32.0605,34.7727496,18z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4b629673152b:0xb0ea26dabbf6d240!2m2!1d34.7749325!2d32.0617115!3e2?hl=en',  link: 'http://yogalev.com/', tags:'yoga'},
 
 
-{name: 'Santa Caterina', text:'Very hipster place to eat. A bit packed', hours:'Mon-Thu: 5:30 pm-1:30 am | Fri: 12:30 pm-1:30 am |  Sat: 7:00 pm-1:30 am | Sun:5:30 pm-1:30 am' , map:'https://www.google.com/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo,+Israel/Santa+Katarina,+Har+Sinai+Street+2,+Tel+Aviv-Yafo,+Israel/@32.0619899,34.7693488,17z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4c82d19724e7:0x231035f58280cc0!2m2!1d34.7718868!2d32.0644351!3e2?hl=en',  link: 'https://www.facebook.com/santakatarina2/info?tab=page_info', tags:'hipster,food,music,drink'},
+{name: 'Santa Caterina', text:'Very hipster place to eat. A bit packed', hours:'Mon-Thu: 5:30 pm-1:30 am | Fri: 12:30 pm-1:30 am |  Sat: 7:00 pm-1:30 am | Sun:5:30 pm-1:30 am' , map:'',  link: 'https://www.facebook.com/santakatarina2/info?tab=page_info', tags:'hipster,food,music,drink'},
 { realhours:
      { mon_1_open: '08:15',
        mon_1_close: '00:00',
@@ -47,7 +47,7 @@ var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basi
        sun_1_open: '08:15',
        sun_1_close: '00:00' },
     hours: 'mon-thu or sun:08:15-00:00 | fri:08:00-16:00 | sat:09:00-00:00',
-    map: 'https://www.google.com/maps?saddr=Merhavia%2019%20Tel%20Aviv&daddr=' + encodeURIComponent('32.0599098,34.7716103') + '&dirflg=w',
+    map: 'https://www.google.com/maps?saddr=&daddr=' + encodeURIComponent('32.0599098,34.7716103') + '&dirflg=w',
     link: 'http://facebook.com/Tonyveesther',
     text: 'Nice coffee place with food and drinks',
     tags: 'Coffee, beer, food',
@@ -66,14 +66,14 @@ var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basi
        sun_1_open: '11:00',
        sun_1_close: '23:00' },
     hours: 'mon-thu or sun:11:00-23:00 | fri:10:00-18:00',
-    map: 'https://www.google.com/maps?saddr=Merhavia%2019%20Tel%20Aviv&daddr=32.0600815,34.77248&dirflg=w',
+    map: 'https://www.google.com/maps?saddr=&daddr=32.0600815,34.77248&dirflg=w',
     link: 'http://facebook.com/622591387867546',
     text: 'Yemenite food with a modern twist. They have 50% on all dishes 17:00-20:00',
     tags: 'yemenite,food,lunch',
     name: 'saluf & sons' },
   {
     hours: '',
-    map: 'https://www.google.com/maps?saddr=Merhavia%2019%20Tel%20Aviv&daddr=32.0609016,34.7699814&dirflg=w',
+    map: 'https://www.google.com/maps?saddr=&daddr=32.0609016,34.7699814&dirflg=w',
     link: 'http://facebook.com/uganda.tlv',
     text: 'Hidden bar and record store',
     tags: 'Bar,Records,hipster',
@@ -92,14 +92,14 @@ var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basi
        sat_1_open: '21:30',
        sat_1_close: '03:00' },
     hours: 'mon-wed or sat:21:30-03:00 | thu:21:30-04:00 | fri:22:00-04:00',
-    map: 'https://www.google.com/maps?saddr=Merhavia%2019%20Tel%20Aviv&daddr=32.0645294,34.7720413&dirflg=w',
+    map: 'https://www.google.com/maps?saddr=&daddr=32.0645294,34.7720413&dirflg=w',
     link: 'http://facebook.com/harsinai',
     text: 'Place closes at end of october but is really a central place to hipster nightlife',
     tags: 'drink,dance,hipster',
     name: 'Har Sinai' },
   {
     hours: 'check website',
-    map: 'https://www.google.com/maps?saddr=Merhavia%2019%20Tel%20Aviv&daddr=32.053847147487,34.784753208717&dirflg=w',
+    map: 'https://www.google.com/maps?saddr=&daddr=32.053847147487,34.784753208717&dirflg=w',
     link: 'http://www.rail.co.il/EN/DrivePlan/Pages/DrivePlan.aspx',
     text: 'Train station. A train costs ~$7',
     tags: 'train,station,transportation,basic',

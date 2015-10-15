@@ -109,7 +109,7 @@ mergelistas(function(){
 
 var getdist = function(x) {
     if (x && x.map && pos) {
-        var rgx = (x.map.match && x.map.match('@')) ?  /@(.*?)((%2C)|,)(.*?),/gim:  /daddr=(.*?)((%2C)|,)(.*?)&/gim;
+        var rgx = (false) ?  /@(.*?)((%2C)|,)(.*?),/gim:  /daddr=(.*?)((%2C)|,)(.*?)&/gim;
             var match = rgx.exec(x.map);
             if (match) {
                 var lat1 = parseFloat(match[1]);
