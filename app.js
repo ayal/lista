@@ -321,7 +321,7 @@ const App = React.createClass({
     nav: function(name) {
         var that = this;
         return function(e) {
-            var val = event.target.value;
+            var val = e.target.value;
             var q = {};
             q[name] = val;
             console.log('value change',e.target.value, q);

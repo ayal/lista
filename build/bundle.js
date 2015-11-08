@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4dba9d97e999a1cf71c5"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "7ceb3a4e6602ff4d7250"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -890,7 +890,7 @@
 	    nav: function nav(name) {
 	        var that = this;
 	        return function (e) {
-	            var val = event.target.value;
+	            var val = e.target.value;
 	            var q = {};
 	            q[name] = val;
 	            console.log('value change', e.target.value, q);
