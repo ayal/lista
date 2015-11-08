@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "759fcefd728139648dd7"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "ecef44c9850b7b821974"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -897,15 +897,9 @@
 	            that._nav(q);
 	        };
 	    },
-	    routerWillLeave: function routerWillLeave(nextLocation) {
-	        return null;
-	    },
 	    _nav: function _nav(q) {
 	        this.history.pushState(null, '/lista', q);
 	        this.setState(q);
-	    },
-	    contextTypes: {
-	        router: _react2.default.PropTypes.func.isRequired
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(Lista, { nav: this.nav, term: this.state.term });
