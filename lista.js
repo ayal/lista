@@ -2,7 +2,7 @@ var filter = function(x,y) {
     return '<a class="filter" href="?term='+(y !== undefined ? y : x)+'">'+x+'</a>';
 };
 
-var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basic') + filter('near') + filter('walking') + filter('jaffa') + filter('food') + filter('drink') + filter('street food')  + filter('club') + filter('24/7') + filter('transportation') + filter('SIM') + filter('co-working') + filter('all',''), tags:'*' },
+var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basic') + filter('near') + filter('walking') + filter('jaffa') + filter('food') + filter('drink') + filter('street food')  + filter('club') + filter('24/7') + filter('saturday') + filter('transportation') + filter('SIM') + filter('co-working') + filter('all',''), tags:'*' },
     {name: 'Activities', text:'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a><br><a target="_blank" href="http://activities.co.il/categories/%D7%9E%D7%A1%D7%99%D7%91%D7%94?lng=34.76501&lat=32.03954&h=%7B%22Sub%22%3A%7B%22%D7%9E%D7%A1%D7%99%D7%91%D7%94%22%3A%7B%7D%7D%7D&r=5&w=today&lang=en">three</a>', tags:'*' }],
              list: [
 
@@ -14,7 +14,7 @@ var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basi
 
     {name: 'line 4 or 5 station', 'text': 'take these lines from this station to get to the center/north of tel aviv. There is no real station you just stand in the corner and wait for them to arrive. they look like <a target="_blank" href="http://www.nrg.co.il/images/archive/300x225/1/423/686.jpg">this</a>. they operate even on the weekend and at night (though a bit less frequent than during the weekdays). Costs around $2. ', hours: '24/7', map:'https://www.google.com/maps?saddr=&daddr=' + encodeURIComponent('32.0608008,34.7738404') + '&dirflg=w', tags:'basic,public transportation,bus,taxi,center,north'},
 
-    {name: 'Beta and Grega', 'text':'Very nice coffee place / bar with some food, especially during the day and snacks at night. open almost 24/7.', tags:'food,drink,coffee,bar', map: 'https://www.google.com/maps?saddr&daddr=' + encodeURIComponent('32.0602854,34.7706351') + '&dirflg=w',hours: '24/7',orig:'5247cca611d23acfdc58758b'},
+    {name: 'Beta and Grega', 'text':'Very nice coffee place / bar with some food, especially during the day and snacks at night. open almost 24/7.', tags:'food,drink,coffee,bar,saturday', map: 'https://www.google.com/maps?saddr&daddr=' + encodeURIComponent('32.0602854,34.7706351') + '&dirflg=w',hours: '24/7',orig:'5247cca611d23acfdc58758b'},
 
 
 {name:'Bicycle rent station (telofun)', text:'Station where you rent green bicycle. The full map of all the stations is <a target="blank" href="https://www.google.com/maps/d/viewer?mid=zdi_rVF5Mzjw.kbZqZIxGbWuc&hl">here</a>', map: 'https://www.google.com/maps?saddr=&daddr=' + encodeURIComponent('32.056184,34.769567') + '&dirflg=w', tags:'bicycle,telofun', hours:'24/7', address:'Sderot Washington 15-35'},
@@ -150,7 +150,7 @@ var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basi
     map: 'https://www.google.com/maps?&daddr=32.055809%2C34.7602386&dirflg=w',
     link: 'http://facebook.com/casinosanremo',
     text: 'Great place for brunch. They have occasional djs and shows.',
-    tags: 'drink,food,restaurant,jaffa',
+    tags: 'drink,food,restaurant,jaffa,saturday',
     name: 'Casino San Remo' },
   { realhours:
      { mon_1_open: '07:00',
@@ -326,7 +326,7 @@ var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basi
     map: 'https://www.google.com/maps?&daddr=32.059032084001%2C34.771194003487&dirflg=w',
     link: 'http://facebook.com/barkayma',
     text: 'Vegan and hippieish bar that is open every day until late. kitchen closes at midnight. ALSO the place has a second floor which operates as a co-working space everyday from 12:00 to 18:00',
-    tags: 'Pub-restaurant vegan',
+    tags: 'Pub-restaurant vegan,saturday',
     name: 'Bar Kayma' },
 { realhours: undefined,
     hours: 'mon-sat:21:00-02:00',
