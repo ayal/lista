@@ -53,7 +53,7 @@ var fsGetHours = function(x){
 }
 
 var mergelistas = function(cb) {
-    $.getJSON('fsdata.json', function(r){
+    $.getJSON('fsdata.json?v=1', function(r){
 
         r.forEach(function(x){
             var match;
