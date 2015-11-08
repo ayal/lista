@@ -326,15 +326,9 @@ const App = React.createClass({
             that._nav(q);
         };
     },
-    routerWillLeave: function(nextLocation) {
-        return null;
-    },
     _nav: function(q) {
         this.history.pushState(null, '/lista', q);
         this.setState(q);
-    },
-    contextTypes: {
-        router: React.PropTypes.func.isRequired
     },
     render: function() {
         return (
