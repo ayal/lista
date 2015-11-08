@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1f94941962d2196c8027"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "4dba9d97e999a1cf71c5"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -900,6 +900,9 @@
 	    _nav: function _nav(q) {
 	        this.history.pushState(null, '/lista', q);
 	        this.setState(q);
+	    },
+	    routerWillLeave: function routerWillLeave(nextLocation) {
+	        return null;
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(Lista, { nav: this.nav, term: this.state.term });

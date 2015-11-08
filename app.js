@@ -332,12 +332,17 @@ const App = React.createClass({
         this.history.pushState(null, '/lista', q);
         this.setState(q);
     },
+    routerWillLeave: function(nextLocation) {
+        return null;
+    },
     render: function() {
         return (
             <Lista nav={this.nav} term={this.state.term} />
         );
     }
 });
+
+
 
 import createBrowserHistory from 'history/lib/createBrowserHistory';
 render((
