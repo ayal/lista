@@ -1,7 +1,8 @@
 var webpack = require('webpack');
+var path  =require('path');
+
 module.exports = {
     entry: [
-      'webpack/hot/only-dev-server',
       "./app.js"
     ],
     output: {
@@ -10,9 +11,9 @@ module.exports = {
     },
     module: {
         loaders: [
-
-            { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
-            { test: /\.css$/, loader: "style!css" }
+	    { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
+	    { test: /\.less$/, loader: "style-loader!css-loader!less-loader"}
+            
         ]
     },
     plugins: [
