@@ -1,7 +1,9 @@
 /* jsx */
 
-import React from 'react';
+import React from 'react'
+import { render } from 'react-dom'
 import { Router, Route, Link, History, Lifecycle } from 'react-router';
+
 import {lista} from './lista.js';
 import {geo} from './geo.js';
 
@@ -338,7 +340,7 @@ const App = React.createClass({
 });
 
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-React.render((
+render((
         <Router history={createBrowserHistory()}>
         <Route path="/" component={App}>
         </Route>
