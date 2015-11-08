@@ -79,6 +79,7 @@ var mergelistas = function(cb) {
             if (lista.list.indexOf(match) === -1) {
                 lista.list.push(match);
             }
+	    match.x = x;
         });
         cb();
     });
@@ -152,6 +153,7 @@ var Listing = React.createClass({
         }
     },
     setCenter: function(){
+	console.log(this.props.x);
         if (this.props.aside()) {
             return;
         }
