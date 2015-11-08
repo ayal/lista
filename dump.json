@@ -1,0 +1,17 @@
+[ { realhours:
+     { mon_1_open: '11:00',
+       mon_1_close: '23:00',
+       tue_1_open: '11:00',
+       tue_1_close: '23:00',
+       wed_1_open: '11:00',
+       wed_1_close: '23:00',
+       thu_1_open: '11:00',
+       thu_1_close: '23:00',
+       fri_1_open: '09:00',
+       fri_1_close: '17:00',
+       sun_1_open: '11:00',
+       sun_1_close: '23:00' },
+    hours: 'mon-thu or sun:11:00-23:00 | fri:09:00-17:00',
+    link: 'http://facebook.com/knaffe.banamal',
+    text: 'Knafe is an arabic desert and this place serves a boutique version of it',
+    name: 'Knaffe כנאפה' } ]

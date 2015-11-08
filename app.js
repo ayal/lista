@@ -1,7 +1,9 @@
 /* jsx */
 
-import React from 'react';
+import React from 'react'
+import { render } from 'react-dom'
 import { Router, Route, Link, History, Lifecycle } from 'react-router';
+
 import {lista} from './lista.js';
 import {geo} from './geo.js';
 
@@ -319,22 +321,19 @@ const App = React.createClass({
     nav: function(name) {
         var that = this;
         return function(e) {
-            var val = event.target.value;
+            var val = e.target.value;
             var q = {};
             q[name] = val;
             console.log('value change',e.target.value, q);
             that._nav(q);
         };
     },
-    routerWillLeave: function(nextLocation) {
-        return null;
-    },
     _nav: function(q) {
         this.history.pushState(null, '/lista', q);
         this.setState(q);
     },
-    contextTypes: {
-        router: React.PropTypes.func.isRequired
+    routerWillLeave: function(nextLocation) {
+        return null;
     },
     render: function() {
         return (
@@ -343,8 +342,10 @@ const App = React.createClass({
     }
 });
 
+
+
 import createBrowserHistory from 'history/lib/createBrowserHistory';
-React.render((
+render((
         <Router history={createBrowserHistory()}>
         <Route path="/" component={App}>
         </Route>
