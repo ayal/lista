@@ -73,8 +73,8 @@ var mergelistas = function(cb) {
             match.tel = x.venue.contact.phone;
             match.address = x.venue.location.address;
             var daddr = x.venue.location.lat + ',' + x.venue.location.lng;
-            var map = 'https://www.google.com/maps?&saddr=&daddr=' + encodeURIComponent(daddr) +
-                    '&dirflg=w';
+            var map = 'https://www.google.com/maps/dir/Current+Location/' + encodeURIComponent(daddr) +
+                    '?dirflg=w';
             match.map = map;
             if (lista.list.indexOf(match) === -1) {
                 lista.list.push(match);
