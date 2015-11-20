@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "04e32b562c79fba068cf"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e3d6ceae9f71efee7623"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -681,20 +681,29 @@
 
 	var getdist = function getdist(x) {
 	    if (x && x.map && pos) {
-	        var rgx = false ? /@(.*?)((%2C)|,)(.*?),/gim : /daddr=(.*?)((%2C)|,)(.*?)&/gim;
-	        var match = rgx.exec(x.map);
-	        if (match) {
-	            var lat1 = parseFloat(match[1]);
-	            var lng1 = parseFloat(match[4]);
-	            var d = getDistanceFromLatLonInKm(lat1, lng1, pos.latitude, pos.longitude);
-	            if (d < 1) {
-	                !x.tags.match('near') && (x.tags += ',near');
-	            } else if (d < 2) {
-	                !x.tags.match('walking') && (x.tags += ',walking');
+	        var lat1, lng1;
+	        if (x.x && x.x.venue && x.x.venue.location) {
+	            debugger;
+	            lat1 = x.x.venue.location.lat;
+	            lng1 = x.x.venue.location.lng;
+	        } else {
+	            var rgx = false ? /@(.*?)((%2C)|,)(.*?),/gim : /daddr=(.*?)((%2C)|,)(.*?)&/gim;
+	            var match = rgx.exec(x.map);
+	            if (match) {
+	                lat1 = parseFloat(match[1]);
+	                lng1 = parseFloat(match[4]);
 	            }
-
-	            return { dist: (Math.round(d * 10) / 10).toFixed(1), lat: lat1, lng: lng1 };
 	        }
+	        var d = getDistanceFromLatLonInKm(lat1, lng1, pos.latitude, pos.longitude);
+	        if (d < 1) {
+	            !x.tags.match('near') && (x.tags += ',near');
+	        } else if (d < 2) {
+	            !x.tags.match('walking') && (x.tags += ',walking');
+	        }
+
+	        // hack: fix map link:
+	        x.map = 'https://www.google.com/maps/dir/Current+Location/' + encodeURIComponent(lat1 + ',' + lng1) + '?dirflg=w';
+	        return { dist: (Math.round(d * 10) / 10).toFixed(1), lat: lat1, lng: lng1 };
 	    }
 	};
 
@@ -768,16 +777,32 @@
 	            x.map ? _react2.default.createElement(
 	                'div',
 	                { className: 'map' },
+	                _react2.default.createElement(
+	                    'span',
+	                    null,
+	                    x.address,
+	                    ' | '
+	                ),
+	                _react2.default.createElement(
+	                    'a',
+	                    { onClick: this.setCenter, href: '#', style: { cursor: "pointer" } },
+	                    'Show map'
+	                ),
+	                _react2.default.createElement(
+	                    'span',
+	                    null,
+	                    ' | '
+	                ),
 	                x.map.push ? _.map(x.map, function (y, i) {
 	                    return _react2.default.createElement(
 	                        'a',
 	                        { target: '_blank', href: y, onClick: that.direct },
-	                        "directions" + i
+	                        "map link" + i
 	                    );
 	                }) : _react2.default.createElement(
 	                    'a',
 	                    { target: '_blank', href: x.map, onClick: that.direct },
-	                    x.address || 'directions'
+	                    'map link'
 	                )
 	            ) : null,
 	            _react2.default.createElement('div', { className: 'text', dangerouslySetInnerHTML: { __html: x.text } }),
@@ -832,10 +857,21 @@
 	        return caside;
 	    },
 	    getInitialState: function getInitialState() {
-	        return {};
+	        return { aside: false };
 	    },
 	    componentDidMount: function componentDidMount() {},
 	    componentWillUnmount: function componentWillUnmount() {},
+	    toggle: function toggle(e) {
+	        this.aside();
+	        e.preventDefault();
+	    },
+	    mapornot: function mapornot() {
+	        if (this.state.aside) {
+	            return 'list';
+	        } else {
+	            return 'map';
+	        }
+	    },
 	    search: function search(e) {
 	        console.log('naving');
 	        this.props.nav('term')(e);
@@ -864,7 +900,16 @@
 	            _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement('input', { type: 'text', placeholde: 'search', onChange: this.search, value: this.props.term, className: 'filterput', placeholder: 'filter here' })
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'nav' },
+	                    _react2.default.createElement('input', { type: 'text', placeholde: 'search', onChange: this.search, value: this.props.term, className: 'filterput', placeholder: 'filter here' }),
+	                    _react2.default.createElement(
+	                        'a',
+	                        { href: '#', onClick: this.toggle, style: { cursor: "pointer", 'margin-left': 5 } },
+	                        'Show ' + this.mapornot()
+	                    )
+	                )
 	            ),
 	            lilista
 	        );

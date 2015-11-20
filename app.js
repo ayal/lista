@@ -112,23 +112,33 @@ mergelistas(function(){
 
 var getdist = function(x) {
     if (x && x.map && pos) {
-        var rgx = (false) ?  /@(.*?)((%2C)|,)(.*?),/gim:  /daddr=(.*?)((%2C)|,)(.*?)&/gim;
+	var lat1, lng1;
+	if (x.x && x.x.venue && x.x.venue.location) {
+	    debugger;
+	    lat1 = x.x.venue.location.lat;
+            lng1 = x.x.venue.location.lng;
+	}
+	else {
+            var rgx = (false) ?  /@(.*?)((%2C)|,)(.*?),/gim:  /daddr=(.*?)((%2C)|,)(.*?)&/gim;
             var match = rgx.exec(x.map);
             if (match) {
-                var lat1 = parseFloat(match[1]);
-                var lng1 = parseFloat(match[4]);
-                var d = getDistanceFromLatLonInKm( lat1, lng1, pos.latitude, pos.longitude);
-                if (d < 1) {
-                    !x.tags.match('near') && (x.tags+=',near');
-                }
-                else if (d < 2) {
-                    !x.tags.match('walking') && (x.tags+=',walking');
-                }
-
-                return {dist: (Math.round(d * 10) / 10).toFixed(1), lat: lat1, lng: lng1};
-            }
+                lat1 = parseFloat(match[1]);
+                lng1 = parseFloat(match[4]);
+	    }
+	}
+	var d = getDistanceFromLatLonInKm( lat1, lng1, pos.latitude, pos.longitude);
+        if (d < 1) {
+            !x.tags.match('near') && (x.tags+=',near');
         }
-    };
+        else if (d < 2) {
+            !x.tags.match('walking') && (x.tags+=',walking');
+        }
+	
+	// hack: fix map link:
+	x.map = 'https://www.google.com/maps/dir/Current+Location/' + encodeURIComponent(lat1+','+lng1) + '?dirflg=w';
+        return {dist: (Math.round(d * 10) / 10).toFixed(1), lat: lat1, lng: lng1};
+    }
+}
 
 var Listing = React.createClass({
     getInitialState: function() {
@@ -195,11 +205,14 @@ var Listing = React.createClass({
                                        <div className="name">
                                        {x.name}
                                    </div>
-                                       {x.map ? (<div className="map">
+                {x.map ? (<div className="map">
+			  <span>{x.address} | </span>
+			  <a onClick={this.setCenter} href="#" style={{cursor:"pointer"}}>Show map</a>
+			  <span> | </span>
                                        {
                                            x.map.push ? _.map(x.map, function(y,i){
-                                               return <a target="_blank" href={y} onClick={that.direct}>{"directions" + i}</a>;
-                                           }) : (<a target="_blank" href={x.map} onClick={that.direct}>{x.address || 'directions'}</a>)
+                                               return <a target="_blank" href={y} onClick={that.direct}>{"map link" + i}</a>;
+                                           }) : (<a target="_blank" href={x.map} onClick={that.direct}>{'map link'}</a>)
                                        }
                                    </div>) : null}
                                        <div className="text" dangerouslySetInnerHTML={{__html: x.text }}>
@@ -246,14 +259,26 @@ var Lista = React.createClass({
         return caside;
     },
   getInitialState: function() {
-    return {};
+      return {aside:false};
   },
   componentDidMount: function() {
 
   },
-  componentWillUnmount: function() {
-
-  },
+    componentWillUnmount: function() {
+	
+    },
+    toggle: function(e){
+	this.aside();
+	e.preventDefault();
+    },
+    mapornot: function() {
+	if (this.state.aside) {
+	    return 'list';
+	}
+	else {
+	    return 'map';
+	}
+    },
     search:function(e) {
         console.log('naving');
         this.props.nav('term')(e);
@@ -291,8 +316,11 @@ var Lista = React.createClass({
 
     return (
 <div className="lista">
-  <div>
-    <input type="text" placeholde="search" onChange={this.search} value={this.props.term} className="filterput" placeholder="filter here" />
+	    <div>
+	    <div className="nav">
+	    <input type="text" placeholde="search" onChange={this.search} value={this.props.term} className="filterput" placeholder="filter here" />
+	    <a href="#" onClick={this.toggle} style={{cursor:"pointer",'margin-left':5}}>{'Show ' + this.mapornot()}</a>
+	    </div>
   </div>
     {lilista}
 
