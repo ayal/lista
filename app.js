@@ -369,7 +369,7 @@ const App = React.createClass({
         };
     },
     _nav: function(q) {
-        this.history.pushState(null, '/lista', q);
+        this.history.pushState(null, '/lista/', q);
         this.setState(q);
     },
     routerWillLeave: function(nextLocation) {
@@ -390,8 +390,6 @@ render((
         <Route path="/" component={App}>
         </Route>
         <Route path="/lista/" component={App} >
-        </Route>
-        <Route path="/lista" component={App} >
         </Route>
         </Router>
 ), document.getElementById('main'));

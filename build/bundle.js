@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "d9dd23d579e87b3c0849"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6d676c90a354d8f90a95"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -954,7 +954,7 @@
 	        };
 	    },
 	    _nav: function _nav(q) {
-	        this.history.pushState(null, '/lista', q);
+	        this.history.pushState(null, '/lista/', q);
 	        this.setState(q);
 	    },
 	    routerWillLeave: function routerWillLeave(nextLocation) {
@@ -969,8 +969,7 @@
 	    _reactRouter.Router,
 	    { history: (0, _createBrowserHistory2.default)() },
 	    _react2.default.createElement(_reactRouter.Route, { path: '/', component: App }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/lista/', component: App }),
-	    _react2.default.createElement(_reactRouter.Route, { path: '/lista', component: App })
+	    _react2.default.createElement(_reactRouter.Route, { path: '/lista/', component: App })
 	), document.getElementById('main'));
 
 /***/ },
