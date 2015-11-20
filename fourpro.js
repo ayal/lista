@@ -28,12 +28,15 @@ var fsr = function(p,cb) {
 };
 
 fsr('/lists/560a3c57498ec514a7279631',
-   function(x){
+    function(x){
+	
        var items = x.response.list.listItems.items;
        var all = [];
-       items.forEach(function(x){
+	items.forEach(function(x){
+	    var name = x.venue.name;
            fsr('/venues/' + x.venue.id,
                function(x){
+//		   console.log(name.match('elix'));
                    all.push(x.response);
                    if (all.length === items.length) {
                        console.log(JSON.stringify(all));

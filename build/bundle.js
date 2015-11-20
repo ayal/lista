@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e3d6ceae9f71efee7623"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "d9dd23d579e87b3c0849"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -618,16 +618,26 @@
 	};
 
 	var mergelistas = function mergelistas(cb) {
-	    $.getJSON('fsdata.json?v=1', function (r) {
-
+	    var listclone = _.clone(_lista.lista.list);
+	    $.getJSON('fsdata.json?v=3', function (r) {
+	        window.fsdata = r;
 	        r.forEach(function (x) {
+
 	            var match;
-	            _lista.lista.list.forEach(function (y) {
-	                if (x.venue.name.toLowerCase().match(y.name.toLowerCase()) || y.name.toLowerCase().match(x.venue.name.toLowerCase()) || x.venue.id === y.orig) {
+	            listclone.forEach(function (y) {
+	                if (y.orig) {
+	                    if (x.venue.id === y.orig) {
+	                        y.nomore = true;
+	                        match = y;
+	                        console.log('match by id', x.venue.name, y.name, x, y);
+	                    }
+	                } else if (!y.nomore && (x.venue.name.toLowerCase().match(y.name.toLowerCase()) || y.name.toLowerCase().match(x.venue.name.toLowerCase()))) {
+	                    y.nomore = true;
 	                    match = y;
-	                    console.log('match!', x.venue.name, y.name);
+	                    console.log('match by name', x.venue.name, y.name, x, y);
 	                }
 	            });
+
 	            match ? match.tags = match.tags + ',' + x.venue.tags.join(',') + ',' + x.venue.categories.map(function (x) {
 	                return x.name;
 	            }).join(',') : null;
@@ -683,7 +693,6 @@
 	    if (x && x.map && pos) {
 	        var lat1, lng1;
 	        if (x.x && x.x.venue && x.x.venue.location) {
-	            debugger;
 	            lat1 = x.x.venue.location.lat;
 	            lng1 = x.x.venue.location.lng;
 	        } else {
@@ -906,7 +915,7 @@
 	                    _react2.default.createElement('input', { type: 'text', placeholde: 'search', onChange: this.search, value: this.props.term, className: 'filterput', placeholder: 'filter here' }),
 	                    _react2.default.createElement(
 	                        'a',
-	                        { href: '#', onClick: this.toggle, style: { cursor: "pointer", 'margin-left': 5 } },
+	                        { href: '#', onClick: this.toggle, style: { cursor: "pointer", 'marginLeft': 5 } },
 	                        'Show ' + this.mapornot()
 	                    )
 	                )
@@ -25166,7 +25175,7 @@
 					return '<a class="filter" href="?term=' + (y !== undefined ? y : x) + '">' + x + '</a>';
 	};
 
-	var lista = { extra: [{ name: 'filters', text: 'Try these filters: ' + filter('basic') + filter('near') + filter('walking') + filter('jaffa') + filter('food') + filter('drink') + filter('street food') + filter('club') + filter('24/7') + filter('saturday') + filter('transportation') + filter('SIM') + filter('co-working') + filter('all', ''), tags: '*' }, { name: 'Activities', text: 'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a><br><a target="_blank" href="http://activities.co.il/categories/%D7%9E%D7%A1%D7%99%D7%91%D7%94?lng=34.76501&lat=32.03954&h=%7B%22Sub%22%3A%7B%22%D7%9E%D7%A1%D7%99%D7%91%D7%94%22%3A%7B%7D%7D%7D&r=5&w=today&lang=en">three</a>', tags: '*' }],
+	var lista = { extra: [{ name: 'filters', text: 'Try these filters: ' + filter('basic') + filter('hummus') + filter('jaffa') + filter('food') + filter('drink') + filter('street food') + filter('club') + filter('24/7') + filter('saturday') + filter('transportation') + filter('SIM') + filter('co-working') + filter('all', ''), tags: '*' }, { name: 'Activities', text: 'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a><br><a target="_blank" href="http://activities.co.il/categories/%D7%9E%D7%A1%D7%99%D7%91%D7%94?lng=34.76501&lat=32.03954&h=%7B%22Sub%22%3A%7B%22%D7%9E%D7%A1%D7%99%D7%91%D7%94%22%3A%7B%7D%7D%7D&r=5&w=today&lang=en">three</a>', tags: '*' }],
 					list: [{ name: 'AM:PM supermarket', tags: 'basic,supplies,food,supermarket', text: 'Open all the time, a bit expensive', hours: '24/7' }, { name: 'Merry Market', tags: 'supplies,food,supermarket,24/7,saturday', text: 'Grocery store open all the time, cheaper than AM:PM but smaller', map: 'https://www.google.com/maps?saddr=&daddr=' + encodeURIComponent('32.058982,34.773444') + '&dirflg=w' }, { name: 'Cheap Vegetables', tags: 'supplies,food,supermarket,saturday', text: 'Cheap vegetables place that is open almost 24/7', map: 'https://www.google.com/maps?saddr=&daddr=' + encodeURIComponent('32.058782,34.77354') + '&dirflg=w' }, { name: 'Sunset spot', tags: 'sunset,beach', text: 'A nice place to go watch the sunset. Its in the beginning of a street called "Arlozerov", on the south side of the hilton hotel. there is a nice garden there.  The beach at the bottom of the garden is also nice. You can take <a href="/?term=line 4">line 4 or line 5</a> to get there. Ask the driver to get down at Arlozerov street.', hours: '24/7', map: 'https://www.google.com/maps?saddr=&daddr=' + encodeURIComponent('32.0884965,34.7717279') + '&dirflg=w' }, { name: 'Sunset spot, Jaffa', tags: 'sunset,beach', text: 'A nice place to go watch the sunset.', hours: '24/7', map: 'https://www.google.com/maps?saddr=&daddr=' + encodeURIComponent('32.0540514,34.7532538') + '&dirflg=w' }, { name: 'line 4 or 5 station', 'text': 'take these lines from this station to get to the center/north of tel aviv. There is no real station you just stand in the corner and wait for them to arrive. they look like <a target="_blank" href="http://www.nrg.co.il/images/archive/300x225/1/423/686.jpg">this</a>. they operate even on the weekend and at night (though a bit less frequent than during the weekdays). Costs around $2. ', hours: '24/7', map: 'https://www.google.com/maps?saddr=&daddr=' + encodeURIComponent('32.0608008,34.7738404') + '&dirflg=w', tags: 'basic,public transportation,bus,taxi,center,north' }, { name: 'Beta and Grega', 'text': 'Very nice coffee place / bar with some food, especially during the day and snacks at night. open almost 24/7.', tags: 'food,drink,coffee,bar', map: 'https://www.google.com/maps?saddr&daddr=' + encodeURIComponent('32.0602854,34.7706351') + '&dirflg=w', hours: '24/7', orig: '5247cca611d23acfdc58758b' }, { name: 'Bicycle rent station (telofun)', text: 'Station where you rent green bicycle. The full map of all the stations is <a target="blank" href="https://www.google.com/maps/d/viewer?mid=zdi_rVF5Mzjw.kbZqZIxGbWuc&hl">here</a>', map: 'https://www.google.com/maps?saddr=&daddr=' + encodeURIComponent('32.056184,34.769567') + '&dirflg=w', tags: 'bicycle,telofun', hours: '24/7', address: 'Sderot Washington 15-35' }, { name: 'Tourist info center, Jaffa', tags: 'tourist,info,basic', map: 'https://www.google.com/maps?saddr=&daddr=' + encodeURIComponent('32.055334,34.756832') + '&dirflg=w', hours: 'mon-thu or sun 9:30-18:30|fri: 9:30-16:00|sat/holidays: 10:00-16:00', address: 'Marzuk Ve-Azar St 2' }, { name: 'Bar Mitzva', text: 'Great place for drinking at night. prolly some food. prolly good food.', hours: 'weekday nights and sat night maybe also :)', tags: 'drink,snacks' }, { name: 'Flea Market', text: 'Nice area with restaurants and bars and fashion shops and second hand stores and anthiques.', map: '', tags: 'second hand,clothes,market,flea,fashion' }, { name: 'Studio Naim', text: 'Very famous yoga studio. The map is for one specific but there are three branches. See maps and website. <a target="_blank" href="http://www.naim.org.il/en/memberships/">prices</a>', hours: 'see website', map: ['https://www.google.co.il/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo/%D7%A1%D7%98%D7%95%D7%93%D7%99%D7%95+%D7%A0%D7%A2%D7%99%D7%9D+-+%D7%99%D7%95%D7%92%D7%94,+%D7%A4%D7%99%D7%9C%D7%90%D7%98%D7%99%D7%A1,+%D7%9E%D7%97%D7%95%D7%9C,+%D7%93%D7%A8%D7%9A+%D7%A9%D7%9C%D7%9E%D7%94+46,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95,+66073%E2%80%AD/@32.0570674,34.7674,17z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4ca20e6cdb4d:0x981fc3cef6a7ff88!2m2!1d34.767489!2d32.054943!3e2?hl=en', 'https://www.google.com/maps/dir/%D7%9E%D7%A8%D7%97%D7%91%D7%99%D7%94+19,+%D7%AA%D7%9C+%D7%90%D7%91%D7%99%D7%91+%D7%99%D7%A4%D7%95,+%D7%99%D7%A9%D7%A8%D7%90%D7%9C%E2%80%AD%E2%80%AD/32.0552788,34.7695408/@32.0572308,34.768548,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en', 'https://www.google.com/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo,+Israel/32.0630026,34.7694669/@32.0612194,34.7687516,17z/data=!3m1!4b1!4m8!4m7!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m0?hl=en'], link: 'http://www.naim.org.il/en/', tags: 'yoga' }, { name: 'Yoga Levontin', text: 'Nice yoga studio. <a href="http://yogalev.com/pricelist">prices</a>', hours: 'see website', map: 'https://www.google.com/maps/dir/Merkhavya+St+19,+Tel+Aviv-Yafo,+Israel/Lavontin+St+7,+Tel+Aviv-Yafo,+Israel/@32.0605,34.7727496,18z/data=!3m1!4b1!4m14!4m13!1m5!1m1!1s0x151d4c9dd74e11db:0x53281f61e56b446f!2m2!1d34.7719245!2d32.0591828!1m5!1m1!1s0x151d4b629673152b:0xb0ea26dabbf6d240!2m2!1d34.7749325!2d32.0617115!3e2?hl=en', link: 'http://yogalev.com/', tags: 'yoga' }, { name: 'Santa Caterina', text: 'Very hipster place to eat. A bit packed', hours: 'Mon-Thu: 5:30 pm-1:30 am | Fri: 12:30 pm-1:30 am |  Sat: 7:00 pm-1:30 am | Sun:5:30 pm-1:30 am', map: '', link: 'https://www.facebook.com/santakatarina2/info?tab=page_info', tags: 'hipster,food,music,drink' }, { realhours: { mon_1_open: '08:15',
 													mon_1_close: '00:00',
 													tue_1_open: '08:15',
@@ -25448,8 +25457,9 @@
 									link: 'http://facebook.com/knaffe.banamal',
 									text: 'Knafe is an arabic desert and this place serves a boutique version of it',
 									orig: '528e45b011d2161a074a202e',
-									name: 'knafe' }, { name: 'Self service laundry', map: 'http://google.com/maps?saddr=&daddr=' + encodeURIComponent('32.057211,34.770124') + '&dirflg=w', tags: 'basic,laundry', hours: '24/7?', text: 'it says its always open. maybe try calling the phone they put: 0532502356', link: 'https://www.facebook.com/%D7%9E%D7%9B%D7%91%D7%A1%D7%AA-%D7%A4%D7%9C%D7%95%D7%A8%D7%A0%D7%98%D7%99%D7%9F-%D7%A9%D7%99%D7%A8%D7%95%D7%AA-%D7%A2%D7%A6%D7%9E%D7%99-231630666902088/info?tab=page_info' }, { name: 'Dizengoff Center', text: 'Big mall with many things. One store named "Bug" for computer supply is on the bottom floor (ask people where it is) - it has a representative of a cellular firm called "Golan Telecom" from which you can buy a SIM card with credit card and passport. it should cost ~$12 for the SIM and then you need to choose a plan, for example i think they have ~$20 for no limit calls in israel and 6GB data plan. remember to cancel before you leave!', tags: 'sim card,basic' }, { name: 'ATM and bank', text: 'ATM and bank leumi. ATM open 24 hrs', hours: 'mon-fri:08:30-12:00', map: 'http://google.com/maps/?saddr=&daddr=' + encodeURIComponent('32.0604719,34.7692777') + '&dirflg=w', tags: '' }, { orig: '5477b463498ef621237f868b', name: 'Tahat', link: '', text: 'Underground bar with some parties, try to follow their facebook page in the link', tags: 'club,party', link: 'https://www.facebook.com/tahatclub/?fref=ts' }, { name: 'Tel Aviv University', text: 'You can take line 25 from <a href="http://www.bus.co.il/otobusimmvc/Line_Places/1010/25_11_-528046747?Language=en" target="_blank">ha\'aliya or allenby street</a>', tags: '' }, { name: 'The Library', text: 'A nice co-working space with some startups sitting there.' }, { name: 'Oz Bicycle shop', map: 'http://google.com/maps/?saddr=&daddr=' + encodeURIComponent('32.058825,34.774999') + '&dirflg=w', text: 'Good bicycle shop. Might sell and re-buy bicycle from you', tags: 'bicycle' }] };
+									name: 'knafe' }, { name: 'Self service laundry', map: 'http://google.com/maps?saddr=&daddr=' + encodeURIComponent('32.057211,34.770124') + '&dirflg=w', tags: 'basic,laundry', hours: '24/7?', text: 'it says its always open. maybe try calling the phone they put: 0532502356', link: 'https://www.facebook.com/%D7%9E%D7%9B%D7%91%D7%A1%D7%AA-%D7%A4%D7%9C%D7%95%D7%A8%D7%A0%D7%98%D7%99%D7%9F-%D7%A9%D7%99%D7%A8%D7%95%D7%AA-%D7%A2%D7%A6%D7%9E%D7%99-231630666902088/info?tab=page_info' }, { name: 'Dizengoff Center', text: 'Big mall with many things. One store named "Bug" for computer supply is on the bottom floor (ask people where it is) - it has a representative of a cellular firm called "Golan Telecom" from which you can buy a SIM card with credit card and passport. it should cost ~$12 for the SIM and then you need to choose a plan, for example i think they have ~$20 for no limit calls in israel and 6GB data plan. remember to cancel before you leave!', tags: 'sim card,basic' }, { name: 'ATM and bank', text: 'ATM and bank leumi. ATM open 24 hrs', hours: 'mon-fri:08:30-12:00', map: 'http://google.com/maps/?saddr=&daddr=' + encodeURIComponent('32.0604719,34.7692777') + '&dirflg=w', tags: '' }, { orig: '5477b463498ef621237f868b', name: 'Tahat', link: '', text: 'Underground bar with some parties, try to follow their facebook page in the link', tags: 'club,party', link: 'https://www.facebook.com/tahatclub/?fref=ts' }, { name: 'Tel Aviv University', text: 'You can take line 25 from <a href="http://www.bus.co.il/otobusimmvc/Line_Places/1010/25_11_-528046747?Language=en" target="_blank">ha\'aliya or allenby street</a>', tags: '' }, { name: 'The Library', text: 'A nice co-working space with some startups sitting there.' }, { name: 'Oz Bicycle shop', map: 'http://google.com/maps/?saddr=&daddr=' + encodeURIComponent('32.058825,34.774999') + '&dirflg=w', text: 'Good bicycle shop. Might sell and re-buy bicycle from you', tags: 'bicycle' }, { name: 'cafelix', tags: 'coffee', text: 'best coffee in tel aviv', orig: "5635f309498eccf549c667ab" }, { orig: '5176d4f1e0e2698dbd4c44dc', name: 'Cafelix jaffa', tags: 'coffee,jaffa', text: 'best coffee in tel aviv' }] };
 
+	console.log('hi from lista');
 	module.exports = { lista: lista };
 
 /***/ },

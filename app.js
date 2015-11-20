@@ -53,16 +53,27 @@ var fsGetHours = function(x){
 }
 
 var mergelistas = function(cb) {
-    $.getJSON('fsdata.json?v=1', function(r){
-
+    var listclone = _.clone(lista.list);
+    $.getJSON('fsdata.json?v=3', function(r){
+	window.fsdata = r;	
         r.forEach(function(x){
+
             var match;
-            lista.list.forEach(function(y){
-                if (x.venue.name.toLowerCase().match(y.name.toLowerCase()) || y.name.toLowerCase().match(x.venue.name.toLowerCase()) || x.venue.id === y.orig) {
+            listclone.forEach(function(y){
+		if (y.orig) {
+		    if (x.venue.id === y.orig) {
+			y.nomore = true;
+			match = y;
+			console.log('match by id', x.venue.name, y.name, x, y);
+		    }
+		}
+                else if (!y.nomore && (x.venue.name.toLowerCase().match(y.name.toLowerCase()) || y.name.toLowerCase().match(x.venue.name.toLowerCase()) )) {
+		    y.nomore = true;
                     match = y;
-                    console.log('match!', x.venue.name, y.name);
+                    console.log('match by name', x.venue.name, y.name, x, y);
                 }
             });
+	    
             match ? (match.tags = match.tags + ',' + x.venue.tags.join(',') + ',' + x.venue.categories.map(function(x){return x.name}).join(',')) : null;
             match = _.extend(match || {}, _.extend({name: x.venue.name,
                                                     link: x.venue.canonicalUrl,
@@ -114,7 +125,6 @@ var getdist = function(x) {
     if (x && x.map && pos) {
 	var lat1, lng1;
 	if (x.x && x.x.venue && x.x.venue.location) {
-	    debugger;
 	    lat1 = x.x.venue.location.lat;
             lng1 = x.x.venue.location.lng;
 	}
@@ -319,7 +329,7 @@ var Lista = React.createClass({
 	    <div>
 	    <div className="nav">
 	    <input type="text" placeholde="search" onChange={this.search} value={this.props.term} className="filterput" placeholder="filter here" />
-	    <a href="#" onClick={this.toggle} style={{cursor:"pointer",'margin-left':5}}>{'Show ' + this.mapornot()}</a>
+	    <a href="#" onClick={this.toggle} style={{cursor:"pointer",'marginLeft':5}}>{'Show ' + this.mapornot()}</a>
 	    </div>
   </div>
     {lilista}

@@ -2,7 +2,7 @@ var filter = function(x,y) {
     return '<a class="filter" href="?term='+(y !== undefined ? y : x)+'">'+x+'</a>';
 };
 
-var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basic') + filter('near') + filter('walking') + filter('jaffa') + filter('food') + filter('drink') + filter('street food')  + filter('club') + filter('24/7') + filter('saturday') + filter('transportation') + filter('SIM') + filter('co-working') + filter('all',''), tags:'*' },
+var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basic') + filter('hummus') + filter('jaffa') + filter('food') + filter('drink') + filter('street food')  + filter('club') + filter('24/7') + filter('saturday') + filter('transportation') + filter('SIM') + filter('co-working') + filter('all',''), tags:'*' },
     {name: 'Activities', text:'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a><br><a target="_blank" href="http://activities.co.il/categories/%D7%9E%D7%A1%D7%99%D7%91%D7%94?lng=34.76501&lat=32.03954&h=%7B%22Sub%22%3A%7B%22%D7%9E%D7%A1%D7%99%D7%91%D7%94%22%3A%7B%7D%7D%7D&r=5&w=today&lang=en">three</a>', tags:'*' }],
              list: [
 
@@ -370,9 +370,10 @@ var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basi
 		 {orig: '5477b463498ef621237f868b', name: 'Tahat', link: '', text: 'Underground bar with some parties, try to follow their facebook page in the link', tags: 'club,party', link:'https://www.facebook.com/tahatclub/?fref=ts'},
 		 {name:'Tel Aviv University', text:'You can take line 25 from <a href="http://www.bus.co.il/otobusimmvc/Line_Places/1010/25_11_-528046747?Language=en" target="_blank">ha\'aliya or allenby street</a>',tags:''},
 		 {name:'The Library', text:'A nice co-working space with some startups sitting there.'},
-		 {name:'Oz Bicycle shop', map:'http://google.com/maps/?saddr=&daddr=' + encodeURIComponent('32.058825,34.774999') + '&dirflg=w', text:'Good bicycle shop. Might sell and re-buy bicycle from you', tags:'bicycle'}
+		 {name:'Oz Bicycle shop', map:'http://google.com/maps/?saddr=&daddr=' + encodeURIComponent('32.058825,34.774999') + '&dirflg=w', text:'Good bicycle shop. Might sell and re-buy bicycle from you', tags:'bicycle'},
+		 {name:'cafelix',tags:'coffee', text:'best coffee in tel aviv', orig: "5635f309498eccf549c667ab"},
+		 {orig: '5176d4f1e0e2698dbd4c44dc', name:'Cafelix jaffa',tags:'coffee,jaffa', text:'best coffee in tel aviv'}
 	     ]};
 
-
-
+console.log('hi from lista');
 module.exports = {lista:lista};
