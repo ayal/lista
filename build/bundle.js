@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "9147f904d4beb809953d"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e537235bc6b97dba88bb"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -644,7 +644,7 @@
 	            match.tel = x.venue.contact.phone;
 	            match.address = x.venue.location.address;
 	            var daddr = x.venue.location.lat + ',' + x.venue.location.lng;
-	            var map = 'https://www.google.com/maps?&daddr=' + encodeURIComponent(daddr) + '&dirflg=w';
+	            var map = 'https://www.google.com/maps?&saddr=&daddr=' + encodeURIComponent(daddr) + '&dirflg=w';
 	            match.map = map;
 	            if (_lista.lista.list.indexOf(match) === -1) {
 	                _lista.lista.list.push(match);
