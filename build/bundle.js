@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "e1a107218137641b94c0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a044cd0fed05bd777769"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -634,12 +634,12 @@
 	                    if (x.venue.id === y.orig) {
 	                        y.nomore = true;
 	                        match = y;
-	                        console.log('match by id', x.venue.name, y.name, x, y);
+	                        console.log('match by id', x.venue.name, y.name);
 	                    }
 	                } else if (!y.nomore && (x.venue.name.toLowerCase().match(y.name.toLowerCase()) || y.name.toLowerCase().match(x.venue.name.toLowerCase()))) {
 	                    y.nomore = true;
 	                    match = y;
-	                    console.log('match by name', x.venue.name, y.name, x, y);
+	                    console.log('match by name', x.venue.name, y.name);
 	                }
 	            });
 
@@ -670,32 +670,43 @@
 	    });
 	};
 
-	var pos;
+	var pos = { latitude: 32.059088, longitude: 34.771221 };
+
+	var updateDist = function updateDist() {
+	    _.map(_lista.lista.list, function (x) {
+	        var xydist = getdist(x);
+	        if (xydist) {
+	            x.dist = xydist.dist;
+	            x.lat = xydist.lat;
+	            x.lng = xydist.lng;
+	        }
+	    });
+	};
+
 	mergelistas(function () {
 	    if (_geo.geo.init()) {
+
 	        _geo.geo.getCurrentPosition(function (p) {
+	            window.loaded = true;
 	            pos = p.coords;
 	            console.log('pos', pos);
-	            _.map(_lista.lista.list, function (x) {
-	                var xydist = getdist(x);
-	                if (xydist) {
-	                    x.dist = xydist.dist;
-	                    x.lat = xydist.lat;
-	                    x.lng = xydist.lng;
-	                }
-	            });
+	            updateDist();
+
 	            xupdate();
 	        }, function () {
+	            window.loaded = true;
+	            updateDist();
+	            xupdate();
 	            console.log('error getting postion', arguments);
 	        });
 	    } else {
 	        alert("Functionality not available");
 	    }
-	    //    xupdate();
+	    xupdate();
 	});
 
 	var getdist = function getdist(x) {
-	    if (x && x.map && pos) {
+	    if (x && x.map) {
 	        var lat1, lng1;
 	        if (x.x && x.x.venue && x.x.venue.location) {
 	            lat1 = x.x.venue.location.lat;
@@ -708,7 +719,10 @@
 	                lng1 = parseFloat(match[4]);
 	            }
 	        }
-	        var d = getDistanceFromLatLonInKm(lat1, lng1, pos.latitude, pos.longitude);
+	        var d = 1;
+	        if (pos) {
+	            d = getDistanceFromLatLonInKm(lat1, lng1, pos.latitude, pos.longitude);
+	        }
 	        if (d < 1) {
 	            !x.tags.match('near') && (x.tags += ',near');
 	        } else if (d < 2) {
@@ -717,6 +731,7 @@
 
 	        // hack: fix map link:
 	        x.map = 'https://www.google.com/maps/dir/Current+Location/' + encodeURIComponent(lat1 + ',' + lng1) + '?dirflg=w';
+	        console.log('got dist', d, lat1, lng1);
 	        return { dist: d, lat: lat1, lng: lng1 };
 	    }
 	};
@@ -737,6 +752,7 @@
 	    updateMarker: function updateMarker(x) {
 	        var that = this;
 	        this.marker && this.marker.setMap(null);
+	        console.log('putting marker', x);
 	        if (x.lat) {
 	            var myLatLng = new google.maps.LatLng(x.lat, x.lng);
 	            this.marker = new google.maps.Marker({
@@ -752,8 +768,10 @@
 	        }
 	    },
 	    componentDidUpdate: function componentDidUpdate() {
-	        var x = this.props.x;
-	        this.updateMarker(x);
+	        this.updateMarker(this.props.x);
+	    },
+	    componentDidMount: function componentDidMount() {
+	        this.updateMarker(this.props.x);
 	    },
 	    setCenter: function setCenter() {
 	        console.log(this.props.x);
@@ -781,7 +799,7 @@
 	                    setTimeout(function () {
 	                        infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:150px">' + x.text + '</div></div>');
 	                        infowindow.open(map, that.marker);
-	                    }, 0);
+	                    }, 1000);
 	                    directionsDisplay.setDirections(result);
 	                }
 	            });
@@ -796,6 +814,7 @@
 	    render: function render() {
 	        var that = this;
 	        var x = this.props.x;
+
 	        return _react2.default.createElement(
 	            'div',
 	            { className: "listing " + this.props.cls, onClick: this.setCenter, style: { cursor: "pointer" } },
@@ -905,6 +924,20 @@
 	        this.props.nav('term')(e);
 	    },
 	    render: function render() {
+	        if (!window.loaded) {
+	            return _react2.default.createElement(
+	                'div',
+	                { className: 'demo-3' },
+	                _react2.default.createElement(
+	                    'ul',
+	                    { className: 'bokeh' },
+	                    _react2.default.createElement('li', null),
+	                    _react2.default.createElement('li', null),
+	                    _react2.default.createElement('li', null)
+	                )
+	            );
+	        }
+
 	        var that = this;
 	        var lilista = _.union(_.map(_lista.lista.extra, function (x) {
 	            if (x.name && x.name.toLowerCase().match(that.props.term && that.props.term.toLowerCase()) || x.tags === '*' || x.tags && x.tags.toLowerCase().match(that.props.term && that.props.term.toLowerCase()) || x.text && x.text.toLowerCase().match(that.props.term && that.props.term.toLowerCase())) {

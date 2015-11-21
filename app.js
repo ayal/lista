@@ -9,7 +9,8 @@ import {geo} from './geo.js';
 
 window.lista = lista;
 
-$(function(){
+
+    $(function(){
 
   var mapdiv = document.getElementById("map");
     mapdiv.style.width = '100%';
@@ -31,7 +32,7 @@ $(function(){
 	}
     });
     window.directionsDisplay.setMap(map);
-})
+    });
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
     var R = 6371; // Radius of the earth in km
@@ -69,13 +70,13 @@ var mergelistas = function(cb) {
 		    if (x.venue.id === y.orig) {
 			y.nomore = true;
 			match = y;
-			console.log('match by id', x.venue.name, y.name, x, y);
+			console.log('match by id', x.venue.name, y.name);
 		    }
 		}
                 else if (!y.nomore && (x.venue.name.toLowerCase().match(y.name.toLowerCase()) || y.name.toLowerCase().match(x.venue.name.toLowerCase()) )) {
 		    y.nomore = true;
                     match = y;
-                    console.log('match by name', x.venue.name, y.name, x, y);
+                    console.log('match by name', x.venue.name, y.name);
                 }
             });
 	    
@@ -103,31 +104,44 @@ var mergelistas = function(cb) {
 
 
 
-var pos;
+var pos = {latitude: 32.059088, longitude: 34.771221};
+
+var updateDist = function() {
+    _.map(lista.list, function(x){
+        var xydist = getdist(x);
+        if (xydist) {
+            x.dist = xydist.dist;
+            x.lat = xydist.lat;
+            x.lng = xydist.lng;
+        }
+    });
+};
+
 mergelistas(function(){
     if(geo.init()){
+
         geo.getCurrentPosition(function(p){
+	    window.loaded = true;
             pos = p.coords;
             console.log('pos', pos);
-            _.map(lista.list, function(x){
-                var xydist = getdist(x);
-                if (xydist) {
-                    x.dist = xydist.dist;
-                    x.lat = xydist.lat;
-                    x.lng = xydist.lng;
-                }
-            });
+	    updateDist();	    
+
             xupdate();
-        }, function(){console.log('error getting postion', arguments)});
+        }, function(){
+	    window.loaded = true;
+	    updateDist();	    
+	    xupdate();
+	    console.log('error getting postion', arguments);
+	});
     }
     else{
         alert("Functionality not available");
     }
-//    xupdate();
+    xupdate();
 });
 
 var getdist = function(x) {
-    if (x && x.map && pos) {
+    if (x && x.map) {
 	var lat1, lng1;
 	if (x.x && x.x.venue && x.x.venue.location) {
 	    lat1 = x.x.venue.location.lat;
@@ -141,7 +155,10 @@ var getdist = function(x) {
                 lng1 = parseFloat(match[4]);
 	    }
 	}
-	var d = getDistanceFromLatLonInKm( lat1, lng1, pos.latitude, pos.longitude);
+	var d = 1;
+	if (pos) {
+	    d = getDistanceFromLatLonInKm( lat1, lng1, pos.latitude, pos.longitude);
+	}
         if (d < 1) {
             !x.tags.match('near') && (x.tags+=',near');
         }
@@ -151,6 +168,7 @@ var getdist = function(x) {
 	
 	// hack: fix map link:
 	x.map = 'https://www.google.com/maps/dir/Current+Location/' + encodeURIComponent(lat1+','+lng1) + '?dirflg=w';
+	console.log('got dist', d, lat1, lng1);
         return {dist: d, lat: lat1, lng: lng1};
     }
 }
@@ -171,6 +189,7 @@ var Listing = React.createClass({
     updateMarker: function(x) {
         var that = this;
         this.marker && this.marker.setMap(null);
+	console.log('putting marker', x);
         if (x.lat) {
             var myLatLng = new google.maps.LatLng(x.lat, x.lng);
 	    this.marker = new google.maps.Marker({
@@ -187,8 +206,10 @@ var Listing = React.createClass({
 
     },
     componentDidUpdate: function() {
-	var x  = this.props.x;
-	this.updateMarker(x);
+	this.updateMarker(this.props.x);
+    },
+    componentDidMount: function() {
+	this.updateMarker(this.props.x);
     },
     setCenter: function(){
 	console.log(this.props.x);
@@ -216,7 +237,7 @@ var Listing = React.createClass({
 		    setTimeout(function(){
 			infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:150px">'+x.text+'</div></div>');
 			infowindow.open(map, that.marker);
-		    },0)
+		    },1000)
                     directionsDisplay.setDirections(result);
                 }
             });
@@ -232,6 +253,7 @@ var Listing = React.createClass({
     render: function() {
         var that = this;
         var x = this.props.x;
+	
         return (
                                        <div className={"listing " + this.props.cls} onClick={this.setCenter} style={{cursor:"pointer"}}>
                                        <div className="name">
@@ -296,7 +318,7 @@ var Lista = React.createClass({
       return {aside:false};
   },
   componentDidMount: function() {
-
+      
   },
     componentWillUnmount: function() {
 	
@@ -318,6 +340,19 @@ var Lista = React.createClass({
         this.props.nav('term')(e);
     },
     render: function() {
+	if (!window.loaded) {
+		return (
+	    <div className="demo-3">
+	    <ul className="bokeh">
+		<li></li>
+		<li></li>
+		<li></li>
+		</ul>
+		</div>
+		);
+	}
+	
+
     var that = this;
     var lilista = _.union(
         _.map(lista.extra,
