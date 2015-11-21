@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a044cd0fed05bd777769"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "25da1b0a2e9973459a42"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -752,7 +752,6 @@
 	    updateMarker: function updateMarker(x) {
 	        var that = this;
 	        this.marker && this.marker.setMap(null);
-	        console.log('putting marker', x);
 	        if (x.lat) {
 	            var myLatLng = new google.maps.LatLng(x.lat, x.lng);
 	            this.marker = new google.maps.Marker({
@@ -991,19 +990,25 @@
 	        return { term: '' };
 	    },
 	    componentWillMount: function componentWillMount() {
+	        var that = this;
 	        this.setState({ term: this.props.location.query.term });
 	        var that = this;
 	        xupdate = function () {
 	            that.forceUpdate();
 	        };
-	        // var cquery = this.context.router.getCurrentQuery();
-	        // var def = {term: ''};
-	        // this.context.router.transitionTo('/', '', _.extend(def,cquery));
+
+	        $(function () {
+	            $(document).on("click", ".filter", function (evt) {
+	                console.log('click filter');
+	                evt.preventDefault();
+	                that.nav('term')(evt);
+	            });
+	        });
 	    },
 	    nav: function nav(name) {
 	        var that = this;
 	        return function (e) {
-	            var val = e.target.value;
+	            var val = e.target.value || $(e.target).attr('term');
 	            var q = {};
 	            q[name] = val;
 	            console.log('value change', e.target.value, q);
@@ -25228,7 +25233,7 @@
 	'use strict';
 
 	var filter = function filter(x, y) {
-					return '<a class="filter" href="?term=' + (y !== undefined ? y : x) + '">' + x + '</a>';
+					return '<a class="filter" term="' + (y !== undefined ? y : x) + '">' + x + '</a>';
 	};
 
 	var lista = { extra: [{ name: 'filters', text: 'Try these filters: ' + filter('basic') + filter('hummus') + filter('jaffa') + filter('food') + filter('drink') + filter('street food') + filter('club') + filter('24/7') + filter('saturday') + filter('transportation') + filter('SIM') + filter('co-working') + filter('all', ''), tags: '*' }, { name: 'Activities', text: 'Some websites to help find events / activities / parties etc... <br> <a href="http://israel.dailysecret.com/telaviv/en" target="_blank">one</a><br><a target="_blank" href="https://www.secrettelaviv.com/">two</a><br><a target="_blank" href="http://activities.co.il/categories/%D7%9E%D7%A1%D7%99%D7%91%D7%94?lng=34.76501&lat=32.03954&h=%7B%22Sub%22%3A%7B%22%D7%9E%D7%A1%D7%99%D7%91%D7%94%22%3A%7B%7D%7D%7D&r=5&w=today&lang=en">three</a>', tags: '*' }],

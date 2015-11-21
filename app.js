@@ -189,7 +189,6 @@ var Listing = React.createClass({
     updateMarker: function(x) {
         var that = this;
         this.marker && this.marker.setMap(null);
-	console.log('putting marker', x);
         if (x.lat) {
             var myLatLng = new google.maps.LatLng(x.lat, x.lng);
 	    this.marker = new google.maps.Marker({
@@ -405,6 +404,7 @@ var Lista = React.createClass({
 var xupdate = function() {
 };
 
+
 const App = React.createClass({
     name: 'App',
     mixins: [ Lifecycle, History ],
@@ -412,19 +412,27 @@ const App = React.createClass({
         return {term: ''};
     },
     componentWillMount: function() {
+	var that = this;
         this.setState({term:this.props.location.query.term});
         var that = this;
         xupdate = function() {
             that.forceUpdate();
         };
-        // var cquery = this.context.router.getCurrentQuery();
-        // var def = {term: ''};
-        // this.context.router.transitionTo('/', '', _.extend(def,cquery));
+
+	$(function(){
+	    $(document).on("click", ".filter", function(evt) {
+		console.log('click filter');
+		evt.preventDefault();
+		that.nav('term')(evt);
+	    });
+
+	})
+
     },
     nav: function(name) {
         var that = this;
         return function(e) {
-            var val = e.target.value;
+            var val = e.target.value || $(e.target).attr('term');
             var q = {};
             q[name] = val;
             console.log('value change',e.target.value, q);

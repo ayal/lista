@@ -1,5 +1,5 @@
 var filter = function(x,y) {
-    return '<a class="filter" href="?term='+(y !== undefined ? y : x)+'">'+x+'</a>';
+    return '<a class="filter" term="'+(y !== undefined ? y : x)+'">'+x+'</a>';
 };
 
 var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basic') + filter('hummus') + filter('jaffa') + filter('food') + filter('drink') + filter('street food')  + filter('club') + filter('24/7') + filter('saturday') + filter('transportation') + filter('SIM') + filter('co-working') + filter('all',''), tags:'*' },
