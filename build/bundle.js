@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "2d6542cdbbb67015daa9"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "abe4b30b335ed6414407"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -624,7 +624,7 @@
 
 	var mergelistas = function mergelistas(cb) {
 	    var listclone = _.clone(_lista.lista.list);
-	    $.getJSON('/json/fsdata.json?v=3', function (r) {
+	    $.getJSON('json/fsdata.json?v=3', function (r) {
 	        window.fsdata = r;
 	        r.forEach(function (x) {
 

@@ -59,7 +59,7 @@ var fsGetHours = function(x){
 
 var mergelistas = function(cb) {
     var listclone = _.clone(lista.list);
-    $.getJSON('/json/fsdata.json?v=3', function(r){
+    $.getJSON('json/fsdata.json?v=3', function(r){
 	window.fsdata = r;	
         r.forEach(function(x){
 
