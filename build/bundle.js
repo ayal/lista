@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "6d676c90a354d8f90a95"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2d6542cdbbb67015daa9"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -583,15 +583,20 @@
 	    mapdiv.style.width = '100%';
 	    mapdiv.style.height = '100%';
 	    var mapOptions = {
-	        zoom: 18,
+	        zoom: 17,
 	        center: { lat: 32.0591797, lng: 34.771954 },
-	        scrollwheel: true
+	        scrollwheel: true,
+	        styles: [{ "featureType": "all", "elementType": "labels.text.fill", "stylers": [{ "color": "#ffffff" }] }, { "featureType": "all", "elementType": "labels.text.stroke", "stylers": [{ "color": "#000000" }, { "lightness": 13 }] }, { "featureType": "administrative", "elementType": "geometry.fill", "stylers": [{ "color": "#000000" }] }, { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [{ "color": "#144b53" }, { "lightness": 14 }, { "weight": 1.4 }] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "color": "#08304b" }] }, { "featureType": "poi", "elementType": "geometry", "stylers": [{ "color": "#0c4152" }, { "lightness": 5 }] }, { "featureType": "road.highway", "elementType": "geometry.fill", "stylers": [{ "color": "#000000" }] }, { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{ "color": "#0b434f" }, { "lightness": 25 }] }, { "featureType": "road.arterial", "elementType": "geometry.fill", "stylers": [{ "color": "#000000" }] }, { "featureType": "road.arterial", "elementType": "geometry.stroke", "stylers": [{ "color": "#0b3d51" }, { "lightness": 16 }] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [{ "color": "#000000" }] }, { "featureType": "transit", "elementType": "all", "stylers": [{ "color": "#146474" }] }, { "featureType": "water", "elementType": "all", "stylers": [{ "color": "#021019" }] }]
 
 	    };
 
 	    window.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 	    window.infowindow = new google.maps.InfoWindow();
-	    window.directionsDisplay = new google.maps.DirectionsRenderer();
+	    window.directionsDisplay = new google.maps.DirectionsRenderer({
+	        polylineOptions: {
+	            strokeColor: "#00ffbf"
+	        }
+	    });
 	    window.directionsDisplay.setMap(map);
 	});
 
@@ -619,7 +624,7 @@
 
 	var mergelistas = function mergelistas(cb) {
 	    var listclone = _.clone(_lista.lista.list);
-	    $.getJSON('fsdata.json?v=3', function (r) {
+	    $.getJSON('/json/fsdata.json?v=3', function (r) {
 	        window.fsdata = r;
 	        r.forEach(function (x) {
 
@@ -686,7 +691,7 @@
 	    } else {
 	        alert("Functionality not available");
 	    }
-	    xupdate();
+	    //    xupdate();
 	});
 
 	var getdist = function getdist(x) {
@@ -733,7 +738,7 @@
 	                title: x.name
 	            });
 	            this.marker.addListener('click', function () {
-	                infowindow.setContent('<div><br><h3>' + x.name + '</h3><div>' + x.text + '</div></div>');
+	                infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:200px">' + x.text + '</div></div>');
 	                infowindow.open(map, that.marker);
 	            });
 	        }
@@ -750,8 +755,6 @@
 	            window.map.setCenter(myLatLng);
 
 	            var that = this;
-	            infowindow.setContent(x.name);
-	            infowindow.open(map, this.marker);
 
 	            var directionsService = new google.maps.DirectionsService();
 	            var request = {
@@ -760,7 +763,12 @@
 	                travelMode: google.maps.TravelMode.WALKING
 	            };
 	            directionsService.route(request, function (result, status) {
+
 	                if (status == google.maps.DirectionsStatus.OK) {
+	                    setTimeout(function () {
+	                        infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:200px">' + x.text + '</div></div>');
+	                        infowindow.open(map, that.marker);
+	                    }, 1500);
 	                    directionsDisplay.setDirections(result);
 	                }
 	            });
@@ -787,31 +795,29 @@
 	                'div',
 	                { className: 'map' },
 	                _react2.default.createElement(
-	                    'span',
+	                    'div',
 	                    null,
-	                    x.address,
-	                    ' | '
+	                    _react2.default.createElement(
+	                        'button',
+	                        { onClick: this.setCenter, href: '#', style: { cursor: "pointer" }, className: 'btn btn-3 btn-3e fa fa-map listbtn' },
+	                        'map'
+	                    )
 	                ),
 	                _react2.default.createElement(
-	                    'a',
-	                    { onClick: this.setCenter, href: '#', style: { cursor: "pointer" } },
-	                    'Show map'
-	                ),
-	                _react2.default.createElement(
 	                    'span',
 	                    null,
-	                    ' | '
+	                    x.address
 	                ),
 	                x.map.push ? _.map(x.map, function (y, i) {
 	                    return _react2.default.createElement(
 	                        'a',
 	                        { target: '_blank', href: y, onClick: that.direct },
-	                        "map link" + i
+	                        "google map" + i
 	                    );
 	                }) : _react2.default.createElement(
 	                    'a',
 	                    { target: '_blank', href: x.map, onClick: that.direct },
-	                    'map link'
+	                    'google map'
 	                )
 	            ) : null,
 	            _react2.default.createElement('div', { className: 'text', dangerouslySetInnerHTML: { __html: x.text } }),
@@ -857,9 +863,9 @@
 	var Lista = _react2.default.createClass({
 	    aside: function aside() {
 	        if (this.state.aside) {
-	            $('#main').css('margin-left', '0');
+	            $('.lista').css('transform', 'translateX(0)');
 	        } else {
-	            $('#main').css('margin-left', '-90%');
+	            $('.lista').css('transform', 'translateX(-80%)');
 	        }
 	        var caside = this.state.aside;
 	        this.setState({ aside: !this.state.aside });
@@ -905,22 +911,27 @@
 
 	        return _react2.default.createElement(
 	            'div',
-	            { className: 'lista' },
+	            null,
 	            _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'nav' },
+	                _react2.default.createElement('input', { type: 'text', placeholde: 'search', onChange: this.search, value: this.props.term, className: 'filterput', placeholder: 'filter here' }),
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'nav' },
-	                    _react2.default.createElement('input', { type: 'text', placeholde: 'search', onChange: this.search, value: this.props.term, className: 'filterput', placeholder: 'filter here' }),
-	                    _react2.default.createElement(
-	                        'a',
-	                        { href: '#', onClick: this.toggle, style: { cursor: "pointer", 'marginLeft': 5 } },
-	                        'Show ' + this.mapornot()
-	                    )
+	                    'button',
+	                    { onClick: this.toggle, href: '#', style: { cursor: "pointer" }, className: 'btn btn-3 btn-3e fa fa-map togglebtn kkk' },
+	                    this.mapornot()
 	                )
 	            ),
-	            lilista
+	            _react2.default.createElement(
+	                'div',
+	                { className: 'lista' },
+	                _react2.default.createElement('div', null),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'realista' },
+	                    lilista
+	                )
+	            )
 	        );
 	    }
 	});

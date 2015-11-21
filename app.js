@@ -15,16 +15,21 @@ $(function(){
     mapdiv.style.width = '100%';
     mapdiv.style.height = '100%';
     var mapOptions = {
-        zoom: 18,
+        zoom: 17,
         center: {lat: 32.0591797, lng: 34.771954},
         scrollwheel: true,
+	styles: [{"featureType":"all","elementType":"labels.text.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"all","elementType":"labels.text.stroke","stylers":[{"color":"#000000"},{"lightness":13}]},{"featureType":"administrative","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"color":"#144b53"},{"lightness":14},{"weight":1.4}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#08304b"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#0c4152"},{"lightness":5}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#0b434f"},{"lightness":25}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#000000"}]},{"featureType":"road.arterial","elementType":"geometry.stroke","stylers":[{"color":"#0b3d51"},{"lightness":16}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#000000"}]},{"featureType":"transit","elementType":"all","stylers":[{"color":"#146474"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#021019"}]}]
 
     };
 
     window.map = new google.maps.Map(document.getElementById("map"),
                                   mapOptions);
     window.infowindow = new google.maps.InfoWindow();
-    window.directionsDisplay = new google.maps.DirectionsRenderer();
+    window.directionsDisplay = new google.maps.DirectionsRenderer({
+	polylineOptions: {
+	    strokeColor: "#00ffbf"
+	}
+    });
     window.directionsDisplay.setMap(map);
 })
 
@@ -54,7 +59,7 @@ var fsGetHours = function(x){
 
 var mergelistas = function(cb) {
     var listclone = _.clone(lista.list);
-    $.getJSON('fsdata.json?v=3', function(r){
+    $.getJSON('/json/fsdata.json?v=3', function(r){
 	window.fsdata = r;	
         r.forEach(function(x){
 
@@ -118,7 +123,7 @@ mergelistas(function(){
     else{
         alert("Functionality not available");
     }
-    xupdate();
+//    xupdate();
 });
 
 var getdist = function(x) {
@@ -150,6 +155,8 @@ var getdist = function(x) {
     }
 }
 
+
+
 var Listing = React.createClass({
     getInitialState: function() {
         return {};
@@ -167,7 +174,7 @@ var Listing = React.createClass({
                 title: x.name
             });
             this.marker.addListener('click', function() {
-                infowindow.setContent('<div><br><h3>' + x.name + '</h3><div>'+x.text+'</div></div>');
+                infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:200px">'+x.text+'</div></div>');
                 infowindow.open(map, that.marker);
             });
         }
@@ -184,8 +191,6 @@ var Listing = React.createClass({
         window.map.setCenter(myLatLng);
 
         var that = this;
-        infowindow.setContent(x.name);
-        infowindow.open(map, this.marker);
 
             var directionsService = new google.maps.DirectionsService();
             var request = {
@@ -194,7 +199,13 @@ var Listing = React.createClass({
                 travelMode: google.maps.TravelMode.WALKING
             };
             directionsService.route(request, function(result, status) {
+		
                 if (status == google.maps.DirectionsStatus.OK) {
+		    setTimeout(function(){
+			infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:200px">'+x.text+'</div></div>');
+			infowindow.open(map, that.marker);
+
+		    },1500)
                     directionsDisplay.setDirections(result);
                 }
             });
@@ -216,13 +227,15 @@ var Listing = React.createClass({
                                        {x.name}
                                    </div>
                 {x.map ? (<div className="map">
-			  <span>{x.address} | </span>
-			  <a onClick={this.setCenter} href="#" style={{cursor:"pointer"}}>Show map</a>
-			  <span> | </span>
+			  <div>
+			  <button onClick={this.setCenter} href="#" style={{cursor:"pointer"}} className="btn btn-3 btn-3e fa fa-map listbtn">map</button>
+			  </div>
+
+			  <span>{x.address}</span>
                                        {
                                            x.map.push ? _.map(x.map, function(y,i){
-                                               return <a target="_blank" href={y} onClick={that.direct}>{"map link" + i}</a>;
-                                           }) : (<a target="_blank" href={x.map} onClick={that.direct}>{'map link'}</a>)
+                                               return <a target="_blank" href={y} onClick={that.direct}>{"google map" + i}</a>;
+                                           }) : (<a target="_blank" href={x.map} onClick={that.direct}>{'google map'}</a>)
                                        }
                                    </div>) : null}
                                        <div className="text" dangerouslySetInnerHTML={{__html: x.text }}>
@@ -259,10 +272,10 @@ var Listing = React.createClass({
 var Lista = React.createClass({
     aside: function(){
         if (this.state.aside) {
-            $('#main').css('margin-left','0');
+	    $('.lista').css('transform', 'translateX(0)');
         }
         else {
-            $('#main').css('margin-left','-90%');
+	    $('.lista').css('transform', 'translateX(-80%)');
         }
         var caside = this.state.aside;
         this.setState({aside:!this.state.aside});
@@ -324,17 +337,21 @@ var Lista = React.createClass({
                   return null;
               }));
 
-    return (
+	return (
+		<div>
+		<div className="nav">
+		<input type="text" placeholde="search" onChange={this.search} value={this.props.term} className="filterput" placeholder="filter here" />
+		<button onClick={this.toggle} href="#" style={{cursor:"pointer"}} className="btn btn-3 btn-3e fa fa-map togglebtn kkk">{this.mapornot()}</button>
+		</div>
+
 <div className="lista">
 	    <div>
-	    <div className="nav">
-	    <input type="text" placeholde="search" onChange={this.search} value={this.props.term} className="filterput" placeholder="filter here" />
-	    <a href="#" onClick={this.toggle} style={{cursor:"pointer",'marginLeft':5}}>{'Show ' + this.mapornot()}</a>
 	    </div>
-  </div>
+	    <div className="realista">
     {lilista}
-
 </div>
+		</div>
+		</div>
     );
 }
 });
