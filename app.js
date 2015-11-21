@@ -174,7 +174,7 @@ var Listing = React.createClass({
                 title: x.name
             });
             this.marker.addListener('click', function() {
-                infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:200px">'+x.text+'</div></div>');
+                infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:150px">'+x.text+'</div></div>');
                 infowindow.open(map, that.marker);
             });
         }
@@ -202,7 +202,7 @@ var Listing = React.createClass({
 		
                 if (status == google.maps.DirectionsStatus.OK) {
 		    setTimeout(function(){
-			infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:200px">'+x.text+'</div></div>');
+			infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:150px">'+x.text+'</div></div>');
 			infowindow.open(map, that.marker);
 
 		    },1500)

@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "abe4b30b335ed6414407"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "0ed4c95bdf1b3e58c5a4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -738,7 +738,7 @@
 	                title: x.name
 	            });
 	            this.marker.addListener('click', function () {
-	                infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:200px">' + x.text + '</div></div>');
+	                infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:150px">' + x.text + '</div></div>');
 	                infowindow.open(map, that.marker);
 	            });
 	        }
@@ -766,7 +766,7 @@
 
 	                if (status == google.maps.DirectionsStatus.OK) {
 	                    setTimeout(function () {
-	                        infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:200px">' + x.text + '</div></div>');
+	                        infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:150px">' + x.text + '</div></div>');
 	                        infowindow.open(map, that.marker);
 	                    }, 1500);
 	                    directionsDisplay.setDirections(result);
