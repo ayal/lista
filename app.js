@@ -151,33 +151,44 @@ var getdist = function(x) {
 	
 	// hack: fix map link:
 	x.map = 'https://www.google.com/maps/dir/Current+Location/' + encodeURIComponent(lat1+','+lng1) + '?dirflg=w';
-        return {dist: (Math.round(d * 10) / 10).toFixed(1), lat: lat1, lng: lng1};
+        return {dist: d, lat: lat1, lng: lng1};
     }
 }
 
-
+var goldStar = {
+    path: 'M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0',
+    fillColor: '#00ffbf',
+    fillOpacity: 0.8,
+    scale: 0.01,
+    strokeColor: '#00ffbf',
+    strokeWeight: 14
+  };
 
 var Listing = React.createClass({
     getInitialState: function() {
         return {};
     },
-    componentDidUpdate: function() {
-        var x  = this.props.x;
+    updateMarker: function(x) {
         var that = this;
         this.marker && this.marker.setMap(null);
         if (x.lat) {
             var myLatLng = new google.maps.LatLng(x.lat, x.lng);
-
-            this.marker = new google.maps.Marker({
-                position: myLatLng,
-                map: window.map,
-                title: x.name
+	    this.marker = new google.maps.Marker({
+		icon: goldStar,
+		position: myLatLng,
+		map: window.map,
+		title: x.name
             });
             this.marker.addListener('click', function() {
-                infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:150px">'+x.text+'</div></div>');
-                infowindow.open(map, that.marker);
+		infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:150px">'+x.text+'</div></div>');
+		infowindow.open(map, that.marker);
             });
-        }
+	}
+
+    },
+    componentDidUpdate: function() {
+	var x  = this.props.x;
+	this.updateMarker(x);
     },
     setCenter: function(){
 	console.log(this.props.x);
@@ -187,10 +198,11 @@ var Listing = React.createClass({
 
         var x = this.props.x;
         if (x.lat) {
-        var myLatLng = new google.maps.LatLng(x.lat, x.lng);
-        window.map.setCenter(myLatLng);
+	    this.updateMarker(x);
+            var myLatLng = new google.maps.LatLng(x.lat, x.lng);
+            window.map.setCenter(myLatLng);
 
-        var that = this;
+            var that = this;
 
             var directionsService = new google.maps.DirectionsService();
             var request = {
@@ -204,8 +216,7 @@ var Listing = React.createClass({
 		    setTimeout(function(){
 			infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:150px">'+x.text+'</div></div>');
 			infowindow.open(map, that.marker);
-
-		    },1500)
+		    },0)
                     directionsDisplay.setDirections(result);
                 }
             });
@@ -255,7 +266,7 @@ var Listing = React.createClass({
                                        </div>) : null }
                                    {pos && x.map ? (
                                        <div className="dist">
-                                           {'Distance: ' + x.dist + ' km'}
+                                           {'Distance: ' + (Math.round(x.dist * 10) / 10).toFixed(1) + ' km'}
                                        </div>) : null }
 
 

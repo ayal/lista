@@ -5,6 +5,7 @@ var app     = express();
 app.use(express.static('public'));
 app.use(express.static('build'));
 app.use('/images', express.static('images'));
+app.use('/build', express.static('build'));
 app.use('/fonts', express.static('fonts'));
 app.use('/css', express.static('css'));
 app.use('/js', express.static('js'));

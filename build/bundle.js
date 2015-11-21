@@ -54,7 +54,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "0ed4c95bdf1b3e58c5a4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "e1a107218137641b94c0"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
 /******/ 	
@@ -717,22 +717,30 @@
 
 	        // hack: fix map link:
 	        x.map = 'https://www.google.com/maps/dir/Current+Location/' + encodeURIComponent(lat1 + ',' + lng1) + '?dirflg=w';
-	        return { dist: (Math.round(d * 10) / 10).toFixed(1), lat: lat1, lng: lng1 };
+	        return { dist: d, lat: lat1, lng: lng1 };
 	    }
+	};
+
+	var goldStar = {
+	    path: 'M 100, 100 m -75, 0 a 75,75 0 1,0 150,0 a 75,75 0 1,0 -150,0',
+	    fillColor: '#00ffbf',
+	    fillOpacity: 0.8,
+	    scale: 0.01,
+	    strokeColor: '#00ffbf',
+	    strokeWeight: 14
 	};
 
 	var Listing = _react2.default.createClass({
 	    getInitialState: function getInitialState() {
 	        return {};
 	    },
-	    componentDidUpdate: function componentDidUpdate() {
-	        var x = this.props.x;
+	    updateMarker: function updateMarker(x) {
 	        var that = this;
 	        this.marker && this.marker.setMap(null);
 	        if (x.lat) {
 	            var myLatLng = new google.maps.LatLng(x.lat, x.lng);
-
 	            this.marker = new google.maps.Marker({
+	                icon: goldStar,
 	                position: myLatLng,
 	                map: window.map,
 	                title: x.name
@@ -743,6 +751,10 @@
 	            });
 	        }
 	    },
+	    componentDidUpdate: function componentDidUpdate() {
+	        var x = this.props.x;
+	        this.updateMarker(x);
+	    },
 	    setCenter: function setCenter() {
 	        console.log(this.props.x);
 	        if (this.props.aside()) {
@@ -751,6 +763,7 @@
 
 	        var x = this.props.x;
 	        if (x.lat) {
+	            this.updateMarker(x);
 	            var myLatLng = new google.maps.LatLng(x.lat, x.lng);
 	            window.map.setCenter(myLatLng);
 
@@ -768,7 +781,7 @@
 	                    setTimeout(function () {
 	                        infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:150px">' + x.text + '</div></div>');
 	                        infowindow.open(map, that.marker);
-	                    }, 1500);
+	                    }, 0);
 	                    directionsDisplay.setDirections(result);
 	                }
 	            });
@@ -848,7 +861,7 @@
 	            pos && x.map ? _react2.default.createElement(
 	                'div',
 	                { className: 'dist' },
-	                'Distance: ' + x.dist + ' km'
+	                'Distance: ' + (Math.round(x.dist * 10) / 10).toFixed(1) + ' km'
 	            ) : null,
 	            _react2.default.createElement(
 	                'div',
