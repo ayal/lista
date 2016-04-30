@@ -61,7 +61,7 @@ var fsGetHours = function(x){
 var mergelistas = function(cb) {
     var listclone = _.clone(lista.list);
     $.getJSON('json/fsdata.json?v=3', function(r){
-	window.fsdata = r;	
+	window.fsdata = r;
         r.forEach(function(x){
 
             var match;
@@ -79,7 +79,7 @@ var mergelistas = function(cb) {
                     console.log('match by name', x.venue.name, y.name);
                 }
             });
-	    
+
             match ? (match.tags = match.tags + ',' + x.venue.tags.join(',') + ',' + x.venue.categories.map(function(x){return x.name}).join(',')) : null;
             match = _.extend(match || {}, _.extend({name: x.venue.name,
                                                     link: x.venue.canonicalUrl,
@@ -124,12 +124,12 @@ mergelistas(function(){
 	    window.loaded = true;
             pos = p.coords;
             console.log('pos', pos);
-	    updateDist();	    
+	    updateDist();
 
             xupdate();
         }, function(){
 	    window.loaded = true;
-	    updateDist();	    
+	    updateDist();
 	    xupdate();
 	    console.log('error getting postion', arguments);
 	});
@@ -165,7 +165,7 @@ var getdist = function(x) {
         else if (d < 2) {
             !x.tags.match('walking') && (x.tags+=',walking');
         }
-	
+
 	// hack: fix map link:
 	x.map = 'https://www.google.com/maps/dir/Current+Location/' + encodeURIComponent(lat1+','+lng1) + '?dirflg=w';
 	console.log('got dist', d, lat1, lng1);
@@ -231,7 +231,7 @@ var Listing = React.createClass({
                 travelMode: google.maps.TravelMode.WALKING
             };
             directionsService.route(request, function(result, status) {
-		
+
                 if (status == google.maps.DirectionsStatus.OK) {
 		    setTimeout(function(){
 			infowindow.setContent('<div><br><h3>' + x.name + '</h3><div style="width:150px">'+x.text+'</div></div>');
@@ -252,7 +252,7 @@ var Listing = React.createClass({
     render: function() {
         var that = this;
         var x = this.props.x;
-	
+
         return (
                                        <div className={"listing " + this.props.cls} onClick={this.setCenter} style={{cursor:"pointer"}}>
                                        <div className="name">
@@ -317,10 +317,10 @@ var Lista = React.createClass({
       return {aside:false};
   },
   componentDidMount: function() {
-      
+
   },
     componentWillUnmount: function() {
-	
+
     },
     toggle: function(e){
 	this.aside();
@@ -350,7 +350,7 @@ var Lista = React.createClass({
 		</div>
 		);
 	}
-	
+
 
     var that = this;
     var lilista = _.union(
