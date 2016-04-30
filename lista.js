@@ -188,7 +188,7 @@ var lista = {extra: [{name: 'filters', text:'Try these filters: ' + filter('basi
 		     sun_1_close: '05:00' },
 		   hours: 'mon:19:00-05:00',
 		   map: 'https://www.google.com/maps?&daddr=32.060512722671%2C34.770978123379&dirflg=w',
-		   link: 'http://ofacebook.com/diegosantlv',
+		   link: 'http://facebook.com/diegosantlv',
 		   text: 'really nice korean-mexican vibe with djs and stuff and cool dishes',
 		   tags: 'drink,food,restaurant,dj,vibes,Latin,Asian,hipster',
 		   name: 'Diego San' },
